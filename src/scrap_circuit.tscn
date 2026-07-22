@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dvtfua4u7qnj1" path="res://src/scrap.gd" id="1_d837g"]
 
-[node name="ElectronicScrap" type="RigidBody2D" unique_id=1579310785 groups=["scraps"]]
+[node name="CircuitScrap" type="RigidBody2D" unique_id=1579310785 groups=["scraps"]]
 input_pickable = true
 script = ExtResource("1_d837g")
 

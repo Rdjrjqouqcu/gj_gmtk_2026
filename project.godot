@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.7", "GL Compatibility")
 boot_splash/show_image=false
 config/icon="uid://i65yc61t4cy6"
 
+[autoload]
+
+Resources="*uid://cn4mfl45h4q43"
+
 [display]
 
 window/size/viewport_width=480

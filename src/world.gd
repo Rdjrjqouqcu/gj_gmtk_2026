@@ -21,11 +21,11 @@ func _on_debug_spawn() -> void:
 		var scrap: Scrap
 		match randi_range(0,2):
 			0:
-				scrap = Scrap.create_metallic(self)
+				scrap = Scrap.create_metallic()
 			1:
-				scrap = Scrap.create_plastic(self)
+				scrap = Scrap.create_plastic()
 			2:
-				scrap = Scrap.create_electronic(self)
+				scrap = Scrap.create_circuit()
 		scrap.global_position = trash_spawn.global_position
 		scrap.global_position += Vector2(
 				randi_range(-SPAWN_MARKER_OFFSET, SPAWN_MARKER_OFFSET),

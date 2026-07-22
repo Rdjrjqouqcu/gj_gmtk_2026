@@ -2,22 +2,22 @@
 extends RigidBody2D
 class_name Scrap
 
-@export var bin: Bin
+@export var type: Resources.Types
 
-const SCRAP_ELECTRONIC = preload("uid://dkkqtggj0clpc")
+const SCRAP_CIRCUIT = preload("uid://dkkqtggj0clpc")
 const SCRAP_METALLIC = preload("uid://dg1tdle16rjjf")
 const SCRAP_PLASTIC = preload("uid://bh4ukx6h102xu")
-static func create_plastic(b: Bin) -> Scrap:
-	var s = SCRAP_PLASTIC.instantiate()
-	s.bin = b
+static func create_plastic() -> Scrap:
+	var s: Scrap = SCRAP_PLASTIC.instantiate()
+	s.type = Resources.Types.PLASTIC
 	return s
-static func create_metallic(b: Bin) -> Scrap:
-	var s = SCRAP_METALLIC.instantiate()
-	s.bin = b
+static func create_metallic() -> Scrap:
+	var s: Scrap = SCRAP_METALLIC.instantiate()
+	s.type = Resources.Types.METAL
 	return s
-static func create_electronic(b: Bin) -> Scrap:
-	var s = SCRAP_ELECTRONIC.instantiate()
-	s.bin = b
+static func create_circuit() -> Scrap:
+	var s: Scrap = SCRAP_CIRCUIT.instantiate()
+	s.type = Resources.Types.CIRCUIT
 	return s
 
 const INACTIVE_MODULATION: float = 0.75
@@ -30,6 +30,7 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			self.queue_free()
+			Resources.add_bundle(Resources.Bundle.new_from_type(1, type))
 			get_tree().call_group("scraps", "set_sleeping", false)
 		if event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
 			print("right click")

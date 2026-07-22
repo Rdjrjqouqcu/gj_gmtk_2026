@@ -3,7 +3,8 @@
 [ext_resource type="Script" uid="uid://ck4prm8m0xan3" path="res://src/world.gd" id="1_eewff"]
 [ext_resource type="PackedScene" uid="uid://dg1tdle16rjjf" path="res://src/scrap_metallic.tscn" id="2_gh0ne"]
 [ext_resource type="PackedScene" uid="uid://bh4ukx6h102xu" path="res://src/scrap_plastic.tscn" id="3_5q4o7"]
-[ext_resource type="PackedScene" uid="uid://dkkqtggj0clpc" path="res://src/scrap_electronic.tscn" id="4_3cfgd"]
+[ext_resource type="PackedScene" uid="uid://dkkqtggj0clpc" path="res://src/scrap_circuit.tscn" id="4_3cfgd"]
+[ext_resource type="PackedScene" uid="uid://cwslks0hxdfgx" path="res://src/resource_display.tscn" id="5_fyndt"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rhis3"]
 
@@ -53,18 +54,41 @@ position = Vector2(192, 32)
 
 [node name="ScrapNodes" type="Node2D" parent="bin" unique_id=14620567]
 
-[node name="MetallicScrap" parent="bin/ScrapNodes" unique_id=1579310785 node_paths=PackedStringArray("bin") instance=ExtResource("2_gh0ne")]
+[node name="MetallicScrap" parent="bin/ScrapNodes" unique_id=1579310785 instance=ExtResource("2_gh0ne")]
 position = Vector2(188, 12)
-bin = NodePath("../..")
+type = 1
 
-[node name="PlasticScrap" parent="bin/ScrapNodes" unique_id=791462817 node_paths=PackedStringArray("bin") instance=ExtResource("3_5q4o7")]
+[node name="PlasticScrap" parent="bin/ScrapNodes" unique_id=791462817 instance=ExtResource("3_5q4o7")]
 position = Vector2(172, 32)
-bin = NodePath("../..")
+type = 2
 
-[node name="ElectronicScrap" parent="bin/ScrapNodes" unique_id=1452305703 instance=ExtResource("4_3cfgd")]
+[node name="CircuitScrap" parent="bin/ScrapNodes" unique_id=1452305703 instance=ExtResource("4_3cfgd")]
 position = Vector2(204, 32)
+type = 3
 
-[node name="recycler" type="Polygon2D" parent="." unique_id=196070658]
+[node name="recyclers" type="Node2D" parent="." unique_id=495947630]
+
+[node name="recyclerPlaceholder1" type="Polygon2D" parent="recyclers" unique_id=196070658]
+position = Vector2(432, 32)
+color = Color(0, 0.3666668, 1, 1)
+polygon = PackedVector2Array(-48, -32, 48, -32, 48, 32, -48, 32)
+
+[node name="recyclerPlaceholder2" type="Polygon2D" parent="recyclers" unique_id=412259589]
+position = Vector2(432, 96)
+color = Color(1, 0.98333335, 0, 1)
+polygon = PackedVector2Array(-48, -32, 48, -32, 48, 32, -48, 32)
+
+[node name="recyclerPlaceholder3" type="Polygon2D" parent="recyclers" unique_id=2118537035]
+position = Vector2(432, 160)
+color = Color(1, 0, 0.9500003, 1)
+polygon = PackedVector2Array(-48, -32, 48, -32, 48, 32, -48, 32)
+
+[node name="recyclerPlaceholder4" type="Polygon2D" parent="recyclers" unique_id=467435824]
+position = Vector2(432, 224)
+color = Color(0, 1, 0.049999952, 1)
+polygon = PackedVector2Array(-48, -32, 48, -32, 48, 32, -48, 32)
+
+[node name="ResourceDisplay" parent="." unique_id=833009980 instance=ExtResource("5_fyndt")]
 
 [connection signal="pressed" from="bin/Button" to="bin" method="_on_debug_spawn"]
 [connection signal="child_entered_tree" from="bin/ScrapNodes" to="bin" method="_on_scrap_nodes_child_entered_tree"]
