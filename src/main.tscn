@@ -1,8 +1,70 @@
 [gd_scene format=3 uid="uid://baopmn5l2lmu"]
 
 [ext_resource type="Script" uid="uid://ck4prm8m0xan3" path="res://src/world.gd" id="1_eewff"]
+[ext_resource type="PackedScene" uid="uid://dg1tdle16rjjf" path="res://src/scrap_metallic.tscn" id="2_gh0ne"]
+[ext_resource type="PackedScene" uid="uid://bh4ukx6h102xu" path="res://src/scrap_plastic.tscn" id="3_5q4o7"]
+[ext_resource type="PackedScene" uid="uid://dkkqtggj0clpc" path="res://src/scrap_electronic.tscn" id="4_3cfgd"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rhis3"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_eewff"]
 
 [node name="Main" type="Node" unique_id=388192039]
 
-[node name="World" type="Node2D" parent="." unique_id=1471244640]
+[node name="bin" type="Node2D" parent="." unique_id=1471244640]
 script = ExtResource("1_eewff")
+
+[node name="RigidBody2D" type="StaticBody2D" parent="bin" unique_id=880022982]
+
+[node name="bottom" type="CollisionShape2D" parent="bin/RigidBody2D" unique_id=262525815]
+position = Vector2(192, 252)
+shape = SubResource("WorldBoundaryShape2D_rhis3")
+
+[node name="border" type="Polygon2D" parent="bin/RigidBody2D" unique_id=181574813]
+polygon = PackedVector2Array(0, 0, 0, 256, 384, 256, 384, 0, 380, 0, 380, 252, 4, 252, 4, 0)
+
+[node name="right" type="CollisionShape2D" parent="bin/RigidBody2D" unique_id=1478181060]
+position = Vector2(380, 156)
+rotation = -1.5707964
+shape = SubResource("WorldBoundaryShape2D_eewff")
+
+[node name="left" type="CollisionShape2D" parent="bin/RigidBody2D" unique_id=50730531]
+position = Vector2(4, 156)
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_eewff")
+
+[node name="Label" type="Label" parent="bin" unique_id=1451066071]
+offset_left = 320.0
+offset_top = 256.0
+offset_right = 384.0
+offset_bottom = 288.0
+text = "100 lbs"
+horizontal_alignment = 2
+
+[node name="Button" type="Button" parent="bin" unique_id=2118711183]
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 16.0
+offset_bottom = 12.0
+text = "test spawn"
+
+[node name="TrashSpawn" type="Marker2D" parent="bin" unique_id=1022385217]
+position = Vector2(192, 32)
+
+[node name="ScrapNodes" type="Node2D" parent="bin" unique_id=14620567]
+
+[node name="MetallicScrap" parent="bin/ScrapNodes" unique_id=1579310785 node_paths=PackedStringArray("bin") instance=ExtResource("2_gh0ne")]
+position = Vector2(188, 12)
+bin = NodePath("../..")
+
+[node name="PlasticScrap" parent="bin/ScrapNodes" unique_id=791462817 node_paths=PackedStringArray("bin") instance=ExtResource("3_5q4o7")]
+position = Vector2(172, 32)
+bin = NodePath("../..")
+
+[node name="ElectronicScrap" parent="bin/ScrapNodes" unique_id=1452305703 instance=ExtResource("4_3cfgd")]
+position = Vector2(204, 32)
+
+[node name="recycler" type="Polygon2D" parent="." unique_id=196070658]
+
+[connection signal="pressed" from="bin/Button" to="bin" method="_on_debug_spawn"]
+[connection signal="child_entered_tree" from="bin/ScrapNodes" to="bin" method="_on_scrap_nodes_child_entered_tree"]

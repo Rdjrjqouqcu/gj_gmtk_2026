@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dg1tdle16rjjf"]
+
+[ext_resource type="Script" uid="uid://dvtfua4u7qnj1" path="res://src/scrap.gd" id="1_0olue"]
+
+[node name="MetallicScrap" type="RigidBody2D" unique_id=1579310785 groups=["scraps"]]
+input_pickable = true
+script = ExtResource("1_0olue")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1385157574]
+color = Color(0, 0, 1, 1)
+polygon = PackedVector2Array(-12, -4, -4, -12, 4, -12, 12, -4, 12, 4, 4, 12, -4, 12, -12, 4)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1899656504]
+polygon = PackedVector2Array(-12, -4, -4, -12, 4, -12, 12, -4, 12, 4, 4, 12, -4, 12, -12, 4)
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

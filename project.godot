@@ -18,11 +18,18 @@ config/icon="uid://i65yc61t4cy6"
 
 [display]
 
+window/size/viewport_width=480
+window/size/viewport_height=512
 window/stretch/mode="canvas_items"
+window/handheld/orientation=1
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/at-icons/plugin.cfg", "res://addons/log/plugin.cfg", "res://addons/script-ide/plugin.cfg")
+
+[global_group]
+
+scraps=""
 
 [physics]
 
