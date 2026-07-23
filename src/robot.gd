@@ -27,7 +27,7 @@ func _get_available_recycler() -> Variant:
 	return filtered.pick_random() if not filtered.is_empty() else null
 
 const MOVE_SPEED: float = 100.0
-const PUSH_FORCE: float = 50_000.0
+const PUSH_FORCE: float = 1000.0
 const MOVE_EPSILON: int = 4
 const FLOOR_EPSILON: float = 1
 var _unloading_target: Marker2D = null
@@ -44,7 +44,7 @@ func _move_towards(global_pos: Vector2, _delta: float, add_gravity: bool) -> boo
 		for i in get_slide_collision_count():
 			var col = get_slide_collision(i)
 			if col.get_collider() is RigidBody2D:
-				(col.get_collider() as RigidBody2D).apply_force(col.get_normal() * -PUSH_FORCE)
+				(col.get_collider() as RigidBody2D).apply_impulse(col.get_normal() * -PUSH_FORCE)
 	#move_and_collide(vel, false, 0.08, true)
 	if (global_pos - global_position).length() < MOVE_EPSILON:
 		return true
@@ -55,6 +55,7 @@ func _physics_process(delta: float) -> void:
 		if _move_towards(entrance.global_position, delta, false):
 			sprite.flip_h = true
 			state = States.COLLECTING_RIGHT
+			#state = States.IDLE
 	elif state == States.COLLECTING_RIGHT:
 		if _move_towards(right.global_position, delta, true):
 			sprite.flip_h = true

@@ -44,7 +44,8 @@ var spawn_timer: float = 0.25:
 	set(v):
 		spawn_timer = v
 		spawn_timer_label.text = "%05.2f" % v
-const DEBUG_SPAWN_COUNT: int = 10
+
+const DEBUG_SPAWN_COUNT: int = 25
 func _on_spawn_timer() -> void:
 	_spawn_scrap(DEBUG_SPAWN_COUNT)
 	spawn_timer = SPAWN_TIMER_MAX

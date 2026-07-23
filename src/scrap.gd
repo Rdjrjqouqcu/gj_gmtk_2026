@@ -4,20 +4,79 @@ class_name Scrap
 
 @export var type: Resources.Types
 
+static var _atlas: CompressedTexture2D = preload("uid://ovjmope3aupn")
+## each entry is [collision_array, atlas_region]
+static func _variation(x: float, y: float, w: float, h: float) -> Array:
+	var w2: float = w / 2.0
+	var h2: float = h / 2.0
+	return [
+		PackedVector2Array([
+			Vector2(-w2, -h2), Vector2(-w2, h2), Vector2(w2, h2), Vector2(w2, -h2),
+		]),
+		Rect2(x, y, w, h),
+	]
+
+static var _circuit_variations: Array = [
+	_variation(49, 17, 14, 14),
+	_variation(53, 33, 7, 14),
+	_variation(49, 52, 14, 8),
+	_variation(49, 66, 14, 12),
+	_variation(50, 81, 12, 13),
+]
 const SCRAP_CIRCUIT = preload("uid://dkkqtggj0clpc")
+static func create_circuit() -> Scrap:
+	var s: Scrap = SCRAP_CIRCUIT.instantiate()
+	s.type = Resources.Types.CIRCUIT
+	var variation: Array = _circuit_variations.pick_random()
+	var collision: CollisionPolygon2D = s.get_node("collision")
+	collision.polygon = variation[0]
+	var sprite: Sprite2D = s.get_node("sprite")
+	sprite.texture = AtlasTexture.new()
+	(sprite.texture as AtlasTexture).atlas = _atlas
+	(sprite.texture as AtlasTexture).region = variation[1]
+	return s
+
+static var _metallic_variations: Array = [
+	_variation(6, 5, 4, 8),
+	_variation(6, 21, 4, 8),
+	_variation(6, 37, 4, 8),
+	_variation(3, 54, 10, 7),
+	_variation(3, 70, 10, 7),
+]
 const SCRAP_METALLIC = preload("uid://dg1tdle16rjjf")
+static func create_metallic() -> Scrap:
+	var s: Scrap = SCRAP_METALLIC.instantiate()
+	s.type = Resources.Types.METAL
+	var variation: Array = _metallic_variations.pick_random()
+	var collision: CollisionPolygon2D = s.get_node("collision")
+	collision.polygon = variation[0]
+	var sprite: Sprite2D = s.get_node("sprite")
+	sprite.texture = AtlasTexture.new()
+	(sprite.texture as AtlasTexture).atlas = _atlas
+	(sprite.texture as AtlasTexture).region = variation[1]
+	return s
+	
+
+static var _plastic_variations: Array = [
+	_variation(22, 3, 4, 11),
+	_variation(22, 19, 4, 11),
+	_variation(20, 33, 8, 13),
+	_variation(38, 3, 4, 11),
+	_variation(38, 19, 4, 11),
+	_variation(36, 33, 8, 13),
+	_variation(35, 66, 11, 11),
+]
 const SCRAP_PLASTIC = preload("uid://bh4ukx6h102xu")
 static func create_plastic() -> Scrap:
 	var s: Scrap = SCRAP_PLASTIC.instantiate()
 	s.type = Resources.Types.PLASTIC
-	return s
-static func create_metallic() -> Scrap:
-	var s: Scrap = SCRAP_METALLIC.instantiate()
-	s.type = Resources.Types.METAL
-	return s
-static func create_circuit() -> Scrap:
-	var s: Scrap = SCRAP_CIRCUIT.instantiate()
-	s.type = Resources.Types.CIRCUIT
+	var variation: Array = _plastic_variations.pick_random()
+	var collision: CollisionPolygon2D = s.get_node("collision")
+	collision.polygon = variation[0]
+	var sprite: Sprite2D = s.get_node("sprite")
+	sprite.texture = AtlasTexture.new()
+	(sprite.texture as AtlasTexture).atlas = _atlas
+	(sprite.texture as AtlasTexture).region = variation[1]
 	return s
 
 const INACTIVE_MODULATION: float = 0.75

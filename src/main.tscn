@@ -1,9 +1,6 @@
 [gd_scene format=3 uid="uid://baopmn5l2lmu"]
 
 [ext_resource type="Script" uid="uid://ck4prm8m0xan3" path="res://src/world.gd" id="1_eewff"]
-[ext_resource type="PackedScene" uid="uid://dg1tdle16rjjf" path="res://src/scrap_metallic.tscn" id="2_gh0ne"]
-[ext_resource type="PackedScene" uid="uid://bh4ukx6h102xu" path="res://src/scrap_plastic.tscn" id="3_5q4o7"]
-[ext_resource type="PackedScene" uid="uid://dkkqtggj0clpc" path="res://src/scrap_circuit.tscn" id="4_3cfgd"]
 [ext_resource type="PackedScene" uid="uid://cwslks0hxdfgx" path="res://src/resource_display.tscn" id="5_fyndt"]
 [ext_resource type="PackedScene" uid="uid://cvav5wlslk61r" path="res://src/recycler.tscn" id="5_kmhfv"]
 [ext_resource type="PackedScene" uid="uid://be2rvgbd8k3pa" path="res://src/robot.tscn" id="6_rlaii"]
@@ -18,18 +15,6 @@
 script = ExtResource("1_eewff")
 
 [node name="ScrapNodes" type="Node2D" parent="bin" unique_id=14620567]
-
-[node name="MetallicScrap" parent="bin/ScrapNodes" unique_id=1579310785 instance=ExtResource("2_gh0ne")]
-position = Vector2(192, -20)
-type = 1
-
-[node name="PlasticScrap" parent="bin/ScrapNodes" unique_id=791462817 instance=ExtResource("3_5q4o7")]
-position = Vector2(172, 32)
-type = 2
-
-[node name="CircuitScrap" parent="bin/ScrapNodes" unique_id=1452305703 instance=ExtResource("4_3cfgd")]
-position = Vector2(204, 32)
-type = 3
 
 [node name="sides" type="StaticBody2D" parent="bin" unique_id=880022982]
 collision_layer = 2
