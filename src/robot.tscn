@@ -1,18 +1,15 @@
-[gd_scene format=3 uid="uid://be2rvgbd8k3pa"]
+[gd_scene format=3 uid="uid://b2oinxatyf6o4"]
 
-[ext_resource type="Texture2D" uid="uid://cx3sek2s70o65" path="res://assets/robot.png" id="1_86vwj"]
-[ext_resource type="Script" uid="uid://cuc2r5krq1do0" path="res://src/robot.gd" id="1_m74s2"]
+[ext_resource type="Script" uid="uid://nlsjb0etm34g" path="res://src/robot.gd" id="1_6avpw"]
+[ext_resource type="Texture2D" uid="uid://cx3sek2s70o65" path="res://assets/robot.png" id="1_sgrpe"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rhis3"]
-size = Vector2(32, 32)
-
-[node name="robot" type="CharacterBody2D" unique_id=610154769]
+[node name="Robot" type="AnimatableBody2D" unique_id=1753369023]
 collision_layer = 4
 collision_mask = 4
-script = ExtResource("1_m74s2")
+script = ExtResource("1_6avpw")
 
-[node name="sprite" type="Sprite2D" parent="." unique_id=2056250257]
-texture = ExtResource("1_86vwj")
+[node name="sprite" type="Sprite2D" parent="." unique_id=1366299929]
+texture = ExtResource("1_sgrpe")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=165013435]
-shape = SubResource("RectangleShape2D_rhis3")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=735985158]
+polygon = PackedVector2Array(-16, 16, -12, -16, 12, -16, 16, 16)

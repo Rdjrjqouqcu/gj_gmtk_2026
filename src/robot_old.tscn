@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://be2rvgbd8k3pa"]
+
+[ext_resource type="Texture2D" uid="uid://cx3sek2s70o65" path="res://assets/robot.png" id="1_86vwj"]
+[ext_resource type="Script" uid="uid://cuc2r5krq1do0" path="res://src/robot_old.gd" id="1_m74s2"]
+
+[node name="robot" type="CharacterBody2D" unique_id=610154769]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_m74s2")
+
+[node name="sprite" type="Sprite2D" parent="." unique_id=2056250257]
+texture = ExtResource("1_86vwj")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=187341933]
+polygon = PackedVector2Array(-16, 16, -12, -16, 12, -16, 16, 16)

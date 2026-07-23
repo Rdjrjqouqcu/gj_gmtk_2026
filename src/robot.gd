@@ -1,85 +1,32 @@
-extends CharacterBody2D
-class_name Robot
+extends AnimatableBody2D
 
-@export var recyclers: Array[Recycler]
-@export var entrance: Marker2D
-@export var right: Marker2D
 @export var left: Marker2D
+@export var right: Marker2D
+const MOVE_TIME: float = 4.0
 
 @onready var sprite: Sprite2D = $sprite
 
-enum States {
-	ENTERING,
-	COLLECTING_RIGHT,
-	COLLECTING_LEFT,
-	EXITING,
-	IDLE,
-	UNLOADING,
-}
-var state: States = States.ENTERING
+var tween: Tween = null
+var going_right: bool = true:
+	set(v):
+		going_right = v
+		sprite.flip_h = not v
+
+func _change_direction() -> void:
+	going_right = not going_right
+	if tween != null:
+		tween.kill()
+		tween = null
+	var dest: Vector2 = right.global_position if going_right else left.global_position
+	tween = get_tree().create_tween()
+	tween.tween_property(self, "global_position", dest , MOVE_TIME)
+	tween.tween_callback(_change_direction)
 
 func _ready() -> void:
-	#sync_to_physics = false
-	sprite.flip_h = true
+	tween = get_tree().create_tween()
+	tween.tween_property(self, "global_position", right.global_position, MOVE_TIME)
+	tween.tween_callback(_change_direction)
 
-func _get_available_recycler() -> Variant:
-	var filtered: Array[Recycler] = recyclers.filter(func(x: Recycler): return x.has_input_space())
-	return filtered.pick_random() if not filtered.is_empty() else null
 
-const MOVE_SPEED: float = 100.0
-const PUSH_FORCE: float = 1000.0
-const MOVE_EPSILON: int = 4
-const FLOOR_EPSILON: float = 1
-var _unloading_target: Marker2D = null
-
-## returns true if arrived at destination
-func _move_towards(global_pos: Vector2, _delta: float, add_gravity: bool) -> bool:
-	#var vel = (global_pos - global_position).normalized() * MOVE_SPEED * delta
-	var vel = (global_pos - global_position).normalized() * MOVE_SPEED
-	if add_gravity and abs((global_pos - global_position).y) > FLOOR_EPSILON:
-		#Log.info(vel, abs((global_pos - global_position).y))
-		vel.y = (global_pos - global_position).y
-	velocity = vel
-	if move_and_slide():
-		for i in get_slide_collision_count():
-			var col = get_slide_collision(i)
-			if col.get_collider() is RigidBody2D:
-				(col.get_collider() as RigidBody2D).apply_impulse(col.get_normal() * -PUSH_FORCE)
-	#move_and_collide(vel, false, 0.08, true)
-	if (global_pos - global_position).length() < MOVE_EPSILON:
-		return true
-	return false
-
-func _physics_process(delta: float) -> void:
-	if state == States.ENTERING:
-		if _move_towards(entrance.global_position, delta, false):
-			sprite.flip_h = true
-			state = States.COLLECTING_RIGHT
-			#state = States.IDLE
-	elif state == States.COLLECTING_RIGHT:
-		if _move_towards(right.global_position, delta, true):
-			sprite.flip_h = true
-			state = States.COLLECTING_LEFT
-	elif state == States.COLLECTING_LEFT:
-		if _move_towards(left.global_position, delta, true):
-			sprite.flip_h = false
-			state = States.COLLECTING_RIGHT
-	elif state == States.EXITING:
-		if _move_towards(entrance.global_position, delta, true):
-			var t = _get_available_recycler()
-			if t == null:
-				state = States.IDLE
-			else:
-				_unloading_target = (t as Recycler).get_input()
-				state = States.UNLOADING
-	elif state == States.IDLE:
-		var t = _get_available_recycler()
-		if t != null:
-			_unloading_target = (t as Recycler).get_input()
-			state = States.UNLOADING
-	elif state == States.UNLOADING:
-		if _move_towards(_unloading_target.global_position, delta, false):
-			# TODO unload scrap
-			state = States.ENTERING
-	else:
-		Log.error("Robot state machine broken:", state)
+func _process(_delta: float) -> void:
+	pass

@@ -55,7 +55,6 @@ static func create_metallic() -> Scrap:
 	(sprite.texture as AtlasTexture).atlas = _atlas
 	(sprite.texture as AtlasTexture).region = variation[1]
 	return s
-	
 
 static var _plastic_variations: Array = [
 	_variation(22, 3, 4, 11),

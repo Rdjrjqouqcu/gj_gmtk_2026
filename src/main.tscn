@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://baopmn5l2lmu"]
 
 [ext_resource type="Script" uid="uid://ck4prm8m0xan3" path="res://src/world.gd" id="1_eewff"]
+[ext_resource type="PackedScene" uid="uid://b2oinxatyf6o4" path="res://src/robot.tscn" id="3_fyndt"]
 [ext_resource type="PackedScene" uid="uid://cwslks0hxdfgx" path="res://src/resource_display.tscn" id="5_fyndt"]
 [ext_resource type="PackedScene" uid="uid://cvav5wlslk61r" path="res://src/recycler.tscn" id="5_kmhfv"]
-[ext_resource type="PackedScene" uid="uid://be2rvgbd8k3pa" path="res://src/robot.tscn" id="6_rlaii"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_eewff"]
 
@@ -100,12 +100,10 @@ position = Vector2(464, 160)
 [node name="Recycler4" parent="recyclers" unique_id=1328164275 instance=ExtResource("5_kmhfv")]
 position = Vector2(464, 224)
 
-[node name="robot" parent="." unique_id=1965983620 node_paths=PackedStringArray("recyclers", "entrance", "right", "left") instance=ExtResource("6_rlaii")]
-position = Vector2(400, 32)
-recyclers = [NodePath("../recyclers/Recycler1"), NodePath("../recyclers/Recycler2"), NodePath("../recyclers/Recycler3"), NodePath("../recyclers/Recycler4")]
-entrance = NodePath("../bin/entrance")
-right = NodePath("../bin/right")
+[node name="Robot" parent="." unique_id=1753369023 node_paths=PackedStringArray("left", "right") instance=ExtResource("3_fyndt")]
+position = Vector2(20, 236)
 left = NodePath("../bin/left")
+right = NodePath("../bin/right")
 
 [node name="ResourceDisplay" parent="." unique_id=833009980 instance=ExtResource("5_fyndt")]
 
