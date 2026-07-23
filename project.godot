@@ -22,7 +22,7 @@ Resources="*uid://cn4mfl45h4q43"
 
 [display]
 
-window/size/viewport_width=480
+window/size/viewport_width=512
 window/size/viewport_height=512
 window/stretch/mode="canvas_items"
 window/handheld/orientation=1

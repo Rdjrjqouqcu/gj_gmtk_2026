@@ -8,12 +8,12 @@ collision_mask = 6
 input_pickable = true
 script = ExtResource("1_2ftnj")
 
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1899656504]
+polygon = PackedVector2Array(0, -8, 8, 4, 0, 8, -8, 4)
+
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=1385157574]
 color = Color(0, 1, 0, 1)
-polygon = PackedVector2Array(0, -12, 12, 8, -12, 8)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1899656504]
-polygon = PackedVector2Array(0, -12, 12, 8, -12, 8)
+polygon = PackedVector2Array(0, -8, 8, 4, 0, 8, -8, 4)
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

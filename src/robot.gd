@@ -28,31 +28,35 @@ func _get_available_recycler() -> Variant:
 
 const MOVE_SPEED: float = 100.0
 const MOVE_EPSILON: int = 4
+const FLOOR_EPSILON: float = 1
 var _unloading_target: Marker2D = null
 
 ## returns true if arrived at destination
-func _move_towards(global_pos: Vector2, delta: float) -> bool:
+func _move_towards(global_pos: Vector2, delta: float, add_gravity: bool) -> bool:
 	var vel = (global_pos - global_position).normalized() * MOVE_SPEED * delta
-	move_and_collide(vel)
+	if add_gravity and abs((global_pos - global_position).y) > FLOOR_EPSILON:
+		#Log.info(vel, abs((global_pos - global_position).y))
+		vel.y = (global_pos - global_position).y
+	move_and_collide(vel, false, 0.08, true)
 	if (global_pos - global_position).length() < MOVE_EPSILON:
 		return true
 	return false
 
 func _process(delta: float) -> void:
 	if state == States.ENTERING:
-		if _move_towards(entrance.global_position, delta):
+		if _move_towards(entrance.global_position, delta, false):
 			sprite.flip_h = true
 			state = States.COLLECTING_RIGHT
 	elif state == States.COLLECTING_RIGHT:
-		if _move_towards(right.global_position, delta):
+		if _move_towards(right.global_position, delta, true):
 			sprite.flip_h = true
 			state = States.COLLECTING_LEFT
 	elif state == States.COLLECTING_LEFT:
-		if _move_towards(left.global_position, delta):
+		if _move_towards(left.global_position, delta, true):
 			sprite.flip_h = false
 			state = States.COLLECTING_RIGHT
 	elif state == States.EXITING:
-		if _move_towards(entrance.global_position, delta):
+		if _move_towards(entrance.global_position, delta, true):
 			var t = _get_available_recycler()
 			if t == null:
 				state = States.IDLE
@@ -65,7 +69,7 @@ func _process(delta: float) -> void:
 			_unloading_target = (t as Recycler).get_input()
 			state = States.UNLOADING
 	elif state == States.UNLOADING:
-		if _move_towards(_unloading_target.global_position, delta):
+		if _move_towards(_unloading_target.global_position, delta, false):
 			# TODO unload scrap
 			state = States.ENTERING
 	else:

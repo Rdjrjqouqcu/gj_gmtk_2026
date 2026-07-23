@@ -84,33 +84,33 @@ text = "00.00"
 horizontal_alignment = 2
 
 [node name="entrance" type="Marker2D" parent="bin" unique_id=543299377]
-position = Vector2(392, 244)
+position = Vector2(400, 236)
 gizmo_extents = 4.0
 
 [node name="right" type="Marker2D" parent="bin" unique_id=2134520963]
-position = Vector2(372, 244)
+position = Vector2(364, 236)
 gizmo_extents = 4.0
 
 [node name="left" type="Marker2D" parent="bin" unique_id=95740170]
-position = Vector2(12, 244)
+position = Vector2(20, 236)
 gizmo_extents = 4.0
 
 [node name="recyclers" type="Node2D" parent="." unique_id=495947630]
 
 [node name="Recycler1" parent="recyclers" unique_id=103653287 instance=ExtResource("5_kmhfv")]
-position = Vector2(432, 32)
+position = Vector2(464, 32)
 
 [node name="Recycler2" parent="recyclers" unique_id=548699439 instance=ExtResource("5_kmhfv")]
-position = Vector2(432, 96)
+position = Vector2(464, 96)
 
 [node name="Recycler3" parent="recyclers" unique_id=2039820163 instance=ExtResource("5_kmhfv")]
-position = Vector2(432, 160)
+position = Vector2(464, 160)
 
 [node name="Recycler4" parent="recyclers" unique_id=1328164275 instance=ExtResource("5_kmhfv")]
-position = Vector2(432, 224)
+position = Vector2(464, 224)
 
 [node name="robot" parent="." unique_id=1965983620 node_paths=PackedStringArray("recyclers", "entrance", "right", "left") instance=ExtResource("6_rlaii")]
-position = Vector2(392, 32)
+position = Vector2(400, 32)
 recyclers = [NodePath("../recyclers/Recycler1"), NodePath("../recyclers/Recycler2"), NodePath("../recyclers/Recycler3"), NodePath("../recyclers/Recycler4")]
 entrance = NodePath("../bin/entrance")
 right = NodePath("../bin/right")
