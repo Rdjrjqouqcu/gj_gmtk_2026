@@ -6,7 +6,7 @@ extends Control
 @onready var val_circuit: Label = $PanelContainer/HBoxContainer/VBoxContainer4/ValCircuit
 
 func _format_line(c: int, m: int) -> String:
-	return "{0} / {1}".format([c, m])
+	return "{0}".format([c, m])
 
 func _update() -> void:
 	val_salvage.text = _format_line(Resources.salvage_count, Resources.salvage_max)

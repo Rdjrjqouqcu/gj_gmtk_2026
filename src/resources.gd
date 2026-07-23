@@ -51,10 +51,14 @@ func has_bundle(b: Bundle) -> bool:
 	return true
 
 func add_bundle(b: Bundle) -> void:
-	salvage_count = min(salvage_max, salvage_count + b.salvage)
-	metal_count = min(metal_max, metal_count + b.metal)
-	plastic_count = min(plastic_max, plastic_count + b.plastic)
-	circuit_count = min(circuit_max, circuit_count + b.circuit)
+	#salvage_count = min(salvage_max, salvage_count + b.salvage)
+	#metal_count = min(metal_max, metal_count + b.metal)
+	#plastic_count = min(plastic_max, plastic_count + b.plastic)
+	#circuit_count = min(circuit_max, circuit_count + b.circuit)
+	salvage_count = salvage_count + b.salvage
+	metal_count = metal_count + b.metal
+	plastic_count = plastic_count + b.plastic
+	circuit_count = circuit_count + b.circuit
 	amounts_updated.emit()
 	
 

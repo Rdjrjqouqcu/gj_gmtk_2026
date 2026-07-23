@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://cwslks0hxdfgx"]
 
 [ext_resource type="Script" uid="uid://bbtqils2o2bnq" path="res://src/resource_display.gd" id="1_y640e"]
+[ext_resource type="Texture2D" uid="uid://dfuuwxlbshqge" path="res://assets/salvage.tres" id="2_ltq7i"]
+[ext_resource type="Texture2D" uid="uid://dh778d2tucsb7" path="res://assets/metal.tres" id="2_op6nu"]
+[ext_resource type="Texture2D" uid="uid://dnf5j6jbi73j1" path="res://assets/plastic.tres" id="4_b6l11"]
+[ext_resource type="Texture2D" uid="uid://r5luvcvw0qje" path="res://assets/circuit.tres" id="5_tlkyn"]
 
 [node name="ResourceDisplay" type="Control" unique_id=833009980]
 layout_mode = 3
@@ -25,7 +29,7 @@ grow_vertical = 0
 layout_mode = 2
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer" unique_id=1846865489]
+[node name="VBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer" unique_id=64060752]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -35,15 +39,17 @@ alignment = 1
 
 [node name="ValSalvage" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer" unique_id=1962963336]
 layout_mode = 2
-text = "00/00"
+text = "00"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer" unique_id=164807822]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/VBoxContainer" unique_id=1940310851]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-text = "Salvage"
-horizontal_alignment = 1
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_ltq7i")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/HBoxContainer" unique_id=1232023781]
+[node name="VBoxContainer2" type="HBoxContainer" parent="PanelContainer/HBoxContainer" unique_id=1273393557]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 accessibility_region = true
@@ -51,15 +57,17 @@ alignment = 1
 
 [node name="ValMetal" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer2" unique_id=1844716271]
 layout_mode = 2
-text = "00/00"
+text = "00"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer2" unique_id=1602058331]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/VBoxContainer2" unique_id=1375644155]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-text = "Metal"
-horizontal_alignment = 1
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_op6nu")
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/HBoxContainer" unique_id=1166801782]
+[node name="VBoxContainer3" type="HBoxContainer" parent="PanelContainer/HBoxContainer" unique_id=1457117232]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -69,15 +77,17 @@ alignment = 1
 
 [node name="ValPlastic" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer3" unique_id=557892870]
 layout_mode = 2
-text = "00/00"
+text = "00"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer3" unique_id=960393662]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/VBoxContainer3" unique_id=1384899174]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-text = "Plastic"
-horizontal_alignment = 1
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_b6l11")
 
-[node name="VBoxContainer4" type="VBoxContainer" parent="PanelContainer/HBoxContainer" unique_id=2088286024]
+[node name="VBoxContainer4" type="HBoxContainer" parent="PanelContainer/HBoxContainer" unique_id=1310688387]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 accessibility_region = true
@@ -85,10 +95,12 @@ alignment = 1
 
 [node name="ValCircuit" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer4" unique_id=1592262963]
 layout_mode = 2
-text = "00/00"
+text = "00"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer4" unique_id=1442280269]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/VBoxContainer4" unique_id=14840000]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-text = "Circuits"
-horizontal_alignment = 1
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_tlkyn")
