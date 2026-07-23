@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rhis3"]
 size = Vector2(32, 32)
 
-[node name="robot" type="AnimatableBody2D" unique_id=311620042]
+[node name="robot" type="CharacterBody2D" unique_id=610154769]
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_m74s2")

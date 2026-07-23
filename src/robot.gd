@@ -1,4 +1,4 @@
-extends AnimatableBody2D
+extends CharacterBody2D
 class_name Robot
 
 @export var recyclers: Array[Recycler]
@@ -19,7 +19,7 @@ enum States {
 var state: States = States.ENTERING
 
 func _ready() -> void:
-	sync_to_physics = false
+	#sync_to_physics = false
 	sprite.flip_h = true
 
 func _get_available_recycler() -> Variant:
@@ -27,22 +27,30 @@ func _get_available_recycler() -> Variant:
 	return filtered.pick_random() if not filtered.is_empty() else null
 
 const MOVE_SPEED: float = 100.0
+const PUSH_FORCE: float = 50_000.0
 const MOVE_EPSILON: int = 4
 const FLOOR_EPSILON: float = 1
 var _unloading_target: Marker2D = null
 
 ## returns true if arrived at destination
-func _move_towards(global_pos: Vector2, delta: float, add_gravity: bool) -> bool:
-	var vel = (global_pos - global_position).normalized() * MOVE_SPEED * delta
+func _move_towards(global_pos: Vector2, _delta: float, add_gravity: bool) -> bool:
+	#var vel = (global_pos - global_position).normalized() * MOVE_SPEED * delta
+	var vel = (global_pos - global_position).normalized() * MOVE_SPEED
 	if add_gravity and abs((global_pos - global_position).y) > FLOOR_EPSILON:
 		#Log.info(vel, abs((global_pos - global_position).y))
 		vel.y = (global_pos - global_position).y
-	move_and_collide(vel, false, 0.08, true)
+	velocity = vel
+	if move_and_slide():
+		for i in get_slide_collision_count():
+			var col = get_slide_collision(i)
+			if col.get_collider() is RigidBody2D:
+				(col.get_collider() as RigidBody2D).apply_force(col.get_normal() * -PUSH_FORCE)
+	#move_and_collide(vel, false, 0.08, true)
 	if (global_pos - global_position).length() < MOVE_EPSILON:
 		return true
 	return false
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if state == States.ENTERING:
 		if _move_towards(entrance.global_position, delta, false):
 			sprite.flip_h = true
