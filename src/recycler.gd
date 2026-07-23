@@ -2,6 +2,10 @@
 extends Node2D
 class_name Recycler
 
+func has_input_space() -> bool:
+	return true
+func get_input() -> Marker2D:
+	return $input
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

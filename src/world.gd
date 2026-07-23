@@ -5,13 +5,13 @@ class_name Bin
 const SPAWN_MARKER_OFFSET: int = 32
 
 @onready var scrap_nodes: Node2D = $ScrapNodes
-@onready var label: Label = $Label
+@onready var scrap_count: Label = $ScrapCount
 @onready var spawn_timer_label: Label = $SpawnTimer
 
 func update_scrap_count() -> void:
-	if scrap_nodes == null or label == null:
+	if scrap_nodes == null or scrap_count == null:
 		return
-	label.text = str(scrap_nodes.get_child_count()) + " lbs"
+	scrap_count.text = str(scrap_nodes.get_child_count()) + " lbs"
 func _on_scrap_nodes_child_entered_tree(node: Node) -> void:
 	node.tree_exited.connect(update_scrap_count)
 	update_scrap_count()

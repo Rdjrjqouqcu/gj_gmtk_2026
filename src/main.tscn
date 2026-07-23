@@ -8,9 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://cvav5wlslk61r" path="res://src/recycler.tscn" id="5_kmhfv"]
 [ext_resource type="PackedScene" uid="uid://be2rvgbd8k3pa" path="res://src/robot.tscn" id="6_rlaii"]
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rhis3"]
-
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_eewff"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rhis3"]
 
 [node name="Main" type="Node" unique_id=388192039]
 
@@ -31,28 +31,32 @@ type = 2
 position = Vector2(204, 32)
 type = 3
 
-[node name="RigidBody2D" type="StaticBody2D" parent="bin" unique_id=880022982]
+[node name="sides" type="StaticBody2D" parent="bin" unique_id=880022982]
 collision_layer = 2
 collision_mask = 2
 
-[node name="border" type="Polygon2D" parent="bin/RigidBody2D" unique_id=181574813]
+[node name="border" type="Polygon2D" parent="bin/sides" unique_id=181574813]
 polygon = PackedVector2Array(0, 0, 0, 256, 384, 256, 384, 0, 380, 0, 380, 252, 4, 252, 4, 0)
 
-[node name="bottom" type="CollisionShape2D" parent="bin/RigidBody2D" unique_id=262525815]
-position = Vector2(192, 252)
-shape = SubResource("WorldBoundaryShape2D_rhis3")
-
-[node name="right" type="CollisionShape2D" parent="bin/RigidBody2D" unique_id=1478181060]
+[node name="right" type="CollisionShape2D" parent="bin/sides" unique_id=1478181060]
 position = Vector2(380, 156)
 rotation = -1.5707964
 shape = SubResource("WorldBoundaryShape2D_eewff")
 
-[node name="left" type="CollisionShape2D" parent="bin/RigidBody2D" unique_id=50730531]
+[node name="left" type="CollisionShape2D" parent="bin/sides" unique_id=50730531]
 position = Vector2(4, 156)
 rotation = 1.5707964
 shape = SubResource("WorldBoundaryShape2D_eewff")
 
-[node name="Label" type="Label" parent="bin" unique_id=1451066071]
+[node name="bottom" type="StaticBody2D" parent="bin" unique_id=1149795194]
+collision_layer = 6
+collision_mask = 6
+
+[node name="bottom" type="CollisionShape2D" parent="bin/bottom" unique_id=262525815]
+position = Vector2(192, 252)
+shape = SubResource("WorldBoundaryShape2D_rhis3")
+
+[node name="ScrapCount" type="Label" parent="bin" unique_id=1451066071]
 offset_left = 320.0
 offset_top = 256.0
 offset_right = 380.0
@@ -61,7 +65,7 @@ text = "100 lbs"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="bin" unique_id=2118711183]
+[node name="debug" type="Button" parent="bin" unique_id=2118711183]
 offset_left = 8.0
 offset_top = 4.0
 offset_right = 16.0
@@ -80,11 +84,15 @@ text = "00.00"
 horizontal_alignment = 2
 
 [node name="entrance" type="Marker2D" parent="bin" unique_id=543299377]
-position = Vector2(392, 248)
+position = Vector2(392, 244)
 gizmo_extents = 4.0
 
-[node name="exit" type="Marker2D" parent="bin" unique_id=2134520963]
-position = Vector2(376, 248)
+[node name="right" type="Marker2D" parent="bin" unique_id=2134520963]
+position = Vector2(372, 244)
+gizmo_extents = 4.0
+
+[node name="left" type="Marker2D" parent="bin" unique_id=95740170]
+position = Vector2(12, 244)
 gizmo_extents = 4.0
 
 [node name="recyclers" type="Node2D" parent="." unique_id=495947630]
@@ -101,10 +109,14 @@ position = Vector2(432, 160)
 [node name="Recycler4" parent="recyclers" unique_id=1328164275 instance=ExtResource("5_kmhfv")]
 position = Vector2(432, 224)
 
-[node name="robot" parent="." unique_id=1965983620 instance=ExtResource("6_rlaii")]
+[node name="robot" parent="." unique_id=1965983620 node_paths=PackedStringArray("recyclers", "entrance", "right", "left") instance=ExtResource("6_rlaii")]
 position = Vector2(392, 32)
+recyclers = [NodePath("../recyclers/Recycler1"), NodePath("../recyclers/Recycler2"), NodePath("../recyclers/Recycler3"), NodePath("../recyclers/Recycler4")]
+entrance = NodePath("../bin/entrance")
+right = NodePath("../bin/right")
+left = NodePath("../bin/left")
 
 [node name="ResourceDisplay" parent="." unique_id=833009980 instance=ExtResource("5_fyndt")]
 
 [connection signal="child_entered_tree" from="bin/ScrapNodes" to="bin" method="_on_scrap_nodes_child_entered_tree"]
-[connection signal="pressed" from="bin/Button" to="bin" method="_on_debug_spawn"]
+[connection signal="pressed" from="bin/debug" to="bin" method="_on_debug_spawn"]
