@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cvav5wlslk61r"]
+
+[ext_resource type="Script" uid="uid://bp1eyhpxyv0f4" path="res://src/recycler.gd" id="1_68bfa"]
+
+[node name="Recycler" type="Node2D" unique_id=103653287]
+script = ExtResource("1_68bfa")
+
+[node name="temp" type="Polygon2D" parent="." unique_id=548699439]
+color = Color(0, 0.3666668, 1, 1)
+polygon = PackedVector2Array(-32, -28, 48, -28, 48, 28, -32, 28)
+
+[node name="input" type="Marker2D" parent="." unique_id=1902001859]
+position = Vector2(-40, 0)
+gizmo_extents = 4.0

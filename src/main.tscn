@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://bh4ukx6h102xu" path="res://src/scrap_plastic.tscn" id="3_5q4o7"]
 [ext_resource type="PackedScene" uid="uid://dkkqtggj0clpc" path="res://src/scrap_circuit.tscn" id="4_3cfgd"]
 [ext_resource type="PackedScene" uid="uid://cwslks0hxdfgx" path="res://src/resource_display.tscn" id="5_fyndt"]
+[ext_resource type="PackedScene" uid="uid://cvav5wlslk61r" path="res://src/recycler.tscn" id="5_kmhfv"]
+[ext_resource type="PackedScene" uid="uid://be2rvgbd8k3pa" path="res://src/robot.tscn" id="6_rlaii"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rhis3"]
 
@@ -30,13 +32,15 @@ position = Vector2(204, 32)
 type = 3
 
 [node name="RigidBody2D" type="StaticBody2D" parent="bin" unique_id=880022982]
+collision_layer = 2
+collision_mask = 2
+
+[node name="border" type="Polygon2D" parent="bin/RigidBody2D" unique_id=181574813]
+polygon = PackedVector2Array(0, 0, 0, 256, 384, 256, 384, 0, 380, 0, 380, 252, 4, 252, 4, 0)
 
 [node name="bottom" type="CollisionShape2D" parent="bin/RigidBody2D" unique_id=262525815]
 position = Vector2(192, 252)
 shape = SubResource("WorldBoundaryShape2D_rhis3")
-
-[node name="border" type="Polygon2D" parent="bin/RigidBody2D" unique_id=181574813]
-polygon = PackedVector2Array(0, 0, 0, 256, 384, 256, 384, 0, 380, 0, 380, 252, 4, 252, 4, 0)
 
 [node name="right" type="CollisionShape2D" parent="bin/RigidBody2D" unique_id=1478181060]
 position = Vector2(380, 156)
@@ -51,10 +55,11 @@ shape = SubResource("WorldBoundaryShape2D_eewff")
 [node name="Label" type="Label" parent="bin" unique_id=1451066071]
 offset_left = 320.0
 offset_top = 256.0
-offset_right = 384.0
+offset_right = 380.0
 offset_bottom = 288.0
 text = "100 lbs"
 horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="Button" type="Button" parent="bin" unique_id=2118711183]
 offset_left = 8.0
@@ -65,6 +70,7 @@ text = "toggle spawn"
 
 [node name="TrashSpawn" type="Marker2D" parent="bin" unique_id=1022385217]
 position = Vector2(192, 32)
+gizmo_extents = 32.0
 
 [node name="SpawnTimer" type="Label" parent="bin" unique_id=580670251]
 offset_left = 336.0
@@ -73,27 +79,30 @@ offset_bottom = 23.0
 text = "00.00"
 horizontal_alignment = 2
 
+[node name="entrance" type="Marker2D" parent="bin" unique_id=543299377]
+position = Vector2(392, 248)
+gizmo_extents = 4.0
+
+[node name="exit" type="Marker2D" parent="bin" unique_id=2134520963]
+position = Vector2(376, 248)
+gizmo_extents = 4.0
+
 [node name="recyclers" type="Node2D" parent="." unique_id=495947630]
 
-[node name="recyclerPlaceholder1" type="Polygon2D" parent="recyclers" unique_id=196070658]
+[node name="Recycler1" parent="recyclers" unique_id=103653287 instance=ExtResource("5_kmhfv")]
 position = Vector2(432, 32)
-color = Color(0, 0.3666668, 1, 1)
-polygon = PackedVector2Array(-48, -32, 48, -32, 48, 32, -48, 32)
 
-[node name="recyclerPlaceholder2" type="Polygon2D" parent="recyclers" unique_id=412259589]
+[node name="Recycler2" parent="recyclers" unique_id=548699439 instance=ExtResource("5_kmhfv")]
 position = Vector2(432, 96)
-color = Color(1, 0.98333335, 0, 1)
-polygon = PackedVector2Array(-48, -32, 48, -32, 48, 32, -48, 32)
 
-[node name="recyclerPlaceholder3" type="Polygon2D" parent="recyclers" unique_id=2118537035]
+[node name="Recycler3" parent="recyclers" unique_id=2039820163 instance=ExtResource("5_kmhfv")]
 position = Vector2(432, 160)
-color = Color(1, 0, 0.9500003, 1)
-polygon = PackedVector2Array(-48, -32, 48, -32, 48, 32, -48, 32)
 
-[node name="recyclerPlaceholder4" type="Polygon2D" parent="recyclers" unique_id=467435824]
+[node name="Recycler4" parent="recyclers" unique_id=1328164275 instance=ExtResource("5_kmhfv")]
 position = Vector2(432, 224)
-color = Color(0, 1, 0.049999952, 1)
-polygon = PackedVector2Array(-48, -32, 48, -32, 48, 32, -48, 32)
+
+[node name="robot" parent="." unique_id=1965983620 instance=ExtResource("6_rlaii")]
+position = Vector2(392, 32)
 
 [node name="ResourceDisplay" parent="." unique_id=833009980 instance=ExtResource("5_fyndt")]
 

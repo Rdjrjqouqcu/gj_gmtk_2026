@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://dvtfua4u7qnj1" path="res://src/scrap.gd" id="1_0olue"]
 
 [node name="MetallicScrap" type="RigidBody2D" unique_id=1579310785 groups=["scraps"]]
+collision_layer = 6
+collision_mask = 6
 input_pickable = true
 script = ExtResource("1_0olue")
 

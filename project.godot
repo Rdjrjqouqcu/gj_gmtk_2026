@@ -35,6 +35,12 @@ enabled=PackedStringArray("res://addons/at-icons/plugin.cfg", "res://addons/log/
 
 scraps=""
 
+[layer_names]
+
+2d_physics/layer_1="default"
+2d_physics/layer_2="bin"
+2d_physics/layer_3="mover"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
