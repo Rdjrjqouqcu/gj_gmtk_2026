@@ -13,17 +13,18 @@ grow_horizontal = 2
 
 [node name="GridContainer" type="GridContainer" parent="." unique_id=961557907]
 layout_mode = 0
-offset_left = 12.0
+offset_left = 3.0
 offset_top = 4.0
-offset_right = 498.0
+offset_right = 509.0
 offset_bottom = 188.0
 columns = 5
 
-[node name="UpgradeButton" parent="GridContainer" unique_id=1310057937 instance=ExtResource("1_3yi36")]
+[node name="RobotSpeed" parent="GridContainer" unique_id=1310057937 instance=ExtResource("1_3yi36")]
 layout_mode = 2
 
-[node name="UpgradeButton2" parent="GridContainer" unique_id=1477002810 instance=ExtResource("1_3yi36")]
+[node name="SalvagerSpeed" parent="GridContainer" unique_id=1477002810 instance=ExtResource("1_3yi36")]
 layout_mode = 2
+upgrade = 1
 
 [node name="UpgradeButton3" parent="GridContainer" unique_id=824019543 instance=ExtResource("1_3yi36")]
 layout_mode = 2
@@ -37,8 +38,9 @@ layout_mode = 2
 [node name="UpgradeButton6" parent="GridContainer" unique_id=1438361531 instance=ExtResource("1_3yi36")]
 layout_mode = 2
 
-[node name="UpgradeButton7" parent="GridContainer" unique_id=268662440 instance=ExtResource("1_3yi36")]
+[node name="SalvagerParallel" parent="GridContainer" unique_id=268662440 instance=ExtResource("1_3yi36")]
 layout_mode = 2
+upgrade = 2
 
 [node name="UpgradeButton8" parent="GridContainer" unique_id=1059731892 instance=ExtResource("1_3yi36")]
 layout_mode = 2
