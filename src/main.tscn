@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b2oinxatyf6o4" path="res://src/robot.tscn" id="3_fyndt"]
 [ext_resource type="PackedScene" uid="uid://cwslks0hxdfgx" path="res://src/resource_display.tscn" id="5_fyndt"]
 [ext_resource type="PackedScene" uid="uid://cvav5wlslk61r" path="res://src/recycler.tscn" id="5_kmhfv"]
+[ext_resource type="PackedScene" uid="uid://b71uxwneml6ig" path="res://src/upgrade_buttons.tscn" id="5_rlaii"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_eewff"]
 
@@ -48,10 +49,10 @@ position = Vector2(192, 252)
 shape = SubResource("WorldBoundaryShape2D_rhis3")
 
 [node name="ScrapCount" type="Label" parent="bin" unique_id=1451066071]
-offset_left = 320.0
-offset_top = 256.0
-offset_right = 380.0
-offset_bottom = 288.0
+offset_left = 316.0
+offset_top = 20.0
+offset_right = 376.0
+offset_bottom = 52.0
 text = "100 lbs"
 horizontal_alignment = 2
 vertical_alignment = 1
@@ -106,6 +107,8 @@ left = NodePath("../bin/left")
 right = NodePath("../bin/right")
 
 [node name="ResourceDisplay" parent="." unique_id=833009980 instance=ExtResource("5_fyndt")]
+
+[node name="UpgradeButtons" parent="." unique_id=1739712924 instance=ExtResource("5_rlaii")]
 
 [connection signal="child_entered_tree" from="bin/ScrapNodes" to="bin" method="_on_scrap_nodes_child_entered_tree"]
 [connection signal="pressed" from="bin/debug" to="bin" method="_on_debug_spawn"]
