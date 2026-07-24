@@ -60,9 +60,3 @@ func _process(delta: float) -> void:
 		spawn_timer -= delta
 		if spawn_timer <= 0:
 			_on_spawn_timer()
-
-static var kick_strength: float = 100.0
-static var kick_vector: Vector2 = Vector2(-1, -1).normalized() * kick_strength
-func _on_top_kick_body_entered(body: Node2D) -> void:
-	if body is RigidBody2D:
-		body.apply_impulse(kick_vector)

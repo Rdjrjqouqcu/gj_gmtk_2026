@@ -114,7 +114,7 @@ script = ExtResource("1_08b5q")
 sprite_frames = SubResource("SpriteFrames_kloqm")
 animation = &"crusher"
 autoplay = "crusher"
-frame_progress = 0.814663
+frame_progress = 0.35914782
 
 [node name="input" type="Marker2D" parent="." unique_id=1755967165]
 position = Vector2(-64, 0)

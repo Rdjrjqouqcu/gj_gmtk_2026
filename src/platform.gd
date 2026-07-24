@@ -1,9 +1,12 @@
 extends AnimatableBody2D
 
-@export var left: Marker2D
-@export var right: Marker2D
+@export var bottom: Marker2D
+@export var top: Marker2D
 
-@onready var sprite: Sprite2D = $sprite
+
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+
+var going_up: bool = true
 
 func _get_move_time() -> float:
 	return UpgradeManager.get_robot_speed()
@@ -15,23 +18,25 @@ func _handle_move_time_change(prev: float, curr: float) -> void:
 	var scaled: float = remaining * curr / prev
 	#Log.info("%f %f %f %f" % [remaining, prev, curr, scaled])
 	tween.kill()
-	var dest: Vector2 = right.global_position if going_right else left.global_position
+	var dest: Vector2 = top.global_position if going_up else bottom.global_position
 	tween = get_tree().create_tween()
 	tween.tween_property(self, "global_position", dest , scaled)
 	tween.tween_callback(_change_direction)
 
 var tween: Tween = null
-var going_right: bool = true:
-	set(v):
-		going_right = v
-		sprite.flip_h = not v
 
 func _change_direction() -> void:
-	going_right = not going_right
+	going_up = not going_up
 	if tween != null:
 		tween.kill()
 		tween = null
-	var dest: Vector2 = right.global_position if going_right else left.global_position
+	var dest: Vector2
+	if going_up:
+		dest = top.global_position
+		collision_shape_2d.set_deferred("disabled", false)
+	else:
+		dest = bottom.global_position
+		collision_shape_2d.set_deferred("disabled", true)
 	tween = get_tree().create_tween()
 	tween.tween_property(self, "global_position", dest , _get_move_time())
 	tween.tween_callback(_change_direction)
@@ -39,5 +44,5 @@ func _change_direction() -> void:
 func _ready() -> void:
 	UpgradeManager.robot_speed_changed.connect(_handle_move_time_change)
 	tween = get_tree().create_tween()
-	tween.tween_property(self, "global_position", right.global_position, _get_move_time())
+	tween.tween_property(self, "global_position", top.global_position, _get_move_time())
 	tween.tween_callback(_change_direction)
