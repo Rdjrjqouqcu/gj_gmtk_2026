@@ -5,26 +5,48 @@ const ResourceBundle = Resources.Bundle
 
 @export var upgrade: UpgradeManager.Upgrades
 
+const COLOR_NOT_SELECTED = Color.WHITE
 const COLOR_CAN_AFFORD = Color.GREEN
 const COLOR_CANNOT_AFFORD = Color.RED
+@onready var val_salvage: Label = $VBoxContainer/cost/HBoxContainer/ValSalvage
+@onready var val_metal: Label = $VBoxContainer/cost/HBoxContainer/ValMetal
+@onready var val_plastic: Label = $VBoxContainer/cost/HBoxContainer2/ValPlastic
+@onready var val_circuit: Label = $VBoxContainer/cost/HBoxContainer2/ValCircuit
 
-func _add_cost_nodes(cost: int, type: ResourceType) -> void:
-	var can_afford_salvage: bool = Resources.has(cost, type)
-	var l: Label = Label.new()
-	l.text = str(cost)
-	l.modulate = COLOR_CAN_AFFORD if can_afford_salvage else COLOR_CANNOT_AFFORD
-	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	var t: TextureRect = TextureRect.new()
-	t.texture = Resources.icon_textures[type]
-	t.custom_minimum_size = Vector2(32, 32)
-	t.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	t.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	$VBoxContainer/cost.add_child(l)
-	$VBoxContainer/cost.add_child(t)
+func _update_cost_nodes(cost: ResourceBundle) -> void:
+	if cost.salvage == 0:
+		val_salvage.text = "0"
+		val_salvage.modulate = COLOR_NOT_SELECTED
+	else:
+		val_salvage.text = str(cost.salvage)
+		var can_afford = Resources.has(cost.salvage, ResourceType.SALVAGE)
+		val_salvage.modulate = COLOR_CAN_AFFORD if can_afford else COLOR_CANNOT_AFFORD
+	if cost.metal == 0:
+		val_metal.text = "0"
+		val_metal.modulate = COLOR_NOT_SELECTED
+	else:
+		val_metal.text = str(cost.metal)
+		var can_afford = Resources.has(cost.metal, ResourceType.METAL)
+		val_metal.modulate = COLOR_CAN_AFFORD if can_afford else COLOR_CANNOT_AFFORD
+	if cost.plastic == 0:
+		val_plastic.text = "0"
+		val_plastic.modulate = COLOR_NOT_SELECTED
+	else:
+		val_plastic.text = str(cost.plastic)
+		var can_afford = Resources.has(cost.plastic, ResourceType.PLASTIC)
+		val_plastic.modulate = COLOR_CAN_AFFORD if can_afford else COLOR_CANNOT_AFFORD
+	if cost.circuit == 0:
+		val_circuit.text = "0"
+		val_circuit.modulate = COLOR_NOT_SELECTED
+	else:
+		val_circuit.text = str(cost.circuit)
+		var can_afford = Resources.has(cost.circuit, ResourceType.CIRCUIT)
+		val_circuit.modulate = COLOR_CAN_AFFORD if can_afford else COLOR_CANNOT_AFFORD
+
 
 func _update_display() -> void:
 	$VBoxContainer/name.text = title
-	var cost: Resources.Bundle = get_cost.call()
+	var cost: ResourceBundle = get_cost.call()
 	var current = get_current.call()
 	if cost == null:
 		$VBoxContainer/cost.visible = false
@@ -35,16 +57,7 @@ func _update_display() -> void:
 		$VBoxContainer/maxed.visible = false
 		var next = get_next.call()
 		$VBoxContainer/effect.text = str(current) + unit + " -> " + str(next) + unit
-		for c in $VBoxContainer/cost.get_children():
-			c.queue_free()
-		if cost.salvage != 0:
-			_add_cost_nodes(cost.salvage, ResourceType.SALVAGE)
-		if cost.metal != 0:
-			_add_cost_nodes(cost.metal, ResourceType.METAL)
-		if cost.plastic != 0:
-			_add_cost_nodes(cost.plastic, ResourceType.PLASTIC)
-		if cost.circuit != 0:
-			_add_cost_nodes(cost.circuit, ResourceType.CIRCUIT)
+		_update_cost_nodes(cost)
 
 var title: String
 var unit: String

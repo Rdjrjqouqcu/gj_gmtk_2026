@@ -2,48 +2,97 @@
 
 [ext_resource type="Texture2D" uid="uid://dfuuwxlbshqge" path="res://assets/salvage.tres" id="1_5xxkw"]
 [ext_resource type="Script" uid="uid://228t75gu1dcc" path="res://src/upgrade_button.gd" id="1_xyia7"]
+[ext_resource type="LabelSettings" uid="uid://dwv6emm2q7mur" path="res://assets/upgrade_button_label.tres" id="2_cuedw"]
+[ext_resource type="Texture2D" uid="uid://dh778d2tucsb7" path="res://assets/metal.tres" id="4_1cox5"]
+[ext_resource type="Texture2D" uid="uid://dnf5j6jbi73j1" path="res://assets/plastic.tres" id="5_1ct5o"]
+[ext_resource type="Texture2D" uid="uid://r5luvcvw0qje" path="res://assets/circuit.tres" id="6_7c3sj"]
 
 [node name="UpgradeButton" type="PanelContainer" unique_id=1310057937]
 custom_minimum_size = Vector2(90, 90)
+custom_maximum_size = Vector2(90, 90)
 script = ExtResource("1_xyia7")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1169744989]
 layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
 
 [node name="name" type="Label" parent="VBoxContainer" unique_id=2077639540]
 layout_mode = 2
 text = "robot speed"
+label_settings = ExtResource("2_cuedw")
 horizontal_alignment = 1
 
 [node name="effect" type="Label" parent="VBoxContainer" unique_id=1037943939]
 layout_mode = 2
 text = "10s -> 9s"
+label_settings = ExtResource("2_cuedw")
 horizontal_alignment = 1
 
-[node name="cost" type="HBoxContainer" parent="VBoxContainer" unique_id=327639288]
+[node name="cost" type="VBoxContainer" parent="VBoxContainer" unique_id=264368943]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
-accessibility_region = true
-alignment = 1
+size_flags_vertical = 6
 
-[node name="ValSalvage" type="Label" parent="VBoxContainer/cost" unique_id=1822989033]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/cost" unique_id=922744439]
+layout_mode = 2
+
+[node name="ValSalvage" type="Label" parent="VBoxContainer/cost/HBoxContainer" unique_id=1822989033]
 modulate = Color(1, 0, 0, 1)
 layout_mode = 2
 text = "00"
+label_settings = ExtResource("2_cuedw")
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/cost" unique_id=1444341742]
-custom_minimum_size = Vector2(32, 32)
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/cost/HBoxContainer" unique_id=1444341742]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 texture = ExtResource("1_5xxkw")
+stretch_mode = 3
+
+[node name="ValMetal" type="Label" parent="VBoxContainer/cost/HBoxContainer" unique_id=64052098]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+text = "00"
+label_settings = ExtResource("2_cuedw")
+horizontal_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/cost/HBoxContainer" unique_id=1105541122]
+layout_mode = 2
+texture = ExtResource("4_1cox5")
+stretch_mode = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/cost" unique_id=1691071196]
+layout_mode = 2
+
+[node name="ValPlastic" type="Label" parent="VBoxContainer/cost/HBoxContainer2" unique_id=1115669613]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+text = "00"
+label_settings = ExtResource("2_cuedw")
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/cost/HBoxContainer2" unique_id=1149439994]
+layout_mode = 2
+texture = ExtResource("5_1ct5o")
+stretch_mode = 3
+
+[node name="ValCircuit" type="Label" parent="VBoxContainer/cost/HBoxContainer2" unique_id=439155274]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+text = "00"
+label_settings = ExtResource("2_cuedw")
+horizontal_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/cost/HBoxContainer2" unique_id=1845034162]
+layout_mode = 2
+texture = ExtResource("6_7c3sj")
+stretch_mode = 3
 
 [node name="maxed" type="Label" parent="VBoxContainer" unique_id=16800760]
 visible = false
 layout_mode = 2
 text = "maxed"
+label_settings = ExtResource("2_cuedw")
 horizontal_alignment = 1
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]

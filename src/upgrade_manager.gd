@@ -32,17 +32,17 @@ func get_upgrade(t: Upgrades) -> Array[Variant]:
 
 ## each val is [value, cost:ResourceBundle]
 var _robot_speeds: Array = [
-	[10.0, ResourceBundle.new_from_type(10, ResourceType.SALVAGE)],
-	[9.0, ResourceBundle.new_from_type(10, ResourceType.METAL)],
-	[8.0, ResourceBundle.new_from_type(10, ResourceType.PLASTIC)],
-	[7.0, ResourceBundle.new_from_type(10, ResourceType.CIRCUIT)],
-	[6.0, ResourceBundle.new_from_type(20, ResourceType.SALVAGE)],
-	[5.0, ResourceBundle.new_from_type(20, ResourceType.METAL)],
-	[4.5, ResourceBundle.new_from_type(20, ResourceType.PLASTIC)],
-	[4.0, ResourceBundle.new_from_type(20, ResourceType.CIRCUIT)],
-	[3.5, ResourceBundle.new_from_type(10, ResourceType.SALVAGE)],
-	[3.0, ResourceBundle.new_from_type(10, ResourceType.SALVAGE)],
-	[2.5, ResourceBundle.new_from_type(10, ResourceType.SALVAGE)],
+	[10.0, ResourceBundle.new(10, 0, 0, 0)],
+	[9.0, ResourceBundle.new(0, 10, 0, 0)],
+	[8.0, ResourceBundle.new(0, 0, 10, 0)],
+	[7.0, ResourceBundle.new(0, 0, 0, 10)],
+	[6.0, ResourceBundle.new(10, 10, 0, 0)],
+	[5.0, ResourceBundle.new(10, 0, 10, 0)],
+	[4.5, ResourceBundle.new(10, 0, 0, 10)],
+	[4.0, ResourceBundle.new(25, 25, 25, 25)],
+	[3.5, ResourceBundle.new(50, 50, 50, 50)],
+	[3.0, ResourceBundle.new(75, 75, 75, 75)],
+	[2.5, ResourceBundle.new(100, 100, 100, 100)],
 	[2.0, null],
 ]
 signal robot_speed_changed(prev: float, curr: float)

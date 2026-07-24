@@ -39,6 +39,13 @@ class Bundle extends RefCounted:
 		metal = m
 		plastic = p
 		circuit = c
+	func count_has() -> int:
+		var c: int = 0
+		if salvage > 0: c += 1
+		if metal > 0: c += 1
+		if plastic > 0: c += 1
+		if circuit > 0: c += 1
+		return c
 
 var salvage_count: int = 0
 var salvage_max: int = 100
