@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://baopmn5l2lmu"]
 
 [ext_resource type="Script" uid="uid://ck4prm8m0xan3" path="res://src/world.gd" id="1_eewff"]
+[ext_resource type="Texture2D" uid="uid://d2m70pyg0kv72" path="res://assets/main-room.png" id="2_kmhfv"]
 [ext_resource type="PackedScene" uid="uid://b2oinxatyf6o4" path="res://src/robot.tscn" id="3_fyndt"]
 [ext_resource type="PackedScene" uid="uid://cwslks0hxdfgx" path="res://src/resource_display.tscn" id="5_fyndt"]
 [ext_resource type="PackedScene" uid="uid://cvav5wlslk61r" path="res://src/recycler.tscn" id="5_kmhfv"]
@@ -15,37 +16,40 @@
 [node name="bin" type="Node2D" parent="." unique_id=1471244640]
 script = ExtResource("1_eewff")
 
+[node name="background" type="Sprite2D" parent="bin" unique_id=918181586]
+scale = Vector2(2, 2)
+texture = ExtResource("2_kmhfv")
+centered = false
+
 [node name="ScrapNodes" type="Node2D" parent="bin" unique_id=14620567]
 
-[node name="sides" type="StaticBody2D" parent="bin" unique_id=880022982]
+[node name="border" type="Polygon2D" parent="bin" unique_id=181574813]
+visible = false
+color = Color(0.34901962, 0.34901962, 0.34901962, 1)
+polygon = PackedVector2Array(0, 0, 0, 256, 384, 256, 384, 0, 380, 0, 380, 252, 4, 252, 4, 0)
+
+[node name="edges" type="StaticBody2D" parent="bin" unique_id=880022982]
 collision_layer = 2
 collision_mask = 2
 
-[node name="border" type="Polygon2D" parent="bin/sides" unique_id=181574813]
-polygon = PackedVector2Array(0, 0, 0, 256, 384, 256, 384, 0, 380, 0, 380, 252, 4, 252, 4, 0)
-
-[node name="right" type="CollisionShape2D" parent="bin/sides" unique_id=1478181060]
-position = Vector2(380, 156)
+[node name="right" type="CollisionShape2D" parent="bin/edges" unique_id=1478181060]
+position = Vector2(384, 156)
 rotation = -1.5707964
 shape = SubResource("WorldBoundaryShape2D_eewff")
 
-[node name="left" type="CollisionShape2D" parent="bin/sides" unique_id=50730531]
-position = Vector2(4, 156)
+[node name="left" type="CollisionShape2D" parent="bin/edges" unique_id=50730531]
+position = Vector2(0, 156)
 rotation = 1.5707964
 shape = SubResource("WorldBoundaryShape2D_eewff")
 
-[node name="top" type="CollisionShape2D" parent="bin/sides" unique_id=3811595]
+[node name="top" type="CollisionShape2D" parent="bin/edges" unique_id=3811595]
 position = Vector2(192, 0)
 rotation = 3.1415927
 shape = SubResource("WorldBoundaryShape2D_eewff")
 one_way_collision_direction = Vector2(0, -1)
 
-[node name="bottom" type="StaticBody2D" parent="bin" unique_id=1149795194]
-collision_layer = 6
-collision_mask = 6
-
-[node name="bottom" type="CollisionShape2D" parent="bin/bottom" unique_id=262525815]
-position = Vector2(192, 252)
+[node name="bottom" type="CollisionShape2D" parent="bin/edges" unique_id=262525815]
+position = Vector2(192, 256)
 shape = SubResource("WorldBoundaryShape2D_rhis3")
 
 [node name="ScrapCount" type="Label" parent="bin" unique_id=1451066071]
@@ -75,16 +79,12 @@ offset_bottom = 23.0
 text = "00.00"
 horizontal_alignment = 2
 
-[node name="entrance" type="Marker2D" parent="bin" unique_id=543299377]
-position = Vector2(400, 236)
-gizmo_extents = 4.0
-
 [node name="right" type="Marker2D" parent="bin" unique_id=2134520963]
-position = Vector2(364, 236)
+position = Vector2(364, 240)
 gizmo_extents = 4.0
 
 [node name="left" type="Marker2D" parent="bin" unique_id=95740170]
-position = Vector2(20, 236)
+position = Vector2(20, 240)
 gizmo_extents = 4.0
 
 [node name="recyclers" type="Node2D" parent="." unique_id=495947630]
@@ -102,7 +102,7 @@ position = Vector2(464, 160)
 position = Vector2(464, 224)
 
 [node name="Robot" parent="." unique_id=1753369023 node_paths=PackedStringArray("left", "right") instance=ExtResource("3_fyndt")]
-position = Vector2(20, 236)
+position = Vector2(20, 240)
 left = NodePath("../bin/left")
 right = NodePath("../bin/right")
 
