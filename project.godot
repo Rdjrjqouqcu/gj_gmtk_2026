@@ -19,6 +19,7 @@ config/icon="uid://i65yc61t4cy6"
 [autoload]
 
 Resources="*uid://cn4mfl45h4q43"
+UpgradeManager="*uid://di0soden2ecyi"
 
 [display]
 

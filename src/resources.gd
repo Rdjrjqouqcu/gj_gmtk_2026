@@ -7,6 +7,17 @@ enum Types {
 	CIRCUIT,
 }
 
+const CIRCUIT_TEXTURE = preload("uid://r5luvcvw0qje")
+const METAL_TEXTURE = preload("uid://dh778d2tucsb7")
+const PLASTIC_TEXTURE = preload("uid://dnf5j6jbi73j1")
+const SALVAGE_TEXTURE = preload("uid://dfuuwxlbshqge")
+var icon_textures: Dictionary[Types, Texture2D] = {
+	Types.SALVAGE: SALVAGE_TEXTURE,
+	Types.METAL: METAL_TEXTURE,
+	Types.PLASTIC: PLASTIC_TEXTURE,
+	Types.CIRCUIT: CIRCUIT_TEXTURE,
+}
+
 class Bundle extends RefCounted:
 	var salvage: int = 0
 	var metal: int = 0
@@ -42,6 +53,20 @@ var circuit_count: int = 0
 var circuit_max: int = 100
 
 signal amounts_updated
+
+func has(c: int, t: Types) -> bool:
+	match t:
+		Types.SALVAGE:
+			return c <= salvage_count
+		Types.METAL:
+			return c <= metal_count
+		Types.PLASTIC:
+			return c <= plastic_count
+		Types.CIRCUIT:
+			return c <= circuit_count
+		_:
+			Log.error("invalid resource type")
+			return false
 
 func has_bundle(b: Bundle) -> bool:
 	if salvage_count < b.salvage: return false
