@@ -53,6 +53,7 @@ var circuit_count: int = 0
 var circuit_max: int = 100
 
 signal amounts_updated
+signal amounts_spent(b: Bundle)
 
 func has(c: int, t: Types) -> bool:
 	match t:
@@ -102,9 +103,10 @@ func add_bundle(b: Bundle) -> void:
 	amounts_updated.emit()
 	
 
-func remove_bundle(b: Bundle) -> void:
+func spend_bundle(b: Bundle) -> void:
 	salvage_count -= b.salvage
 	metal_count -= b.metal
 	plastic_count -= b.plastic
 	circuit_count -= b.circuit
 	amounts_updated.emit()
+	amounts_spent.emit(b)

@@ -9,8 +9,13 @@ const PLASTIC = preload("uid://dnf5j6jbi73j1")
 const SALVAGE = preload("uid://dfuuwxlbshqge")
 
 static func create(i: int, t: Resources.Types, gpos: Vector2) -> void:
+	if i == 0:
+		return
 	var r: ResourceToast = RESOURCE_TOAST.instantiate()
-	r.text = "+%d" % i
+	if i > 0:
+		r.text = "+%d" % i
+	else:
+		r.text = "-%d" % abs(i)
 	var texture_rect: TextureRect = r.get_node("icon")
 	match t:
 		Resources.Types.SALVAGE:

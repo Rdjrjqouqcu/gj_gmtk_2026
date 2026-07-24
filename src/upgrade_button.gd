@@ -85,6 +85,12 @@ func _on_gui_input(event: InputEvent) -> void:
 		print(event)
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			print("lclick")
+			var cost: ResourceBundle = get_cost.call()
+			if cost == null:
+				return # upgrades maxed
+			# TODO enable cost checks
+			#if Resources.has_bundle(cost):
+			Resources.spend_bundle(cost)
 			increase.call()
 			_update_display()
 			
