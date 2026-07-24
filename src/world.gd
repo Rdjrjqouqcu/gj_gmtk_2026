@@ -6,17 +6,22 @@ const SPAWN_MARKER_OFFSET: int = 32
 
 @onready var scrap_nodes: Node2D = $ScrapNodes
 @onready var scrap_count: Label = $ScrapCount
+const SCRAP_COUNT_MAX: int = 200
+
 @onready var spawn_timer_label: Label = $SpawnTimer
 
 func update_scrap_count() -> void:
 	if scrap_nodes == null or scrap_count == null:
 		return
-	scrap_count.text = str(scrap_nodes.get_child_count()) + " lbs"
+	scrap_count.text = str(scrap_nodes.get_child_count()) + "/" + str(SCRAP_COUNT_MAX)
 func _on_scrap_nodes_child_entered_tree(node: Node) -> void:
 	node.tree_exited.connect(update_scrap_count)
 	update_scrap_count()
 
 func _spawn_scrap(count: int) -> void:
+	if SCRAP_COUNT_MAX < count + scrap_nodes.get_child_count():
+		Log.info("GAME OVER, TOO MUCH SCRAP")
+	count = min(count, SCRAP_COUNT_MAX - scrap_nodes.get_child_count())
 	for i in range(count):
 		var scrap: Scrap
 		match randi_range(0,4):
