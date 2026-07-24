@@ -63,7 +63,6 @@ static var _plastic_variations: Array = [
 	_variation(38, 3, 4, 11),
 	_variation(38, 19, 4, 11),
 	_variation(36, 33, 8, 13),
-	_variation(35, 66, 11, 11),
 ]
 const SCRAP_PLASTIC = preload("uid://bh4ukx6h102xu")
 static func create_plastic() -> Scrap:
@@ -88,10 +87,12 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			self.queue_free()
-			Resources.add_bundle(Resources.Bundle.new_from_type(1, type))
+			ResourceToast.create(1, Resources.Types.SALVAGE, global_position)
+			Resources.add(1, Resources.Types.SALVAGE)
 			get_tree().call_group("scraps", "set_sleeping", false)
 		if event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
 			print("right click")
+			ResourceToast.create(1, type, global_position)
 
 func _ready() -> void:
 	self.modulate.a = INACTIVE_MODULATION

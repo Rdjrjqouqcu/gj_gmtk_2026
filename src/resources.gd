@@ -50,6 +50,21 @@ func has_bundle(b: Bundle) -> bool:
 	if circuit_count < b.circuit: return false
 	return true
 
+func add(c: int, t: Types) -> void:
+	match t:
+		Types.SALVAGE:
+			salvage_count = salvage_count + c
+		Types.METAL:
+			metal_count = metal_count + c
+		Types.PLASTIC:
+			plastic_count = plastic_count + c
+		Types.CIRCUIT:
+			circuit_count = circuit_count + c
+		_:
+			Log.error("invalid resource type")
+			return
+	amounts_updated.emit()
+
 func add_bundle(b: Bundle) -> void:
 	#salvage_count = min(salvage_max, salvage_count + b.salvage)
 	#metal_count = min(metal_max, metal_count + b.metal)

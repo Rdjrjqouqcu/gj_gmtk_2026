@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bldrymxcpn7no"]
+
+[ext_resource type="Texture2D" uid="uid://dfuuwxlbshqge" path="res://assets/salvage.tres" id="1_27lwx"]
+[ext_resource type="Script" uid="uid://bqv77t24hnh0j" path="res://src/resource_toast.gd" id="1_xto36"]
+
+[node name="ResourceToast" type="Label" unique_id=1821222128]
+custom_minimum_size = Vector2(20, 24)
+offset_left = -20.0
+offset_top = -12.0
+offset_bottom = 12.0
+text = "+1"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_xto36")
+
+[node name="icon" type="TextureRect" parent="." unique_id=586598254]
+custom_minimum_size = Vector2(16, 16)
+custom_maximum_size = Vector2(16, 16)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.16666667
+anchor_right = 1.8
+anchor_bottom = 0.8333333
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_27lwx")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
