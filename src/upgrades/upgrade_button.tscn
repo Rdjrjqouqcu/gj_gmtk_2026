@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bokqu8wgmy2ih"]
 
 [ext_resource type="Texture2D" uid="uid://dfuuwxlbshqge" path="res://assets/salvage.tres" id="1_5xxkw"]
-[ext_resource type="Script" uid="uid://228t75gu1dcc" path="res://src/upgrade_button.gd" id="1_xyia7"]
+[ext_resource type="Script" uid="uid://228t75gu1dcc" path="res://src/upgrades/upgrade_button.gd" id="1_xyia7"]
 [ext_resource type="LabelSettings" uid="uid://dwv6emm2q7mur" path="res://assets/upgrade_button_label.tres" id="2_cuedw"]
 [ext_resource type="Texture2D" uid="uid://dh778d2tucsb7" path="res://assets/metal.tres" id="4_1cox5"]
 [ext_resource type="Texture2D" uid="uid://dnf5j6jbi73j1" path="res://assets/plastic.tres" id="5_1ct5o"]

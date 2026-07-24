@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bh4ukx6h102xu"]
 
-[ext_resource type="Script" uid="uid://dvtfua4u7qnj1" path="res://src/scrap.gd" id="1_2ftnj"]
+[ext_resource type="Script" uid="uid://dvtfua4u7qnj1" path="res://src/scrap/scrap.gd" id="1_2ftnj"]
 
 [node name="PlasticScrap" type="RigidBody2D" unique_id=1579310785 groups=["scraps"]]
 collision_layer = 6

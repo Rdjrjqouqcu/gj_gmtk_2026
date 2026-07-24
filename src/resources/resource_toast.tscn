@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bldrymxcpn7no"]
 
 [ext_resource type="Texture2D" uid="uid://dfuuwxlbshqge" path="res://assets/salvage.tres" id="1_27lwx"]
-[ext_resource type="Script" uid="uid://bqv77t24hnh0j" path="res://src/resource_toast.gd" id="1_xto36"]
+[ext_resource type="Script" uid="uid://bqv77t24hnh0j" path="res://src/resources/resource_toast.gd" id="1_xto36"]
 
 [node name="ResourceToast" type="Label" unique_id=1821222128]
 custom_minimum_size = Vector2(20, 24)

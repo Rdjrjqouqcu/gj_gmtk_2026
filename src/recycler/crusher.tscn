@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://cc107pe41im83"]
+
+[ext_resource type="Script" uid="uid://dg1vycwlpan6s" path="res://src/recycler/crusher.gd" id="1_08b5q"]
+[ext_resource type="Texture2D" uid="uid://d3uul32hoar8o" path="res://assets/animations/machines1.png" id="2_ei1v7"]
+[ext_resource type="Texture2D" uid="uid://0hposymjkiw7" path="res://assets/animations/machines2.png" id="3_2g3v0"]
+[ext_resource type="Texture2D" uid="uid://con4vfcpfnj7j" path="res://assets/animations/machines3.png" id="4_v3jl8"]
+[ext_resource type="Texture2D" uid="uid://cpba4ux0a3wqm" path="res://assets/animations/machines4.png" id="5_sp155"]
+[ext_resource type="Texture2D" uid="uid://y41sbbbruapy" path="res://assets/animations/machines5.png" id="6_rpvm3"]
+[ext_resource type="Texture2D" uid="uid://cruaku4d0cyvf" path="res://assets/animations/machines6.png" id="7_v742g"]
+[ext_resource type="Texture2D" uid="uid://bdfarv5e68b8i" path="res://assets/animations/machines7.png" id="8_qvk04"]
+[ext_resource type="Texture2D" uid="uid://diuux1qwtuwic" path="res://assets/animations/machines8.png" id="9_s8a1n"]
+[ext_resource type="Texture2D" uid="uid://dqnuqiw46aai2" path="res://assets/animations/machines9.png" id="10_nr533"]
+[ext_resource type="Texture2D" uid="uid://b041s3m3knnjq" path="res://assets/animations/machines10.png" id="11_1abmt"]
+[ext_resource type="Texture2D" uid="uid://cspl6ku8vudrr" path="res://assets/animations/machines11.png" id="12_f3f5i"]
+[ext_resource type="Texture2D" uid="uid://ctt6pv4x0dotd" path="res://assets/animations/machines12.png" id="13_4dj0x"]
+[ext_resource type="Texture2D" uid="uid://t078yafm7wec" path="res://assets/window.png" id="14_2g3v0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0v8xo"]
+atlas = ExtResource("2_ei1v7")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n70sr"]
+atlas = ExtResource("3_2g3v0")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ppi3i"]
+atlas = ExtResource("4_v3jl8")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhf3k"]
+atlas = ExtResource("5_sp155")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgvh1"]
+atlas = ExtResource("6_rpvm3")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3yt8t"]
+atlas = ExtResource("7_v742g")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_paggm"]
+atlas = ExtResource("8_qvk04")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lrjj3"]
+atlas = ExtResource("9_s8a1n")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spref"]
+atlas = ExtResource("10_nr533")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0m10"]
+atlas = ExtResource("11_1abmt")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ajmbk"]
+atlas = ExtResource("12_f3f5i")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lielu"]
+atlas = ExtResource("13_4dj0x")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kloqm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0v8xo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n70sr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ppi3i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhf3k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cgvh1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3yt8t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_paggm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lrjj3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_spref")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0m10")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ajmbk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lielu")
+}],
+"loop": 1,
+"name": &"crusher",
+"speed": 5.0
+}]
+
+[node name="Crusher" type="Node2D" unique_id=1619695884]
+script = ExtResource("1_08b5q")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=276395752]
+sprite_frames = SubResource("SpriteFrames_kloqm")
+animation = &"crusher"
+autoplay = "crusher"
+frame_progress = 0.814663
+
+[node name="input" type="Marker2D" parent="." unique_id=1755967165]
+position = Vector2(-64, 0)
+gizmo_extents = 4.0
+
+[node name="glass" type="Sprite2D" parent="." unique_id=1599473439]
+texture = ExtResource("14_2g3v0")

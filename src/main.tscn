@@ -1,39 +1,67 @@
 [gd_scene format=3 uid="uid://baopmn5l2lmu"]
 
 [ext_resource type="Script" uid="uid://ck4prm8m0xan3" path="res://src/world.gd" id="1_eewff"]
-[ext_resource type="Texture2D" uid="uid://d2m70pyg0kv72" path="res://assets/main-room.png" id="2_kmhfv"]
+[ext_resource type="Texture2D" uid="uid://bfulte36nb30" path="res://assets/UI-wall.png" id="1_rlaii"]
+[ext_resource type="Texture2D" uid="uid://gn1d7k3rhqym" path="res://assets/main-room-x2.png" id="2_kmhfv"]
 [ext_resource type="PackedScene" uid="uid://b2oinxatyf6o4" path="res://src/robot.tscn" id="3_fyndt"]
-[ext_resource type="PackedScene" uid="uid://cwslks0hxdfgx" path="res://src/resource_display.tscn" id="5_fyndt"]
-[ext_resource type="PackedScene" uid="uid://cvav5wlslk61r" path="res://src/recycler.tscn" id="5_kmhfv"]
-[ext_resource type="PackedScene" uid="uid://b71uxwneml6ig" path="res://src/upgrade_buttons.tscn" id="5_rlaii"]
+[ext_resource type="Texture2D" uid="uid://duk4bv0ccou66" path="res://assets/trap.png" id="4_uewes"]
+[ext_resource type="PackedScene" uid="uid://cwslks0hxdfgx" path="res://src/resources/resource_display.tscn" id="5_fyndt"]
+[ext_resource type="PackedScene" uid="uid://cvav5wlslk61r" path="res://src/recycler/salvager.tscn" id="5_kmhfv"]
+[ext_resource type="Texture2D" uid="uid://fe3mnojhtwrf" path="res://assets/metal-frame.png" id="5_kqbth"]
+[ext_resource type="PackedScene" uid="uid://b71uxwneml6ig" path="res://src/upgrades/upgrade_buttons.tscn" id="5_rlaii"]
+[ext_resource type="PackedScene" uid="uid://dmxw7yplcce6r" path="res://src/recycler/shredder.tscn" id="6_kqbth"]
+[ext_resource type="PackedScene" uid="uid://650bvom5oj6e" path="res://src/recycler/extractor.tscn" id="7_srxbw"]
+[ext_resource type="PackedScene" uid="uid://cc107pe41im83" path="res://src/recycler/crusher.tscn" id="8_d3u4l"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_eewff"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rhis3"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rhis3"]
+size = Vector2(2, 215)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7qmab"]
+size = Vector2(32, 18)
+
 [node name="Main" type="Node" unique_id=388192039]
+
+[node name="background" type="Node2D" parent="." unique_id=1204976910]
+
+[node name="wall" type="Sprite2D" parent="background" unique_id=420203117]
+texture = ExtResource("1_rlaii")
+centered = false
 
 [node name="bin" type="Node2D" parent="." unique_id=1471244640]
 script = ExtResource("1_eewff")
 
 [node name="background" type="Sprite2D" parent="bin" unique_id=918181586]
-scale = Vector2(2, 2)
 texture = ExtResource("2_kmhfv")
 centered = false
 
 [node name="ScrapNodes" type="Node2D" parent="bin" unique_id=14620567]
 
-[node name="border" type="Polygon2D" parent="bin" unique_id=181574813]
-visible = false
-color = Color(0.34901962, 0.34901962, 0.34901962, 1)
-polygon = PackedVector2Array(0, 0, 0, 256, 384, 256, 384, 0, 380, 0, 380, 252, 4, 252, 4, 0)
+[node name="trap" type="Sprite2D" parent="bin" unique_id=673127076]
+position = Vector2(192, 20)
+texture = ExtResource("4_uewes")
+
+[node name="SpawnTimer" type="Label" parent="bin/trap" unique_id=580670251]
+offset_left = -30.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 11.0
+text = "0.0"
+horizontal_alignment = 2
+
+[node name="TrashSpawn" type="Marker2D" parent="bin/trap" unique_id=1022385217]
+position = Vector2(0, -68)
+gizmo_extents = 32.0
 
 [node name="edges" type="StaticBody2D" parent="bin" unique_id=880022982]
 collision_layer = 2
 collision_mask = 2
 
 [node name="right" type="CollisionShape2D" parent="bin/edges" unique_id=1478181060]
-position = Vector2(384, 156)
+position = Vector2(416, 156)
 rotation = -1.5707964
 shape = SubResource("WorldBoundaryShape2D_eewff")
 
@@ -52,12 +80,34 @@ one_way_collision_direction = Vector2(0, -1)
 position = Vector2(192, 256)
 shape = SubResource("WorldBoundaryShape2D_rhis3")
 
+[node name="elevator" type="Sprite2D" parent="bin" unique_id=514657453]
+position = Vector2(400, 136)
+texture = ExtResource("5_kqbth")
+
+[node name="ElevatorWall" type="StaticBody2D" parent="bin/elevator" unique_id=1036584829]
+position = Vector2(-16, -118)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bin/elevator/ElevatorWall" unique_id=1681100813]
+position = Vector2(1, 107.5)
+shape = SubResource("RectangleShape2D_rhis3")
+
+[node name="TopKick" type="Area2D" parent="bin/elevator" unique_id=44512780]
+position = Vector2(-1, -126)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bin/elevator/TopKick" unique_id=2061475938]
+position = Vector2(1, -1)
+shape = SubResource("RectangleShape2D_7qmab")
+
 [node name="ScrapCount" type="Label" parent="bin" unique_id=1451066071]
-offset_left = 316.0
-offset_top = 20.0
-offset_right = 376.0
-offset_bottom = 52.0
-text = "100 lbs"
+offset_left = 312.0
+offset_top = 24.0
+offset_right = 374.0
+offset_bottom = 56.0
+text = "100/200"
 horizontal_alignment = 2
 vertical_alignment = 1
 
@@ -67,17 +117,6 @@ offset_top = 4.0
 offset_right = 16.0
 offset_bottom = 12.0
 text = "toggle spawn"
-
-[node name="TrashSpawn" type="Marker2D" parent="bin" unique_id=1022385217]
-position = Vector2(192, -48)
-gizmo_extents = 32.0
-
-[node name="SpawnTimer" type="Label" parent="bin" unique_id=580670251]
-offset_left = 336.0
-offset_right = 378.0
-offset_bottom = 23.0
-text = "00.00"
-horizontal_alignment = 2
 
 [node name="right" type="Marker2D" parent="bin" unique_id=2134520963]
 position = Vector2(364, 240)
@@ -89,16 +128,16 @@ gizmo_extents = 4.0
 
 [node name="recyclers" type="Node2D" parent="." unique_id=495947630]
 
-[node name="Recycler1" parent="recyclers" unique_id=103653287 instance=ExtResource("5_kmhfv")]
+[node name="Salvager" parent="recyclers" unique_id=103653287 instance=ExtResource("5_kmhfv")]
 position = Vector2(464, 32)
 
-[node name="Recycler2" parent="recyclers" unique_id=548699439 instance=ExtResource("5_kmhfv")]
-position = Vector2(464, 96)
-
-[node name="Recycler3" parent="recyclers" unique_id=2039820163 instance=ExtResource("5_kmhfv")]
+[node name="Shredder" parent="recyclers" unique_id=473627541 instance=ExtResource("6_kqbth")]
 position = Vector2(464, 160)
 
-[node name="Recycler4" parent="recyclers" unique_id=1328164275 instance=ExtResource("5_kmhfv")]
+[node name="Extractor" parent="recyclers" unique_id=1140322655 instance=ExtResource("7_srxbw")]
+position = Vector2(464, 96)
+
+[node name="Crusher" parent="recyclers" unique_id=1619695884 instance=ExtResource("8_d3u4l")]
 position = Vector2(464, 224)
 
 [node name="Robot" parent="." unique_id=1753369023 node_paths=PackedStringArray("left", "right") instance=ExtResource("3_fyndt")]
@@ -111,4 +150,5 @@ right = NodePath("../bin/right")
 [node name="UpgradeButtons" parent="." unique_id=1739712924 instance=ExtResource("5_rlaii")]
 
 [connection signal="child_entered_tree" from="bin/ScrapNodes" to="bin" method="_on_scrap_nodes_child_entered_tree"]
+[connection signal="body_entered" from="bin/elevator/TopKick" to="bin" method="_on_top_kick_body_entered"]
 [connection signal="pressed" from="bin/debug" to="bin" method="_on_debug_spawn"]

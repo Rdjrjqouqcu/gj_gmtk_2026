@@ -1,14 +1,14 @@
 extends Node2D
 class_name Bin
 
-@onready var trash_spawn: Marker2D = $TrashSpawn
+@onready var trash_spawn: Marker2D = $trap/TrashSpawn
 const SPAWN_MARKER_OFFSET: int = 32
 
 @onready var scrap_nodes: Node2D = $ScrapNodes
 @onready var scrap_count: Label = $ScrapCount
 const SCRAP_COUNT_MAX: int = 200
 
-@onready var spawn_timer_label: Label = $SpawnTimer
+@onready var spawn_timer_label: Label = $trap/SpawnTimer
 
 func update_scrap_count() -> void:
 	if scrap_nodes == null or scrap_count == null:
@@ -39,7 +39,7 @@ func _spawn_scrap(count: int) -> void:
 
 
 func _on_debug_spawn() -> void:
-	spawn_timer = -spawn_timer
+	_spawn_scrap(DEBUG_SPAWN_COUNT)
 
 func _ready() -> void:
 	update_scrap_count()
@@ -48,7 +48,7 @@ const SPAWN_TIMER_MAX: float = 10.0
 var spawn_timer: float = 0.25:
 	set(v):
 		spawn_timer = v
-		spawn_timer_label.text = "%05.2f" % v
+		spawn_timer_label.text = "%03.1f" % v
 
 const DEBUG_SPAWN_COUNT: int = 25
 func _on_spawn_timer() -> void:
@@ -60,3 +60,9 @@ func _process(delta: float) -> void:
 		spawn_timer -= delta
 		if spawn_timer <= 0:
 			_on_spawn_timer()
+
+static var kick_strength: float = 100.0
+static var kick_vector: Vector2 = Vector2(-1, -1).normalized() * kick_strength
+func _on_top_kick_body_entered(body: Node2D) -> void:
+	if body is RigidBody2D:
+		body.apply_impulse(kick_vector)

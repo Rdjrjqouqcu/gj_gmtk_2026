@@ -1,0 +1,123 @@
+[gd_scene format=3 uid="uid://dmxw7yplcce6r"]
+
+[ext_resource type="Script" uid="uid://2qrf2jsao3w" path="res://src/recycler/shredder.gd" id="1_cyxco"]
+[ext_resource type="Texture2D" uid="uid://d3uul32hoar8o" path="res://assets/animations/machines1.png" id="2_2qktb"]
+[ext_resource type="Texture2D" uid="uid://0hposymjkiw7" path="res://assets/animations/machines2.png" id="3_v1oro"]
+[ext_resource type="Texture2D" uid="uid://con4vfcpfnj7j" path="res://assets/animations/machines3.png" id="4_8c7cx"]
+[ext_resource type="Texture2D" uid="uid://cpba4ux0a3wqm" path="res://assets/animations/machines4.png" id="5_xnq04"]
+[ext_resource type="Texture2D" uid="uid://y41sbbbruapy" path="res://assets/animations/machines5.png" id="6_2evcx"]
+[ext_resource type="Texture2D" uid="uid://cruaku4d0cyvf" path="res://assets/animations/machines6.png" id="7_uwdl5"]
+[ext_resource type="Texture2D" uid="uid://bdfarv5e68b8i" path="res://assets/animations/machines7.png" id="8_0qer4"]
+[ext_resource type="Texture2D" uid="uid://diuux1qwtuwic" path="res://assets/animations/machines8.png" id="9_absa5"]
+[ext_resource type="Texture2D" uid="uid://dqnuqiw46aai2" path="res://assets/animations/machines9.png" id="10_ybb0g"]
+[ext_resource type="Texture2D" uid="uid://b041s3m3knnjq" path="res://assets/animations/machines10.png" id="11_1gr4o"]
+[ext_resource type="Texture2D" uid="uid://cspl6ku8vudrr" path="res://assets/animations/machines11.png" id="12_ltqos"]
+[ext_resource type="Texture2D" uid="uid://ctt6pv4x0dotd" path="res://assets/animations/machines12.png" id="13_uf44w"]
+[ext_resource type="Texture2D" uid="uid://t078yafm7wec" path="res://assets/window.png" id="14_mt4fb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3tyuj"]
+atlas = ExtResource("2_2qktb")
+region = Rect2(0, 128, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayqmf"]
+atlas = ExtResource("3_v1oro")
+region = Rect2(0, 128, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3rucj"]
+atlas = ExtResource("4_8c7cx")
+region = Rect2(0, 128, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2n31"]
+atlas = ExtResource("5_xnq04")
+region = Rect2(0, 128, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eanan"]
+atlas = ExtResource("6_2evcx")
+region = Rect2(0, 128, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykuxt"]
+atlas = ExtResource("7_uwdl5")
+region = Rect2(0, 128, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_af5ph"]
+atlas = ExtResource("8_0qer4")
+region = Rect2(0, 128, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ktvtd"]
+atlas = ExtResource("9_absa5")
+region = Rect2(0, 128, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wh2ef"]
+atlas = ExtResource("10_ybb0g")
+region = Rect2(0, 128, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pi7wo"]
+atlas = ExtResource("11_1gr4o")
+region = Rect2(0, 128, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0viln"]
+atlas = ExtResource("12_ltqos")
+region = Rect2(0, 128, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_478tc"]
+atlas = ExtResource("13_uf44w")
+region = Rect2(0, 128, 96, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h46ej"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3tyuj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ayqmf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3rucj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2n31")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eanan")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ykuxt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_af5ph")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ktvtd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wh2ef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pi7wo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0viln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_478tc")
+}],
+"loop": 1,
+"name": &"shredder",
+"speed": 5.0
+}]
+
+[node name="Shredder" type="Node2D" unique_id=473627541]
+script = ExtResource("1_cyxco")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2125300723]
+sprite_frames = SubResource("SpriteFrames_h46ej")
+animation = &"shredder"
+autoplay = "shredder"
+
+[node name="input" type="Marker2D" parent="." unique_id=691302419]
+position = Vector2(-64, 0)
+gizmo_extents = 4.0
+
+[node name="glass" type="Sprite2D" parent="." unique_id=1142497299]
+texture = ExtResource("14_mt4fb")

@@ -1,4 +1,3 @@
-@icon ("res://addons/at-icons/node2d/factory.svg")
 extends Node2D
 class_name Recycler
 
@@ -9,7 +8,7 @@ func get_input() -> Marker2D:
 
 
 func _ready() -> void:
-	$temp.color = Color.from_hsv(randf(), 1.0, 1.0)
+	pass
 
 
 func _process(_delta: float) -> void:
