@@ -107,6 +107,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rhis3"]
+size = Vector2(32, 16)
+
 [node name="Salvager" type="Node2D" unique_id=103653287]
 script = ExtResource("1_fu04g")
 
@@ -116,9 +119,16 @@ animation = &"salvager"
 autoplay = "salvager"
 frame_progress = 0.53797966
 
-[node name="input" type="Marker2D" parent="." unique_id=1902001859]
-position = Vector2(-64, 0)
-gizmo_extents = 4.0
+[node name="input" type="Area2D" parent="." unique_id=1670540553]
+position = Vector2(-80, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="input" unique_id=300235370]
+position = Vector2(16, 0)
+shape = SubResource("RectangleShape2D_rhis3")
 
 [node name="glass" type="Sprite2D" parent="." unique_id=1175533200]
 texture = ExtResource("14_1lxwo")
+
+[connection signal="body_entered" from="input" to="." method="_on_input_body_entered"]

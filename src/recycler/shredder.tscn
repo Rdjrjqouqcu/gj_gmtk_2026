@@ -107,6 +107,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mt4fb"]
+size = Vector2(32, 16)
+
 [node name="Shredder" type="Node2D" unique_id=473627541]
 script = ExtResource("1_cyxco")
 
@@ -115,9 +118,16 @@ sprite_frames = SubResource("SpriteFrames_h46ej")
 animation = &"shredder"
 autoplay = "shredder"
 
-[node name="input" type="Marker2D" parent="." unique_id=691302419]
-position = Vector2(-64, 0)
-gizmo_extents = 4.0
+[node name="input" type="Area2D" parent="." unique_id=1536987009]
+position = Vector2(-80, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="input" unique_id=1273577076]
+position = Vector2(16, 0)
+shape = SubResource("RectangleShape2D_mt4fb")
 
 [node name="glass" type="Sprite2D" parent="." unique_id=1142497299]
 texture = ExtResource("14_mt4fb")
+
+[connection signal="body_entered" from="input" to="." method="_on_input_body_entered"]

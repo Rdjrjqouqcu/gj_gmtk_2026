@@ -107,6 +107,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rhis3"]
+size = Vector2(32, 16)
+
 [node name="Extractor" type="Node2D" unique_id=1140322655]
 script = ExtResource("1_jksqx")
 
@@ -116,9 +119,16 @@ animation = &"extractor"
 autoplay = "extractor"
 frame_progress = 0.4474818
 
-[node name="input" type="Marker2D" parent="." unique_id=1178586410]
-position = Vector2(-64, 0)
-gizmo_extents = 4.0
+[node name="input" type="Area2D" parent="." unique_id=1932090342]
+position = Vector2(-80, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="input" unique_id=1127543756]
+position = Vector2(16, 0)
+shape = SubResource("RectangleShape2D_rhis3")
 
 [node name="glass" type="Sprite2D" parent="." unique_id=193846539]
 texture = ExtResource("14_heskx")
+
+[connection signal="body_entered" from="input" to="." method="_on_input_body_entered"]

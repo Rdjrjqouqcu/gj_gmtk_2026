@@ -6,7 +6,7 @@ extends AnimatableBody2D
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
-var going_up: bool = true
+@export var going_up: bool = true
 
 func _get_move_time() -> float:
 	return UpgradeManager.get_robot_speed()
@@ -44,5 +44,6 @@ func _change_direction() -> void:
 func _ready() -> void:
 	UpgradeManager.robot_speed_changed.connect(_handle_move_time_change)
 	tween = get_tree().create_tween()
-	tween.tween_property(self, "global_position", top.global_position, _get_move_time())
+	var dest: Marker2D = top if going_up else bottom
+	tween.tween_property(self, "global_position", dest.global_position, _get_move_time())
 	tween.tween_callback(_change_direction)

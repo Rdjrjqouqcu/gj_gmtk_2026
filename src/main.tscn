@@ -9,9 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://cvav5wlslk61r" path="res://src/recycler/salvager.tscn" id="5_kmhfv"]
 [ext_resource type="Texture2D" uid="uid://fe3mnojhtwrf" path="res://assets/metal-frame.png" id="5_kqbth"]
 [ext_resource type="PackedScene" uid="uid://b71uxwneml6ig" path="res://src/upgrades/upgrade_buttons.tscn" id="5_rlaii"]
-[ext_resource type="Script" uid="uid://ubglqd6hnxto" path="res://src/platform.gd" id="6_d3u4l"]
 [ext_resource type="PackedScene" uid="uid://dmxw7yplcce6r" path="res://src/recycler/shredder.tscn" id="6_kqbth"]
-[ext_resource type="Texture2D" uid="uid://cqurlro2wn5um" path="res://assets/platform.png" id="7_mlv6i"]
+[ext_resource type="PackedScene" uid="uid://y7yx0w5acybb" path="res://src/platform.tscn" id="6_srxbw"]
 [ext_resource type="PackedScene" uid="uid://650bvom5oj6e" path="res://src/recycler/extractor.tscn" id="7_srxbw"]
 [ext_resource type="PackedScene" uid="uid://cc107pe41im83" path="res://src/recycler/crusher.tscn" id="8_d3u4l"]
 
@@ -20,13 +19,10 @@
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rhis3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rhis3"]
-size = Vector2(2, 221)
+size = Vector2(2, 219)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7qmab"]
 size = Vector2(32, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_akmt8"]
-size = Vector2(32, 6)
 
 [node name="Main" type="Node" unique_id=388192039]
 
@@ -95,7 +91,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bin/elevator/ElevatorWall" unique_id=1681100813]
-position = Vector2(1, 112.5)
+position = Vector2(1, 113.5)
 shape = SubResource("RectangleShape2D_rhis3")
 
 [node name="TopKick" type="Area2D" parent="bin/elevator" unique_id=44512780]
@@ -110,19 +106,16 @@ gravity_direction = Vector2(-1, 0)
 position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_7qmab")
 
-[node name="platform" type="AnimatableBody2D" parent="bin/elevator" unique_id=1157780114 node_paths=PackedStringArray("bottom", "top")]
+[node name="PlatformUp" parent="bin/elevator" unique_id=102835886 node_paths=PackedStringArray("bottom", "top") instance=ExtResource("6_srxbw")]
 position = Vector2(0, 123)
-collision_layer = 2
-collision_mask = 2
-script = ExtResource("6_d3u4l")
 bottom = NodePath("../bottom")
 top = NodePath("../top")
 
-[node name="Sprite2D" type="Sprite2D" parent="bin/elevator/platform" unique_id=756054057]
-texture = ExtResource("7_mlv6i")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bin/elevator/platform" unique_id=1410790752]
-shape = SubResource("RectangleShape2D_akmt8")
+[node name="PlatformDown" parent="bin/elevator" unique_id=1337509346 node_paths=PackedStringArray("bottom", "top") instance=ExtResource("6_srxbw")]
+position = Vector2(0, -115)
+bottom = NodePath("../bottom")
+top = NodePath("../top")
+going_up = false
 
 [node name="bottom" type="Marker2D" parent="bin/elevator" unique_id=1766225311]
 position = Vector2(0, 123)
