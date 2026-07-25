@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c4gvqcheqv2fi" path="res://src/main_menu.gd" id="1_bq8pk"]
 [ext_resource type="Texture2D" uid="uid://bey5x4m660jvw" path="res://assets/logo315x250.png" id="1_guuao"]
-[ext_resource type="Texture2D" uid="uid://bxp0g6xmc7l0q" path="res://assets/bricks.png" id="2_6w7d7"]
+[ext_resource type="Texture2D" uid="uid://bxp0g6xmc7l0q" path="res://assets/menu-background.png" id="2_6w7d7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rhis3"]
 font_size = 48

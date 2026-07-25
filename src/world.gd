@@ -37,10 +37,6 @@ func _spawn_scrap(count: int) -> void:
 				randi_range(-SPAWN_MARKER_OFFSET, SPAWN_MARKER_OFFSET))
 		scrap_nodes.add_child(scrap)
 
-
-func _on_debug_spawn() -> void:
-	_spawn_scrap(DEBUG_SPAWN_COUNT)
-
 func _ready() -> void:
 	update_scrap_count()
 
@@ -60,3 +56,10 @@ func _process(delta: float) -> void:
 		spawn_timer -= delta
 		if spawn_timer <= 0:
 			_on_spawn_timer()
+
+
+func _on_debug_spawn() -> void:
+	_spawn_scrap(DEBUG_SPAWN_COUNT)
+
+func _on_debug_resc_pressed() -> void:
+	Resources.add_bundle(Resources.Bundle.new(100, 100, 100, 100))

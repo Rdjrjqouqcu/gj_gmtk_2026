@@ -116,6 +116,22 @@ position = Vector2(0, -115)
 bottom = NodePath("../bottom")
 top = NodePath("../top")
 going_up = false
+active_level = 2
+
+[node name="PlatformDownHalf" parent="bin/elevator" unique_id=1916501891 node_paths=PackedStringArray("bottom", "top") instance=ExtResource("6_srxbw")]
+position = Vector2(0, 4)
+bottom = NodePath("../bottom")
+top = NodePath("../top")
+going_up = false
+start_half = true
+active_level = 3
+
+[node name="PlatformUpHalf" parent="bin/elevator" unique_id=1565928525 node_paths=PackedStringArray("bottom", "top") instance=ExtResource("6_srxbw")]
+position = Vector2(0, 4)
+bottom = NodePath("../bottom")
+top = NodePath("../top")
+start_half = true
+active_level = 4
 
 [node name="bottom" type="Marker2D" parent="bin/elevator" unique_id=1766225311]
 position = Vector2(0, 123)
@@ -132,19 +148,12 @@ text = "100/200"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="debug" type="Button" parent="bin" unique_id=2118711183]
-offset_left = 8.0
-offset_top = 4.0
-offset_right = 16.0
-offset_bottom = 12.0
-text = "toggle spawn"
-
 [node name="right" type="Marker2D" parent="bin" unique_id=2134520963]
-position = Vector2(364, 240)
+position = Vector2(368, 240)
 gizmo_extents = 4.0
 
 [node name="left" type="Marker2D" parent="bin" unique_id=95740170]
-position = Vector2(20, 240)
+position = Vector2(16, 240)
 gizmo_extents = 4.0
 
 [node name="recyclers" type="Node2D" parent="." unique_id=495947630]
@@ -161,14 +170,52 @@ position = Vector2(464, 96)
 [node name="Crusher" parent="recyclers" unique_id=1619695884 instance=ExtResource("8_d3u4l")]
 position = Vector2(464, 224)
 
-[node name="Robot" parent="." unique_id=1753369023 node_paths=PackedStringArray("left", "right") instance=ExtResource("3_fyndt")]
-position = Vector2(20, 240)
+[node name="RobotL" parent="." unique_id=1753369023 node_paths=PackedStringArray("left", "right") instance=ExtResource("3_fyndt")]
+position = Vector2(16, 240)
 left = NodePath("../bin/left")
 right = NodePath("../bin/right")
+
+[node name="RobotR" parent="." unique_id=1512089153 node_paths=PackedStringArray("left", "right") instance=ExtResource("3_fyndt")]
+position = Vector2(368, 240)
+left = NodePath("../bin/left")
+right = NodePath("../bin/right")
+going_right = false
+active_level = 2
+
+[node name="RobotRHalf" parent="." unique_id=1447747583 node_paths=PackedStringArray("left", "right") instance=ExtResource("3_fyndt")]
+position = Vector2(192, 240)
+left = NodePath("../bin/left")
+right = NodePath("../bin/right")
+going_right = false
+start_half = true
+active_level = 3
+
+[node name="RobotLHalf" parent="." unique_id=1697909337 node_paths=PackedStringArray("left", "right") instance=ExtResource("3_fyndt")]
+position = Vector2(192, 240)
+left = NodePath("../bin/left")
+right = NodePath("../bin/right")
+start_half = true
+active_level = 4
 
 [node name="ResourceDisplay" parent="." unique_id=833009980 instance=ExtResource("5_fyndt")]
 
 [node name="UpgradeButtons" parent="." unique_id=1739712924 instance=ExtResource("5_rlaii")]
 
+[node name="debugSpawn" type="Button" parent="." unique_id=2118711183]
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 67.0
+offset_bottom = 35.0
+text = "spawn"
+
+[node name="debugResc" type="Button" parent="debugSpawn" unique_id=175299322]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 457.0
+offset_right = 70.0
+offset_bottom = 488.0
+text = "Resc"
+
 [connection signal="child_entered_tree" from="bin/ScrapNodes" to="bin" method="_on_scrap_nodes_child_entered_tree"]
-[connection signal="pressed" from="bin/debug" to="bin" method="_on_debug_spawn"]
+[connection signal="pressed" from="debugSpawn" to="bin" method="_on_debug_spawn"]
+[connection signal="pressed" from="debugSpawn/debugResc" to="bin" method="_on_debug_resc_pressed"]

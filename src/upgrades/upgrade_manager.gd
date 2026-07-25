@@ -23,27 +23,27 @@ const GET_NEXT: int = 3
 const GET_COST: int = 4
 const INCREASE: int = 5
 
-#region robot speeds
+#region mover speeds
 var _robot_speeds: Array = [
-	[10.0, ResourceBundle.new(10, 0, 0, 0)],
-	[9.0, ResourceBundle.new(0, 10, 0, 0)],
-	[8.0, ResourceBundle.new(0, 0, 10, 0)],
-	[7.0, ResourceBundle.new(0, 0, 0, 10)],
-	[6.0, ResourceBundle.new(10, 10, 0, 0)],
-	[5.0, ResourceBundle.new(10, 0, 10, 0)],
-	[4.5, ResourceBundle.new(10, 0, 0, 10)],
-	[4.0, ResourceBundle.new(25, 25, 25, 25)],
-	[3.5, ResourceBundle.new(50, 50, 50, 50)],
-	[3.0, ResourceBundle.new(75, 75, 75, 75)],
+	[10.0, ResourceBundle.new(5, 0, 0, 0)],
+	[9.0, ResourceBundle.new(10, 0, 0, 0)],
+	[8.0, ResourceBundle.new(20, 0, 0, 0)],
+	[7.0, ResourceBundle.new(30, 0, 0, 0)],
+	[6.0, ResourceBundle.new(40, 5, 5, 5)],
+	[5.0, ResourceBundle.new(50, 10, 10, 10)],
+	[4.5, ResourceBundle.new(60, 20, 20, 20)],
+	[4.0, ResourceBundle.new(70, 25, 25, 25)],
+	[3.5, ResourceBundle.new(80, 50, 50, 50)],
+	[3.0, ResourceBundle.new(90, 75, 75, 75)],
 	[2.5, ResourceBundle.new(100, 100, 100, 100)],
 	[2.0, null],
 ]
 var _robot_speed_current: int = 0
-signal robot_speed_changed(prev: float, curr: float)
+signal mover_speed_changed(prev: float, curr: float)
 
-@onready var _robot_speed_state: Array = [_robot_speeds, _robot_speed_current, robot_speed_changed]
+@onready var _robot_speed_state: Array = [_robot_speeds, _robot_speed_current, mover_speed_changed]
 @onready var _robot_speed_upgrade: Array = [
-	"Robot Speed",
+	"Mover Speed",
 	"s",
 	get_v.bind(_robot_speed_state),
 	get_next_v.bind(_robot_speed_state),
@@ -51,31 +51,23 @@ signal robot_speed_changed(prev: float, curr: float)
 	increase_v.bind(_robot_speed_state),
 ]
 
-func get_robot_speed() -> float:
+func get_mover_speed() -> float:
 	return _robot_speed_upgrade[GET_CURRENT].call()
 #endregion
 
-#region platform speeds
+#region mover count
 var _platform_speeds: Array = [
-	[10.0, ResourceBundle.new(10, 0, 0, 0)],
-	[9.0, ResourceBundle.new(0, 10, 0, 0)],
-	[8.0, ResourceBundle.new(0, 0, 10, 0)],
-	[7.0, ResourceBundle.new(0, 0, 0, 10)],
-	[6.0, ResourceBundle.new(10, 10, 0, 0)],
-	[5.0, ResourceBundle.new(10, 0, 10, 0)],
-	[4.5, ResourceBundle.new(10, 0, 0, 10)],
-	[4.0, ResourceBundle.new(25, 25, 25, 25)],
-	[3.5, ResourceBundle.new(50, 50, 50, 50)],
-	[3.0, ResourceBundle.new(75, 75, 75, 75)],
-	[2.5, ResourceBundle.new(100, 100, 100, 100)],
-	[2.0, null],
+	[1, ResourceBundle.new(10, 10, 10, 10)],
+	[2, ResourceBundle.new(25, 25, 25, 25)],
+	[3, ResourceBundle.new(75, 75, 75, 75)],
+	[4, null],
 ]
 var _platform_speed_current: int = 0
-signal platform_speed_changed(prev: float, curr: float)
+signal mover_count_changed(prev: float, curr: float)
 
-@onready var _platform_speed_state: Array = [_platform_speeds, _platform_speed_current, platform_speed_changed]
+@onready var _platform_speed_state: Array = [_platform_speeds, _platform_speed_current, mover_count_changed]
 @onready var _platform_speed_upgrade: Array = [
-	"Platform Speed",
+	"Mover Count",
 	"s",
 	get_v.bind(_platform_speed_state),
 	get_next_v.bind(_platform_speed_state),
@@ -83,8 +75,8 @@ signal platform_speed_changed(prev: float, curr: float)
 	increase_v.bind(_platform_speed_state),
 ]
 
-func get_platform_speed() -> float:
-	return _platform_speed_upgrade[GET_CURRENT].call()
+func get_mover_count() -> int:
+	return int(_platform_speed_upgrade[GET_CURRENT].call())
 #endregion
 
 #region salvager speed
