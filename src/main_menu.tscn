@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://2335g7pw4h8d"]
+
+[ext_resource type="Script" uid="uid://c4gvqcheqv2fi" path="res://src/main_menu.gd" id="1_bq8pk"]
+[ext_resource type="Texture2D" uid="uid://bey5x4m660jvw" path="res://assets/logo315x250.png" id="1_guuao"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rhis3"]
+font_size = 48
+
+[node name="MainMenu" type="CenterContainer" unique_id=1806182471]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bq8pk")
+
+[node name="menu" type="VBoxContainer" parent="." unique_id=1272541763]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="menu" unique_id=1026795927]
+layout_mode = 2
+texture = ExtResource("1_guuao")
+
+[node name="Play" type="Button" parent="menu" unique_id=248655704]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+text = "Play"
+
+[node name="Credits" type="Button" parent="menu" unique_id=1581859113]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+text = "Credits"
+
+[node name="Quit" type="Button" parent="menu" unique_id=742977199]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+text = "Quit"
+
+[node name="credits" type="PanelContainer" parent="." unique_id=281333131]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="credits" unique_id=2091710296]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="credits/MarginContainer" unique_id=919137703]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="title" type="Label" parent="credits/MarginContainer/VBoxContainer" unique_id=592063132]
+layout_mode = 2
+text = "Credits"
+label_settings = SubResource("LabelSettings_rhis3")
+
+[node name="Label2" type="Label" parent="credits/MarginContainer/VBoxContainer" unique_id=1577117611]
+layout_mode = 2
+text = "Rdjrjqouqcu"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="credits/MarginContainer/VBoxContainer" unique_id=1426379520]
+layout_mode = 2
+text = "szymon_krzak"
+horizontal_alignment = 1
+
+[node name="Close" type="Button" parent="credits/MarginContainer/VBoxContainer" unique_id=1348951339]
+layout_mode = 2
+text = "Close"
+
+[connection signal="pressed" from="menu/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="menu/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="menu/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="credits/MarginContainer/VBoxContainer/Close" to="." method="_on_close_pressed"]

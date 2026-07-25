@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="gj_gmtk_2026"
-run/main_scene="uid://baopmn5l2lmu"
+run/main_scene="uid://2335g7pw4h8d"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 boot_splash/show_image=false
 config/icon="uid://i65yc61t4cy6"

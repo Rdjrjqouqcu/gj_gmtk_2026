@@ -89,22 +89,22 @@ func get_platform_speed() -> float:
 
 #region salvager speed
 var _salvager_speeds: Array = [
-	[2.0, ResourceBundle.new(10, 0, 0, 0)],
-	[1.5, ResourceBundle.new(10, 0, 0, 0)],
-	[1.0, ResourceBundle.new(10, 0, 0, 0)],
-	[0.5, ResourceBundle.new(10, 0, 0, 0)],
-	[0.25, null],
+	[4.0, ResourceBundle.new(10, 0, 0, 0)],
+	[3.0, ResourceBundle.new(20, 0, 0, 0)],
+	[2.0, ResourceBundle.new(40, 0, 0, 0)],
+	[1.0, null],
 ]
 var _salvager_speed_current: int = 0
 signal salvager_speed_changed(prev: float, curr: float)
 
+@onready var _salvager_speed_state = [_salvager_speeds, _salvager_speed_current, salvager_speed_changed]
 @onready var _salvager_speed_upgrade: Array = [
 	"Salvage Speed",
 	"s",
-	get_v.bind([_salvager_speeds, _salvager_speed_current, salvager_speed_changed]),
-	get_next_v.bind([_salvager_speeds, _salvager_speed_current, salvager_speed_changed]),
-	get_cost_v.bind([_salvager_speeds, _salvager_speed_current, salvager_speed_changed]),
-	increase_v.bind([_salvager_speeds, _salvager_speed_current, salvager_speed_changed]),
+	get_v.bind(_salvager_speed_state),
+	get_next_v.bind(_salvager_speed_state),
+	get_cost_v.bind(_salvager_speed_state),
+	increase_v.bind(_salvager_speed_state),
 ]
 
 func get_salvager_speed() -> float:
@@ -114,10 +114,10 @@ func get_salvager_speed() -> float:
 #region salvager size
 var _salvager_size: Array = [
 	[1.0, ResourceBundle.new(10, 0, 0, 0)],
-	[2.0, ResourceBundle.new(10, 0, 0, 0)],
-	[5.0, ResourceBundle.new(10, 0, 0, 0)],
-	[10.0, ResourceBundle.new(10, 0, 0, 0)],
-	[20.0, null],
+	[2.0, ResourceBundle.new(20, 0, 0, 0)],
+	[3.0, ResourceBundle.new(40, 0, 0, 0)],
+	[4.0, ResourceBundle.new(80, 0, 0, 0)],
+	[5.0, null],
 ]
 var _salvager_size_current: int = 0
 signal salvager_size_changed(prev: float, curr: float)
