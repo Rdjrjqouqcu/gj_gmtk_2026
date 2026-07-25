@@ -6,12 +6,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_akmt8"]
 size = Vector2(32, 6)
 
-[node name="platform" type="AnimatableBody2D" unique_id=102835886 node_paths=PackedStringArray("bottom", "top")]
+[node name="platform" type="AnimatableBody2D" unique_id=102835886]
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_uc2gi")
-bottom = NodePath("")
-top = NodePath("")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1891162086]
 texture = ExtResource("2_y05p8")

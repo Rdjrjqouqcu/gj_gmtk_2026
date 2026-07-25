@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://cspl6ku8vudrr" path="res://assets/animations/machines11.png" id="12_6q85o"]
 [ext_resource type="Texture2D" uid="uid://ctt6pv4x0dotd" path="res://assets/animations/machines12.png" id="13_j0v2n"]
 [ext_resource type="Texture2D" uid="uid://t078yafm7wec" path="res://assets/window.png" id="14_1lxwo"]
+[ext_resource type="Texture2D" uid="uid://dnf5j6jbi73j1" path="res://assets/plastic.tres" id="14_gnljj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q4s16"]
 atlas = ExtResource("2_5ggun")
@@ -103,21 +104,145 @@ animations = [{
 "texture": SubResource("AtlasTexture_funyg")
 }],
 "loop": 1,
-"name": &"salvager",
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4s16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5dx8g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_am72f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1yd72")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sp3lk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u7s4n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52cj7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hfp6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31tr7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wwx0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6w8n5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_funyg")
+}],
+"loop": 1,
+"name": &"process",
 "speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rhis3"]
 size = Vector2(32, 16)
 
+[sub_resource type="Animation" id="Animation_1lxwo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("item:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("item:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-40, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("item:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_dcqyj"]
+resource_name = "process"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("item:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("item:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-40, 0), Vector2(16, 0), Vector2(16, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("item:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_weuiu"]
+_data = {
+&"RESET": SubResource("Animation_1lxwo"),
+&"process": SubResource("Animation_dcqyj")
+}
+
 [node name="Salvager" type="Node2D" unique_id=103653287]
 script = ExtResource("1_fu04g")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=861329855]
+[node name="anim" type="AnimatedSprite2D" parent="." unique_id=861329855]
 sprite_frames = SubResource("SpriteFrames_sfae5")
-animation = &"salvager"
-autoplay = "salvager"
-frame_progress = 0.53797966
+animation = &"idle"
+autoplay = "idle"
 
 [node name="input" type="Area2D" parent="." unique_id=1670540553]
 position = Vector2(-80, 0)
@@ -128,7 +253,41 @@ collision_mask = 2
 position = Vector2(16, 0)
 shape = SubResource("RectangleShape2D_rhis3")
 
+[node name="item" type="Sprite2D" parent="." unique_id=720559922]
+visible = false
+position = Vector2(-40, 0)
+texture = ExtResource("14_gnljj")
+
+[node name="anim" type="AnimationPlayer" parent="item" unique_id=750689477]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_weuiu")
+autoplay = &"RESET"
+
 [node name="glass" type="Sprite2D" parent="." unique_id=1175533200]
 texture = ExtResource("14_1lxwo")
+
+[node name="InputLeft" type="ProgressBar" parent="." unique_id=1156351391]
+offset_left = -48.0
+offset_top = -32.0
+offset_right = -40.0
+offset_bottom = 32.0
+max_value = 10.0
+step = 1.0
+fill_mode = 3
+show_percentage = false
+
+[node name="InputRight" type="ProgressBar" parent="." unique_id=1661634060]
+offset_left = -40.0
+offset_top = -32.0
+offset_right = -32.0
+offset_bottom = 32.0
+max_value = 10.0
+step = 1.0
+fill_mode = 3
+show_percentage = false
+
+[node name="ToastSpawn" type="Marker2D" parent="." unique_id=802992942]
+position = Vector2(16, 0)
+gizmo_extents = 4.0
 
 [connection signal="body_entered" from="input" to="." method="_on_input_body_entered"]

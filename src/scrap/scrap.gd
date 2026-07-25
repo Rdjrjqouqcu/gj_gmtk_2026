@@ -2,7 +2,9 @@
 extends RigidBody2D
 class_name Scrap
 
-@export var type: Resources.Types
+var type: Resources.Types
+
+#region create
 
 static var _atlas: CompressedTexture2D = preload("uid://ovjmope3aupn")
 ## each entry is [collision_array, atlas_region]
@@ -77,22 +79,31 @@ static func create_plastic() -> Scrap:
 	(sprite.texture as AtlasTexture).region = variation[1]
 	return s
 
+#endregion
+
 const INACTIVE_MODULATION: float = 0.75
 const ACTIVE_MODULATION: float = 1.0
 func _on_mouse_entered() -> void:
 	self.modulate.a = ACTIVE_MODULATION
 func _on_mouse_exited() -> void:
 	self.modulate.a = INACTIVE_MODULATION
+
+func get_texture() -> Texture2D:
+	return (get_node("sprite") as Sprite2D).texture
+
+func collect() -> void:
+	self.queue_free()
+
+
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-			self.queue_free()
+			collect()
 			ResourceToast.create(1, Resources.Types.SALVAGE, global_position)
 			Resources.add(1, Resources.Types.SALVAGE)
 			get_tree().call_group("scraps", "set_sleeping", false)
 		if event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
 			print("right click")
-			ResourceToast.create(1, type, global_position)
 
 func _ready() -> void:
 	self.modulate.a = INACTIVE_MODULATION

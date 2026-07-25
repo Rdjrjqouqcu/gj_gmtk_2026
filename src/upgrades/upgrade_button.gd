@@ -1,8 +1,5 @@
 extends PanelContainer
 
-const ResourceType = Resources.Types
-const ResourceBundle = Resources.Bundle
-
 @export var upgrade: UpgradeManager.Upgrades
 
 const COLOR_NOT_SELECTED = Color.WHITE
@@ -13,40 +10,40 @@ const COLOR_CANNOT_AFFORD = Color.RED
 @onready var val_plastic: Label = $VBoxContainer/cost/HBoxContainer2/ValPlastic
 @onready var val_circuit: Label = $VBoxContainer/cost/HBoxContainer2/ValCircuit
 
-func _update_cost_nodes(cost: ResourceBundle) -> void:
+func _update_cost_nodes(cost: Resources.Bundle) -> void:
 	if cost.salvage == 0:
 		val_salvage.text = "0"
 		val_salvage.modulate = COLOR_NOT_SELECTED
 	else:
 		val_salvage.text = str(cost.salvage)
-		var can_afford = Resources.has(cost.salvage, ResourceType.SALVAGE)
+		var can_afford = Resources.has(cost.salvage, Resources.Types.SALVAGE)
 		val_salvage.modulate = COLOR_CAN_AFFORD if can_afford else COLOR_CANNOT_AFFORD
 	if cost.metal == 0:
 		val_metal.text = "0"
 		val_metal.modulate = COLOR_NOT_SELECTED
 	else:
 		val_metal.text = str(cost.metal)
-		var can_afford = Resources.has(cost.metal, ResourceType.METAL)
+		var can_afford = Resources.has(cost.metal, Resources.Types.METAL)
 		val_metal.modulate = COLOR_CAN_AFFORD if can_afford else COLOR_CANNOT_AFFORD
 	if cost.plastic == 0:
 		val_plastic.text = "0"
 		val_plastic.modulate = COLOR_NOT_SELECTED
 	else:
 		val_plastic.text = str(cost.plastic)
-		var can_afford = Resources.has(cost.plastic, ResourceType.PLASTIC)
+		var can_afford = Resources.has(cost.plastic, Resources.Types.PLASTIC)
 		val_plastic.modulate = COLOR_CAN_AFFORD if can_afford else COLOR_CANNOT_AFFORD
 	if cost.circuit == 0:
 		val_circuit.text = "0"
 		val_circuit.modulate = COLOR_NOT_SELECTED
 	else:
 		val_circuit.text = str(cost.circuit)
-		var can_afford = Resources.has(cost.circuit, ResourceType.CIRCUIT)
+		var can_afford = Resources.has(cost.circuit, Resources.Types.CIRCUIT)
 		val_circuit.modulate = COLOR_CAN_AFFORD if can_afford else COLOR_CANNOT_AFFORD
 
 
 func _update_display() -> void:
 	$VBoxContainer/name.text = title
-	var cost: ResourceBundle = get_cost.call()
+	var cost: Resources.Bundle = get_cost.call()
 	var current = get_current.call()
 	if cost == null:
 		$VBoxContainer/cost.visible = false
@@ -96,7 +93,7 @@ func _on_mouse_exited() -> void:
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			var cost: ResourceBundle = get_cost.call()
+			var cost: Resources.Bundle = get_cost.call()
 			if cost == null:
 				return # upgrades maxed
 			if Resources.has_bundle(cost):

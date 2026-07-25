@@ -9,7 +9,7 @@ extends AnimatableBody2D
 @export var going_up: bool = true
 
 func _get_move_time() -> float:
-	return UpgradeManager.get_robot_speed()
+	return UpgradeManager.get_platform_speed()
 
 func _handle_move_time_change(prev: float, curr: float) -> void:
 	if tween == null:
@@ -42,7 +42,7 @@ func _change_direction() -> void:
 	tween.tween_callback(_change_direction)
 
 func _ready() -> void:
-	UpgradeManager.robot_speed_changed.connect(_handle_move_time_change)
+	UpgradeManager.platform_speed_changed.connect(_handle_move_time_change)
 	tween = get_tree().create_tween()
 	var dest: Marker2D = top if going_up else bottom
 	tween.tween_property(self, "global_position", dest.global_position, _get_move_time())

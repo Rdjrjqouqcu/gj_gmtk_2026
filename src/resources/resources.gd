@@ -108,7 +108,6 @@ func add_bundle(b: Bundle) -> void:
 	plastic_count = plastic_count + b.plastic
 	circuit_count = circuit_count + b.circuit
 	amounts_updated.emit()
-	
 
 func spend_bundle(b: Bundle) -> void:
 	salvage_count -= b.salvage
