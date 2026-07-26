@@ -35,9 +35,11 @@ func _on_scrap_nodes_child_entered_tree(node: Node) -> void:
 
 @onready var game_over: PanelContainer = $"../CanvasLayer/GameOver"
 @onready var credits: Control = $"../CanvasLayer/credits"
+@onready var score: Label = $"../CanvasLayer/GameOver/MarginContainer/VBoxContainer/score"
 var _game_over_input_lock: bool = true
 func _on_game_over() -> void:
 	get_tree().paused = true
+	score.text = "Processed %d Scrap" % Resources.processed_scrap_count
 	game_over.visible = true
 	credits.visible = false
 	await get_tree().create_timer(2.5).timeout

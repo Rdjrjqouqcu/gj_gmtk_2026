@@ -100,6 +100,7 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 			collect()
 			ResourceToast.create(1, Resources.Types.SALVAGE, global_position)
 			Resources.add(1, Resources.Types.SALVAGE)
+			Resources.processed_scrap()
 			get_tree().call_group("scraps", "set_sleeping", false)
 		if event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
 			print("right click")

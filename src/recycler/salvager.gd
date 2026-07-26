@@ -38,6 +38,7 @@ func _finish_processing(_name: String) -> void:
 	if not _is_processing: return
 	Resources.add(_processing_count, Resources.Types.SALVAGE)
 	ResourceToast.create(_processing_count, Resources.Types.SALVAGE, toast_spawn.global_position)
+	Resources.processed_scrap(_processing_count)
 	_is_processing = false
 	if queued.size() > 0:
 		_start_processing()

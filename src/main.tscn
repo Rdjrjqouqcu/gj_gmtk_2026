@@ -202,14 +202,14 @@ left = NodePath("../bin/left")
 right = NodePath("../bin/right")
 going_right = false
 start_half = true
-active_level = 3
+active_level = 4
 
 [node name="RobotLHalf" parent="." unique_id=1697909337 node_paths=PackedStringArray("left", "right") instance=ExtResource("3_fyndt")]
 position = Vector2(192, 240)
 left = NodePath("../bin/left")
 right = NodePath("../bin/right")
 start_half = true
-active_level = 4
+active_level = 3
 
 [node name="ResourceDisplay" parent="." unique_id=833009980 instance=ExtResource("5_fyndt")]
 
@@ -229,7 +229,6 @@ vertical_alignment = 1
 
 [node name="GameOver" type="PanelContainer" parent="CanvasLayer" unique_id=460355744]
 process_mode = 3
-visible = false
 top_level = true
 anchors_preset = 8
 anchor_left = 0.5
@@ -266,6 +265,11 @@ size_flags_vertical = 4
 layout_mode = 2
 text = "Game Over"
 label_settings = SubResource("LabelSettings_rhis3")
+
+[node name="score" type="Label" parent="CanvasLayer/GameOver/MarginContainer/VBoxContainer" unique_id=499439024]
+layout_mode = 2
+text = "Processed 0 Scrap"
+horizontal_alignment = 1
 
 [node name="Restart" type="Button" parent="CanvasLayer/GameOver/MarginContainer/VBoxContainer" unique_id=573860672]
 custom_minimum_size = Vector2(0, 64)

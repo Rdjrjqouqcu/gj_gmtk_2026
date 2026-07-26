@@ -84,6 +84,22 @@ func get_mover_count() -> int:
 #endregion
 
 #region salvager speed
+@warning_ignore("unused_private_class_variable")
+var _salvager_speed: Array = [
+	[20.0, bundle_all(1, 0)],
+	[15.0, bundle_all(3, 0)],
+	[10.0, bundle_all(6, 0)],
+	[7.5, bundle_all(10, 0)],
+	[5.0, bundle_all(15, 0)],
+	[4.0, bundle_all(20, 0)],
+	[3.0, bundle_all(25, 0)],
+	[2.5, bundle_all(30, 0)],
+	[2.0, bundle_all(40, 0)],
+	[1.5, bundle_all(50, 0)],
+	[1.0, bundle_all(60, 0)],
+	[0.5, bundle_all(75, 0)],
+	[0.25, null],
+]
 signal salvager_speed_changed(prev: float, curr: float)
 
 @onready var _salvager_speed_state = [_recycler_speeds(0,0,0), 0, salvager_speed_changed]
@@ -103,14 +119,14 @@ func get_salvager_speed() -> float:
 #region salvager size
 var _salvager_size: Array = [
 	[1.0, bundle_all(1, 0)],
-	[2.0, bundle_all(5, 0)],
-	[3.0, bundle_all(10, 0)],
-	[4.0, bundle_all(15, 0)],
-	[5.0, bundle_all(20, 5)],
-	[6.0, bundle_all(40, 10)],
-	[7.0, bundle_all(60, 20)],
-	[8.0, bundle_all(80, 30)],
-	[9.0, bundle_all(100, 40)],
+	[2.0, bundle_all(3, 0)],
+	[3.0, bundle_all(6, 0)],
+	[4.0, bundle_all(10, 0)],
+	[5.0, bundle_all(15, 1)],
+	[6.0, bundle_all(20, 3)],
+	[7.0, bundle_all(25, 6)],
+	[8.0, bundle_all(35, 10)],
+	[9.0, bundle_all(50, 15)],
 	[10.0, null],
 ]
 signal salvager_size_changed(prev: float, curr: float)
@@ -134,18 +150,15 @@ func _recycler_speeds(m: int, p: int, c: int) -> Array:
 	[20.0, ResourceBundle.new(1, m * 0, p * 0, c * 0)],
 	[15.0, ResourceBundle.new(3, m * 0, p * 0, c * 0)],
 	[10.0, ResourceBundle.new(6, m * 0, p * 0, c * 0)],
-	[9.0, ResourceBundle.new(10, m * 1, p * 1, c * 1)],
-	[8.0, ResourceBundle.new(15, m * 2, p * 2, c * 2)],
-	[7.0, ResourceBundle.new(20, m * 5, p * 5, c * 5)],
-	[6.0, ResourceBundle.new(25, m * 10, p * 10, c * 10)],
-	[5.0, ResourceBundle.new(30, m * 20, p * 20, c * 20)],
-	[4.0, ResourceBundle.new(40, m * 40, p * 40, c * 40)],
-	[3.0, ResourceBundle.new(50, m * 50, p * 50, c * 50)],
-	[2.5, ResourceBundle.new(60, m * 60, p * 60, c * 60)],
-	[2.0, ResourceBundle.new(70, m * 70, p * 70, c * 70)],
-	[1.5, ResourceBundle.new(80, m * 80, p * 80, c * 80)],
-	[1.0, ResourceBundle.new(90, m * 90, p * 90, c * 90)],
-	[0.5, ResourceBundle.new(100, m * 100, p * 100, c * 100)],
+	[7.5, ResourceBundle.new(10, m * 1, p * 1, c * 1)],
+	[5.0, ResourceBundle.new(15, m * 2, p * 2, c * 2)],
+	[4.0, ResourceBundle.new(20, m * 5, p * 5, c * 5)],
+	[3.0, ResourceBundle.new(25, m * 10, p * 10, c * 10)],
+	[2.5, ResourceBundle.new(30, m * 20, p * 20, c * 20)],
+	[2.0, ResourceBundle.new(40, m * 40, p * 40, c * 40)],
+	[1.5, ResourceBundle.new(50, m * 50, p * 50, c * 50)],
+	[1.0, ResourceBundle.new(60, m * 60, p * 60, c * 60)],
+	[0.5, ResourceBundle.new(75, m * 75, p * 75, c * 75)],
 	[0.25, null],
 ]
 

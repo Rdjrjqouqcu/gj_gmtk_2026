@@ -38,7 +38,14 @@ func _change_direction() -> void:
 	if tween != null:
 		tween.kill()
 		tween = null
-	var dest: Marker2D = right if going_right else left
+	var dest: Marker2D
+	if going_right:
+		dest = right
+		if active_level <= UpgradeManager.get_mover_count():
+			collision_polygon_2d.set_deferred("disabled", false)
+	else:
+		dest = left
+		collision_polygon_2d.set_deferred("disabled", true)
 	tween = get_tree().create_tween()
 	current_time = _get_move_time()
 	tween.tween_property(self, "global_position", dest.global_position, current_time)
@@ -47,7 +54,8 @@ func _change_direction() -> void:
 func _handle_count_change(_prev: float, _next: float) -> void:
 	if active_level <= UpgradeManager.get_mover_count():
 		visible = true
-		collision_polygon_2d.set_deferred("disabled", false)
+		if going_right:
+			collision_polygon_2d.set_deferred("disabled", false)
 
 func _ready() -> void:
 	UpgradeManager.mover_speed_changed.connect(_handle_move_time_change)

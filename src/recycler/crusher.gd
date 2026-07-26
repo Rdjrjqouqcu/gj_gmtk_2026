@@ -26,6 +26,7 @@ func _finish_processing() -> void:
 		count += UpgradeManager.get_bonus_amount()
 	Resources.add(count, Resources.Types.METAL)
 	ResourceToast.create(count, Resources.Types.METAL, toast_spawn.global_position)
+	Resources.processed_scrap()
 	_is_processing = false
 	if input_queue.has_next_scrap():
 		_start_processing()
