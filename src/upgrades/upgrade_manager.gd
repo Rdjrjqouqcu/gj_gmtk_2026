@@ -1,7 +1,7 @@
 extends Node
 
-const ResourceType = Resources.Types
 const ResourceBundle = Resources.Bundle
+
 
 enum Upgrades {
 	ROBOT_SPEED,
@@ -129,18 +129,13 @@ func get_salvager_size() -> float:
 #endregion
 
 var _recycler_speeds: Array = [
+	[4.0, ResourceBundle.new(10, 0, 0, 0)],
+	[3.0, ResourceBundle.new(10, 0, 0, 0)],
 	[2.0, ResourceBundle.new(10, 0, 0, 0)],
 	[1.5, ResourceBundle.new(10, 0, 0, 0)],
 	[1.0, ResourceBundle.new(10, 0, 0, 0)],
 	[0.5, ResourceBundle.new(10, 0, 0, 0)],
 	[0.25, null],
-]
-var _recycler_size: Array = [
-	[1.0, ResourceBundle.new(10, 0, 0, 0)],
-	[2.0, ResourceBundle.new(10, 0, 0, 0)],
-	[5.0, ResourceBundle.new(10, 0, 0, 0)],
-	[10.0, ResourceBundle.new(10, 0, 0, 0)],
-	[20.0, null],
 ]
 
 #region crusher speed
@@ -198,6 +193,10 @@ func get_extractor_speed() -> float:
 #endregion
 
 var _queue_size: Array = [
+	[1, ResourceBundle.new(10, 0, 0, 0)],
+	[2, ResourceBundle.new(10, 0, 0, 0)],
+	[3, ResourceBundle.new(10, 0, 0, 0)],
+	[4, ResourceBundle.new(10, 0, 0, 0)],
 	[5, ResourceBundle.new(10, 0, 0, 0)],
 	[10, ResourceBundle.new(10, 0, 0, 0)],
 	[15, ResourceBundle.new(10, 0, 0, 0)],
