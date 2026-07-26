@@ -23,19 +23,25 @@ const GET_NEXT: int = 3
 const GET_COST: int = 4
 const INCREASE: int = 5
 
+func bundle_all(x: int, y: int = -1) -> ResourceBundle:
+	if y == -1:
+		return ResourceBundle.new(x, x, x, x)
+	else:
+		return ResourceBundle.new(x, y, y, y)
+
 #region mover speeds
 var _robot_speeds: Array = [
-	[10.0, ResourceBundle.new(5, 0, 0, 0)],
-	[9.0, ResourceBundle.new(10, 0, 0, 0)],
-	[8.0, ResourceBundle.new(20, 0, 0, 0)],
-	[7.0, ResourceBundle.new(30, 0, 0, 0)],
-	[6.0, ResourceBundle.new(40, 5, 5, 5)],
-	[5.0, ResourceBundle.new(50, 10, 10, 10)],
-	[4.5, ResourceBundle.new(60, 20, 20, 20)],
-	[4.0, ResourceBundle.new(70, 25, 25, 25)],
-	[3.5, ResourceBundle.new(80, 50, 50, 50)],
-	[3.0, ResourceBundle.new(90, 75, 75, 75)],
-	[2.5, ResourceBundle.new(100, 100, 100, 100)],
+	[10.0, bundle_all(5, 0)],
+	[9.0, bundle_all(10, 0)],
+	[8.0, bundle_all(20, 0)],
+	[7.0, bundle_all(30, 0)],
+	[6.0, bundle_all(40, 5)],
+	[5.0, bundle_all(50, 10)],
+	[4.5, bundle_all(60, 20)],
+	[4.0, bundle_all(70, 25)],
+	[3.5, bundle_all(80, 50)],
+	[3.0, bundle_all(90, 75)],
+	[2.5, bundle_all(100, 100)],
 	[2.0, null],
 ]
 signal mover_speed_changed(prev: float, curr: float)
@@ -56,9 +62,9 @@ func get_mover_speed() -> float:
 
 #region mover count
 var _platform_speeds: Array = [
-	[1, ResourceBundle.new(10, 10, 10, 10)],
-	[2, ResourceBundle.new(25, 25, 25, 25)],
-	[3, ResourceBundle.new(75, 75, 75, 75)],
+	[1, bundle_all(1)],
+	[2, bundle_all(10)],
+	[3, bundle_all(25)],
 	[4, null],
 ]
 signal mover_count_changed(prev: float, curr: float)
@@ -78,15 +84,9 @@ func get_mover_count() -> int:
 #endregion
 
 #region salvager speed
-var _salvager_speeds: Array = [
-	[4.0, ResourceBundle.new(10, 0, 0, 0)],
-	[3.0, ResourceBundle.new(20, 0, 0, 0)],
-	[2.0, ResourceBundle.new(40, 0, 0, 0)],
-	[1.0, null],
-]
 signal salvager_speed_changed(prev: float, curr: float)
 
-@onready var _salvager_speed_state = [_salvager_speeds, 0, salvager_speed_changed]
+@onready var _salvager_speed_state = [_recycler_speeds(0,0,0), 0, salvager_speed_changed]
 @onready var _salvager_speed_upgrade: Array = [
 	"Salvage Speed",
 	"s",
@@ -102,11 +102,16 @@ func get_salvager_speed() -> float:
 
 #region salvager size
 var _salvager_size: Array = [
-	[1.0, ResourceBundle.new(10, 0, 0, 0)],
-	[2.0, ResourceBundle.new(20, 0, 0, 0)],
-	[3.0, ResourceBundle.new(40, 0, 0, 0)],
-	[4.0, ResourceBundle.new(80, 0, 0, 0)],
-	[5.0, null],
+	[1.0, bundle_all(1, 0)],
+	[2.0, bundle_all(5, 0)],
+	[3.0, bundle_all(10, 0)],
+	[4.0, bundle_all(15, 0)],
+	[5.0, bundle_all(20, 5)],
+	[6.0, bundle_all(40, 10)],
+	[7.0, bundle_all(60, 20)],
+	[8.0, bundle_all(80, 30)],
+	[9.0, bundle_all(100, 40)],
+	[10.0, null],
 ]
 signal salvager_size_changed(prev: float, curr: float)
 
@@ -124,20 +129,30 @@ func get_salvager_size() -> float:
 	return _salvager_size_upgrade[GET_CURRENT].call()
 #endregion
 
-var _recycler_speeds: Array = [
-	[4.0, ResourceBundle.new(10, 0, 0, 0)],
-	[3.0, ResourceBundle.new(10, 0, 0, 0)],
-	[2.0, ResourceBundle.new(10, 0, 0, 0)],
-	[1.5, ResourceBundle.new(10, 0, 0, 0)],
-	[1.0, ResourceBundle.new(10, 0, 0, 0)],
-	[0.5, ResourceBundle.new(10, 0, 0, 0)],
+func _recycler_speeds(m: int, p: int, c: int) -> Array:
+	return [
+	[20.0, ResourceBundle.new(1, m * 0, p * 0, c * 0)],
+	[15.0, ResourceBundle.new(3, m * 0, p * 0, c * 0)],
+	[10.0, ResourceBundle.new(6, m * 0, p * 0, c * 0)],
+	[9.0, ResourceBundle.new(10, m * 1, p * 1, c * 1)],
+	[8.0, ResourceBundle.new(15, m * 2, p * 2, c * 2)],
+	[7.0, ResourceBundle.new(20, m * 5, p * 5, c * 5)],
+	[6.0, ResourceBundle.new(25, m * 10, p * 10, c * 10)],
+	[5.0, ResourceBundle.new(30, m * 20, p * 20, c * 20)],
+	[4.0, ResourceBundle.new(40, m * 40, p * 40, c * 40)],
+	[3.0, ResourceBundle.new(50, m * 50, p * 50, c * 50)],
+	[2.5, ResourceBundle.new(60, m * 60, p * 60, c * 60)],
+	[2.0, ResourceBundle.new(70, m * 70, p * 70, c * 70)],
+	[1.5, ResourceBundle.new(80, m * 80, p * 80, c * 80)],
+	[1.0, ResourceBundle.new(90, m * 90, p * 90, c * 90)],
+	[0.5, ResourceBundle.new(100, m * 100, p * 100, c * 100)],
 	[0.25, null],
 ]
 
 #region crusher speed
 signal crusher_speed_changed(prev: float, curr: float)
 
-@onready var _crusher_speed_state: Array = [_recycler_speeds, 0, crusher_speed_changed]
+@onready var _crusher_speed_state: Array = [_recycler_speeds(1,0,0), 0, crusher_speed_changed]
 @onready var _crusher_speed_upgrade: Array = [
 	"Crusher Speed",
 	"s",
@@ -154,7 +169,7 @@ func get_crusher_speed() -> float:
 #region shredder speed
 signal shredder_speed_changed(prev: float, curr: float)
 
-@onready var _shredder_speed_state: Array = [_recycler_speeds, 0, shredder_speed_changed]
+@onready var _shredder_speed_state: Array = [_recycler_speeds(0,1,0), 0, shredder_speed_changed]
 @onready var _shredder_speed_upgrade: Array = [
 	"Shredder Speed",
 	"s",
@@ -171,7 +186,7 @@ func get_shredder_speed() -> float:
 #region extractor speed
 signal extractor_speed_changed(prev: float, curr: float)
 
-@onready var _extractor_speed_state = [_recycler_speeds, 0, extractor_speed_changed]
+@onready var _extractor_speed_state = [_recycler_speeds(0,0,1), 0, extractor_speed_changed]
 @onready var _extractor_speed_upgrade: Array = [
 	"Extractor Speed",
 	"s",
@@ -186,14 +201,14 @@ func get_extractor_speed() -> float:
 #endregion
 
 var _queue_size: Array = [
-	[1, ResourceBundle.new(10, 0, 0, 0)],
-	[2, ResourceBundle.new(10, 0, 0, 0)],
-	[3, ResourceBundle.new(10, 0, 0, 0)],
-	[4, ResourceBundle.new(10, 0, 0, 0)],
-	[5, ResourceBundle.new(10, 0, 0, 0)],
-	[10, ResourceBundle.new(10, 0, 0, 0)],
-	[15, ResourceBundle.new(10, 0, 0, 0)],
-	[20, ResourceBundle.new(10, 0, 0, 0)],
+	[1, bundle_all(5, 1)],
+	[2, bundle_all(6, 3)],
+	[3, bundle_all(8, 6)],
+	[4, bundle_all(11, 10)],
+	[5, bundle_all(15, 15)],
+	[10, bundle_all(25, 25)],
+	[15, bundle_all(50, 50)],
+	[20, bundle_all(100, 100)],
 	[25, null],
 ]
 
@@ -233,9 +248,9 @@ func get_generic_size() -> float:
 
 #region bonus count
 var _bonus_amounts: Array = [
-	[1.0, ResourceBundle.new(25, 25, 25, 25)],
-	[2.0, ResourceBundle.new(75, 75, 75, 75)],
-	[3.0, ResourceBundle.new(200, 200, 200, 200)],
+	[1.0, bundle_all(25)],
+	[2.0, bundle_all(50)],
+	[3.0, bundle_all(75)],
 	[4.0, null],
 ]
 signal extractor_size_changed(prev: float, curr: float)

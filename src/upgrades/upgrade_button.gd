@@ -40,20 +40,27 @@ func _update_cost_nodes(cost: Resources.Bundle) -> void:
 		var can_afford = Resources.has(cost.circuit, Resources.Types.CIRCUIT)
 		val_circuit.modulate = COLOR_CAN_AFFORD if can_afford else COLOR_CANNOT_AFFORD
 
+func _format(f: float) -> String:
+	return str(f).replace(".0", "")
 
 func _update_display() -> void:
 	$VBoxContainer/name.text = title
 	var cost: Resources.Bundle = get_cost.call()
 	var current = get_current.call()
 	if cost == null:
+		$VBoxContainer/name.modulate = COLOR_NOT_SELECTED
 		$VBoxContainer/cost.visible = false
 		$VBoxContainer/maxed.visible = true
-		$VBoxContainer/effect.text = str(current) + unit
+		$VBoxContainer/effect.text = _format(current) + unit
 	else:
+		if Resources.has_bundle(cost):
+			$VBoxContainer/name.modulate = COLOR_CAN_AFFORD
+		else:
+			$VBoxContainer/name.modulate = COLOR_CANNOT_AFFORD
 		$VBoxContainer/cost.visible = true
 		$VBoxContainer/maxed.visible = false
 		var next = get_next.call()
-		$VBoxContainer/effect.text = str(current) + unit + " -> " + str(next) + unit
+		$VBoxContainer/effect.text = _format(current) + unit + " -> " + _format(next) + unit
 		_update_cost_nodes(cost)
 
 var title: String

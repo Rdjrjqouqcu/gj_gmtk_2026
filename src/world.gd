@@ -4,8 +4,10 @@ class_name Bin
 @onready var trash_spawn: Marker2D = $trap/TrashSpawn
 const SPAWN_MARKER_OFFSET: int = 32
 
+
+@onready var scrap_count: Label = $"../ScrapCount"
+
 @onready var scrap_nodes: Node2D = $ScrapNodes
-@onready var scrap_count: Label = $ScrapCount
 @onready var resource_bar: ProgressBar = $ResourceBar
 const RESOURCE_BAR_COLORS: Array[Color] = [
 	Color.GREEN, Color.LAWN_GREEN, Color.YELLOW, Color.ORANGE, Color.SALMON, Color.RED
@@ -63,10 +65,12 @@ func _on_credits_closed() -> void:
 
 const SPAWN_TIME: float = 5.0
 const SPAWN_INCREASE: int = 5
-const SPAWNS_BEFORE_INCREASE: int = 5
+const SPAWNS_BEFORE_INCREASE: int = 10
 const SPAWN_START: int = 5
 var _current_spawn_count: int = SPAWN_START
-var _remaining_spawn_increase: int = 5
+var _remaining_spawn_increase: int = SPAWNS_BEFORE_INCREASE
+
+@onready var junk_toast: Marker2D = $JunkToast
 
 func _spawn_scrap(count: int) -> void:
 	for i in range(count):
@@ -83,6 +87,8 @@ func _spawn_scrap(count: int) -> void:
 				randi_range(-SPAWN_MARKER_OFFSET, SPAWN_MARKER_OFFSET),
 				randi_range(-SPAWN_MARKER_OFFSET, SPAWN_MARKER_OFFSET))
 		scrap_nodes.add_child(scrap)
+	@warning_ignore("int_as_enum_without_match", "int_as_enum_without_cast")
+	ResourceToast.create(count, -1, junk_toast.global_position)
 	if scrap_nodes.get_child_count() > SCRAP_COUNT_MAX:
 		_on_game_over()
 
@@ -110,10 +116,3 @@ func _process(delta: float) -> void:
 		spawn_timer -= delta
 		if spawn_timer <= 0:
 			_on_spawn_timer()
-
-
-func _on_debug_spawn() -> void:
-	_spawn_scrap(min(DEBUG_SPAWN_COUNT, SCRAP_COUNT_MAX - scrap_nodes.get_child_count()))
-
-func _on_debug_resc_pressed() -> void:
-	Resources.add_bundle(Resources.Bundle.new(100, 100, 100, 100))

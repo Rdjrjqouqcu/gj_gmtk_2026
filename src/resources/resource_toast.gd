@@ -4,6 +4,8 @@ const RESOURCE_TOAST = preload("uid://bldrymxcpn7no")
 
 const GROUP_NAME = "toasts"
 
+const JUNK = preload("uid://iy60qi6wyaih")
+
 const CIRCUIT = preload("uid://r5luvcvw0qje")
 const METAL = preload("uid://dh778d2tucsb7")
 const PLASTIC = preload("uid://dnf5j6jbi73j1")
@@ -20,6 +22,8 @@ static func create(i: int, t: Resources.Types, gpos: Vector2) -> void:
 		r.text = "-%d" % abs(i)
 	var texture_rect: TextureRect = r.get_node("icon")
 	match t:
+		-1:
+			texture_rect.texture = JUNK
 		Resources.Types.SALVAGE:
 			texture_rect.texture = SALVAGE
 		Resources.Types.METAL:

@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bqv77t24hnh0j" path="res://src/resources/resource_toast.gd" id="1_xto36"]
 
 [node name="ResourceToast" type="Label" unique_id=1821222128]
+self_modulate = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(20, 24)
 offset_left = -20.0
 offset_top = -12.0

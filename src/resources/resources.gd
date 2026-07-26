@@ -34,6 +34,7 @@ class Bundle extends RefCounted:
 			Types.CIRCUIT:
 				return Bundle.new(0, 0, 0, amt)
 		return Bundle.new(0, 0, 0, 0)
+	## new(salvage, metal, plastic, circuit)
 	func _init(s: int, m: int, p: int, c: int):
 		salvage = s
 		metal = m

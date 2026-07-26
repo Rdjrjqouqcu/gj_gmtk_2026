@@ -25,6 +25,9 @@ size = Vector2(2, 212)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7qmab"]
 size = Vector2(32, 20)
 
+[sub_resource type="LabelSettings" id="LabelSettings_d3u4l"]
+font_size = 8
+
 [sub_resource type="LabelSettings" id="LabelSettings_rhis3"]
 font_size = 64
 
@@ -146,15 +149,6 @@ position = Vector2(0, 123)
 [node name="top" type="Marker2D" parent="bin/elevator" unique_id=1169961685]
 position = Vector2(0, -115)
 
-[node name="ScrapCount" type="Label" parent="bin" unique_id=1451066071]
-offset_left = 312.0
-offset_top = 24.0
-offset_right = 374.0
-offset_bottom = 56.0
-text = "100/200"
-horizontal_alignment = 2
-vertical_alignment = 1
-
 [node name="ResourceBar" type="ProgressBar" parent="bin" unique_id=1334704681]
 offset_left = 368.0
 offset_top = 24.0
@@ -172,6 +166,9 @@ gizmo_extents = 4.0
 [node name="left" type="Marker2D" parent="bin" unique_id=95740170]
 position = Vector2(16, 240)
 gizmo_extents = 4.0
+
+[node name="JunkToast" type="Marker2D" parent="bin" unique_id=418699545]
+position = Vector2(192, 64)
 
 [node name="recyclers" type="Node2D" parent="." unique_id=495947630]
 
@@ -218,21 +215,15 @@ active_level = 4
 
 [node name="UpgradeButtons" parent="." unique_id=1739712924 instance=ExtResource("5_rlaii")]
 
-[node name="debugSpawn" type="Button" parent="." unique_id=2118711183]
-offset_left = 8.0
-offset_top = 4.0
-offset_right = 67.0
-offset_bottom = 35.0
-text = "spawn"
-
-[node name="debugResc" type="Button" parent="debugSpawn" unique_id=175299322]
-visible = false
-layout_mode = 0
-offset_left = 11.0
-offset_top = 457.0
-offset_right = 70.0
-offset_bottom = 488.0
-text = "Resc"
+[node name="ScrapCount" type="Label" parent="." unique_id=1451066071]
+offset_left = 353.0
+offset_top = 15.0
+offset_right = 384.0
+offset_bottom = 27.0
+text = "100/200"
+label_settings = SubResource("LabelSettings_d3u4l")
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=539267443]
 
@@ -350,8 +341,6 @@ layout_mode = 2
 text = "Close"
 
 [connection signal="child_entered_tree" from="bin/ScrapNodes" to="bin" method="_on_scrap_nodes_child_entered_tree"]
-[connection signal="pressed" from="debugSpawn" to="bin" method="_on_debug_spawn"]
-[connection signal="pressed" from="debugSpawn/debugResc" to="bin" method="_on_debug_resc_pressed"]
 [connection signal="pressed" from="CanvasLayer/GameOver/MarginContainer/VBoxContainer/Restart" to="bin" method="_on_restart_pressed"]
 [connection signal="pressed" from="CanvasLayer/GameOver/MarginContainer/VBoxContainer/Credits" to="bin" method="_on_credits_opened"]
 [connection signal="pressed" from="CanvasLayer/GameOver/MarginContainer/VBoxContainer/Quit" to="bin" method="_on_quit_pressed"]
