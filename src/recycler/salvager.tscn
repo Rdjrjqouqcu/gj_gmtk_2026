@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://ctt6pv4x0dotd" path="res://assets/animations/machines12.png" id="13_j0v2n"]
 [ext_resource type="Texture2D" uid="uid://t078yafm7wec" path="res://assets/window.png" id="14_1lxwo"]
 [ext_resource type="Texture2D" uid="uid://dnf5j6jbi73j1" path="res://assets/plastic.tres" id="14_gnljj"]
+[ext_resource type="LabelSettings" uid="uid://0y0c26lpxnd5" path="res://assets/recycler_name.tres" id="16_dcqyj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q4s16"]
 atlas = ExtResource("2_5ggun")
@@ -289,5 +290,21 @@ show_percentage = false
 [node name="ToastSpawn" type="Marker2D" parent="." unique_id=802992942]
 position = Vector2(16, 0)
 gizmo_extents = 4.0
+
+[node name="title" type="Label" parent="." unique_id=387988132]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -30.0
+offset_right = 29.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "salvager"
+label_settings = ExtResource("16_dcqyj")
+horizontal_alignment = 1
 
 [connection signal="body_entered" from="input" to="." method="_on_input_body_entered"]

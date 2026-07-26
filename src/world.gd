@@ -34,11 +34,13 @@ func _on_scrap_nodes_child_entered_tree(node: Node) -> void:
 	update_scrap_count()
 
 @onready var game_over: PanelContainer = $"../CanvasLayer/GameOver"
+@onready var result: Label = $"../CanvasLayer/GameOver/MarginContainer/VBoxContainer/Result"
 @onready var credits: Control = $"../CanvasLayer/credits"
 @onready var score: Label = $"../CanvasLayer/GameOver/MarginContainer/VBoxContainer/score"
 var _game_over_input_lock: bool = true
-func _on_game_over() -> void:
+func _on_game_over(win: bool) -> void:
 	get_tree().paused = true
+	result.text = "YOU WIN" if win else "GAME OVER"
 	score.text = "Processed %d Scrap" % Resources.processed_scrap_count
 	game_over.visible = true
 	credits.visible = false
@@ -68,6 +70,7 @@ func _on_credits_closed() -> void:
 const SPAWN_TIME: float = 5.0
 const SPAWN_INCREASE: int = 5
 const SPAWNS_BEFORE_INCREASE: int = 10
+const SPAWN_INCREASE_DOUBLE_CUTOFF: int = 50
 const SPAWN_START: int = 5
 var _current_spawn_count: int = SPAWN_START
 var _remaining_spawn_increase: int = SPAWNS_BEFORE_INCREASE
@@ -92,12 +95,17 @@ func _spawn_scrap(count: int) -> void:
 	@warning_ignore("int_as_enum_without_match", "int_as_enum_without_cast")
 	ResourceToast.create(count, -1, junk_toast.global_position)
 	if scrap_nodes.get_child_count() > SCRAP_COUNT_MAX:
-		_on_game_over()
+		_on_game_over(false)
+
+func _on_any_upgrade_purchased() -> void:
+	if UpgradeManager.has_all_upgrades():
+		_on_game_over(true)
 
 func _ready() -> void:
 	update_scrap_count()
 	game_over.visible = false
 	credits.visible = false
+	UpgradeManager.any_upgrade_purchased.connect(_on_any_upgrade_purchased)
 
 var spawn_timer: float = 1.0:
 	set(v):
@@ -110,7 +118,10 @@ func _on_spawn_timer() -> void:
 	_remaining_spawn_increase -= 1
 	if _remaining_spawn_increase <= 0:
 		_current_spawn_count += SPAWN_INCREASE
-		_remaining_spawn_increase = SPAWNS_BEFORE_INCREASE
+		if _current_spawn_count >= SPAWN_INCREASE_DOUBLE_CUTOFF:
+			_remaining_spawn_increase = floor(SPAWNS_BEFORE_INCREASE / 2.0)
+		else:
+			_remaining_spawn_increase = SPAWNS_BEFORE_INCREASE
 	spawn_timer = SPAWN_TIME
 
 func _process(delta: float) -> void:

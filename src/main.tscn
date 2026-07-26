@@ -32,7 +32,6 @@ size = Vector2(32, 20)
 
 [sub_resource type="LabelSettings" id="LabelSettings_d3u4l"]
 font = ExtResource("5_mlv6i")
-font_size = 8
 
 [sub_resource type="LabelSettings" id="LabelSettings_rhis3"]
 font = ExtResource("5_mlv6i")
@@ -231,10 +230,10 @@ active_level = 3
 [node name="UpgradeButtons" parent="." unique_id=1739712924 instance=ExtResource("5_rlaii")]
 
 [node name="ScrapCount" type="Label" parent="." unique_id=1451066071]
-offset_left = 353.0
-offset_top = 15.0
-offset_right = 384.0
-offset_bottom = 27.0
+offset_left = 328.0
+offset_top = 10.0
+offset_right = 382.0
+offset_bottom = 25.0
 text = "100/200"
 label_settings = SubResource("LabelSettings_d3u4l")
 horizontal_alignment = 2
@@ -244,7 +243,6 @@ vertical_alignment = 1
 
 [node name="GameOver" type="PanelContainer" parent="CanvasLayer" unique_id=460355744]
 process_mode = 3
-visible = false
 top_level = true
 anchors_preset = 8
 anchor_left = 0.5
@@ -277,7 +275,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="CanvasLayer/GameOver/MarginContainer/VBoxContainer" unique_id=1473223171]
+[node name="Result" type="Label" parent="CanvasLayer/GameOver/MarginContainer/VBoxContainer" unique_id=1473223171]
 layout_mode = 2
 text = "Game Over"
 label_settings = SubResource("LabelSettings_rhis3")

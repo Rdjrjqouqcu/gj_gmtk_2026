@@ -96,9 +96,8 @@ var _salvager_speed: Array = [
 	[2.5, bundle_all(30, 0)],
 	[2.0, bundle_all(40, 0)],
 	[1.5, bundle_all(50, 0)],
-	[1.0, bundle_all(60, 0)],
-	[0.5, bundle_all(75, 0)],
-	[0.25, null],
+	[1.0, bundle_all(75, 0)],
+	[0.5, null],
 ]
 signal salvager_speed_changed(prev: float, curr: float)
 
@@ -157,9 +156,8 @@ func _recycler_speeds(m: int, p: int, c: int) -> Array:
 	[2.5, ResourceBundle.new(30, m * 20, p * 20, c * 20)],
 	[2.0, ResourceBundle.new(40, m * 40, p * 40, c * 40)],
 	[1.5, ResourceBundle.new(50, m * 50, p * 50, c * 50)],
-	[1.0, ResourceBundle.new(60, m * 60, p * 60, c * 60)],
-	[0.5, ResourceBundle.new(75, m * 75, p * 75, c * 75)],
-	[0.25, null],
+	[1.0, ResourceBundle.new(75, m * 75, p * 75, c * 75)],
+	[0.5, null],
 ]
 
 #region crusher speed
@@ -309,6 +307,13 @@ func get_upgrade(t: Upgrades) -> Array[Variant]:
 	push_error("upgrade not set up", Upgrades.keys()[t])
 	return []
 
+signal any_upgrade_purchased()
+func has_all_upgrades() -> bool:
+	for k in Upgrades.values():
+		if get_upgrade(k)[GET_COST].call() != null:
+			return false
+	return true
+
 func restart() -> void:
 	_robot_speed_state[1] = 0
 	_platform_speed_state[1] = 0
@@ -323,17 +328,21 @@ func restart() -> void:
 
 
 #region meta
+const _VALUE_COSTS: int = 0
+const _CURRENT_TIER: int = 1
+const _PURCHASE_SIGNAL: int = 2
 func get_v(state: Array) -> float:
-	return state[0][state[1]][0]
+	return state[_VALUE_COSTS][state[_CURRENT_TIER]][0]
 func get_next_v(state: Array) -> float:
-	if state[1] + 1 >= state[0].size():
+	if state[_CURRENT_TIER] + 1 >= state[_VALUE_COSTS].size():
 		return -1
-	return state[0][state[1] + 1][0]
+	return state[_VALUE_COSTS][state[_CURRENT_TIER] + 1][0]
 func get_cost_v(state: Array) -> Variant:
-	return state[0][state[1]][1]
+	return state[_VALUE_COSTS][state[_CURRENT_TIER]][1]
 func increase_v(state: Array) -> void:
-	if state[1] + 1 == state[0].size():
+	if state[_CURRENT_TIER] + 1 == state[_VALUE_COSTS].size():
 		return
-	state[1] = state[1] + 1
-	state[2].emit(state[0][state[1] - 1][0], state[0][state[1]][0])
+	state[_CURRENT_TIER] = state[_CURRENT_TIER] + 1
+	state[_PURCHASE_SIGNAL].emit(state[_VALUE_COSTS][state[_CURRENT_TIER] - 1][0], state[_VALUE_COSTS][state[_CURRENT_TIER]][0])
+	any_upgrade_purchased.emit()
 #endregion

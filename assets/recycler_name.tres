@@ -1,0 +1,6 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://0y0c26lpxnd5"]
+
+[ext_resource type="FontFile" uid="uid://brrmqymjrmamm" path="res://assets/edit-undo.brk.ttf" id="1_xfff2"]
+
+[resource]
+font = ExtResource("1_xfff2")
