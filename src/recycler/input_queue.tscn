@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dgux2mqapj8qs"]
+
+[ext_resource type="Script" uid="uid://bbfpfdpcw2bx" path="res://src/recycler/input_queue.gd" id="1_u2noi"]
+
+[node name="InputQueue" type="Node2D" unique_id=2069312393]
+script = ExtResource("1_u2noi")
+
+[node name="generic" type="ProgressBar" parent="." unique_id=721548117]
+offset_left = -48.0
+offset_top = -32.0
+offset_right = -40.0
+offset_bottom = 32.0
+max_value = 10.0
+step = 1.0
+fill_mode = 3
+show_percentage = false
+
+[node name="priority" type="ProgressBar" parent="." unique_id=2016402381]
+offset_left = -40.0
+offset_top = -32.0
+offset_right = -32.0
+offset_bottom = 32.0
+max_value = 10.0
+step = 1.0
+fill_mode = 3
+show_percentage = false

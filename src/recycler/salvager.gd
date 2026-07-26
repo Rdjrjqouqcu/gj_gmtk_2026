@@ -11,13 +11,15 @@ class_name Salvager
 var _is_processing: bool = false
 var _processing_count: int = 0
 
+const QUEUE_SIZE: int = 20
+
 func can_fit_resource(_t: Resources.Types) -> bool:
-	return queued.size() < 20
+	return queued.size() < 2 * QUEUE_SIZE
 
 var queued: Array[Texture2D] = []
 func _set_input_display() -> void:
-	input_left.value = max(queued.size() - 10, 0)
-	input_right.value = min(queued.size(), 10)
+	input_left.value = max(queued.size() - QUEUE_SIZE, 0)
+	input_right.value = min(queued.size(), QUEUE_SIZE)
 func _add_queue(t: Texture2D):
 	queued.append(t)
 	_set_input_display()
@@ -40,6 +42,9 @@ func _finish_processing(_name: String) -> void:
 	if queued.size() > 0:
 		_start_processing()
 
+func try_start() -> void:
+	pass # not used for salvager
+
 func _start_processing() -> void:
 	_is_processing = true
 	var time: float = 1.0 / UpgradeManager.get_salvager_speed()
@@ -47,7 +52,9 @@ func _start_processing() -> void:
 	item.texture = _pop_queue()
 	for i in range(1, _processing_count):
 		_pop_queue()
-	anim.play("process", -1, time)
+	anim.play("salvager", -1, time)
 
 func _ready() -> void:
+	input_left.max_value = QUEUE_SIZE
+	input_right.max_value = QUEUE_SIZE
 	anim.animation_finished.connect(_finish_processing)

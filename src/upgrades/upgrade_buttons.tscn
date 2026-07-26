@@ -19,10 +19,10 @@ offset_right = 509.0
 offset_bottom = 188.0
 columns = 5
 
-[node name="RobotSpeed" parent="GridContainer" unique_id=1310057937 instance=ExtResource("1_3yi36")]
+[node name="MoverSpeed" parent="GridContainer" unique_id=1310057937 instance=ExtResource("1_3yi36")]
 layout_mode = 2
 
-[node name="SalvagerSpeed" parent="GridContainer" unique_id=1477002810 instance=ExtResource("1_3yi36")]
+[node name="SalvageSpeed" parent="GridContainer" unique_id=1477002810 instance=ExtResource("1_3yi36")]
 layout_mode = 2
 upgrade = 2
 
@@ -38,19 +38,19 @@ upgrade = 6
 layout_mode = 2
 upgrade = 8
 
-[node name="PlatformSpeed" parent="GridContainer" unique_id=1438361531 instance=ExtResource("1_3yi36")]
+[node name="MoverCount" parent="GridContainer" unique_id=1438361531 instance=ExtResource("1_3yi36")]
 layout_mode = 2
 upgrade = 1
 
-[node name="SalvagerSize" parent="GridContainer" unique_id=268662440 instance=ExtResource("1_3yi36")]
+[node name="SalvageCount" parent="GridContainer" unique_id=268662440 instance=ExtResource("1_3yi36")]
 layout_mode = 2
 upgrade = 3
 
-[node name="CrusherSize" parent="GridContainer" unique_id=1059731892 instance=ExtResource("1_3yi36")]
+[node name="PrioritySize" parent="GridContainer" unique_id=1059731892 instance=ExtResource("1_3yi36")]
 layout_mode = 2
 upgrade = 5
 
-[node name="ShredderSize" parent="GridContainer" unique_id=352105017 instance=ExtResource("1_3yi36")]
+[node name="GenericSize" parent="GridContainer" unique_id=352105017 instance=ExtResource("1_3yi36")]
 layout_mode = 2
 upgrade = 7
 

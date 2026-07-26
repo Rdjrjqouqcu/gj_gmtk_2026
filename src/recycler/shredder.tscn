@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dmxw7yplcce6r"]
 
 [ext_resource type="Script" uid="uid://2qrf2jsao3w" path="res://src/recycler/shredder.gd" id="1_cyxco"]
+[ext_resource type="Texture2D" uid="uid://1t27qx70k4r5" path="res://assets/machines-idle1.png" id="2_0hp26"]
 [ext_resource type="Texture2D" uid="uid://d3uul32hoar8o" path="res://assets/animations/machines1.png" id="2_2qktb"]
 [ext_resource type="Texture2D" uid="uid://0hposymjkiw7" path="res://assets/animations/machines2.png" id="3_v1oro"]
 [ext_resource type="Texture2D" uid="uid://con4vfcpfnj7j" path="res://assets/animations/machines3.png" id="4_8c7cx"]
@@ -14,6 +15,12 @@
 [ext_resource type="Texture2D" uid="uid://cspl6ku8vudrr" path="res://assets/animations/machines11.png" id="12_ltqos"]
 [ext_resource type="Texture2D" uid="uid://ctt6pv4x0dotd" path="res://assets/animations/machines12.png" id="13_uf44w"]
 [ext_resource type="Texture2D" uid="uid://t078yafm7wec" path="res://assets/window.png" id="14_mt4fb"]
+[ext_resource type="Texture2D" uid="uid://dnf5j6jbi73j1" path="res://assets/plastic.tres" id="15_g1uls"]
+[ext_resource type="PackedScene" uid="uid://dgux2mqapj8qs" path="res://src/recycler/input_queue.tscn" id="17_cylka"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1uls"]
+atlas = ExtResource("2_0hp26")
+region = Rect2(0, 128, 96, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3tyuj"]
 atlas = ExtResource("2_2qktb")
@@ -67,6 +74,14 @@ region = Rect2(0, 128, 96, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_g1uls")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_3tyuj")
 }, {
 "duration": 1.0,
@@ -102,21 +117,96 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_478tc")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"shredder",
-"speed": 5.0
+"speed": 24.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mt4fb"]
 size = Vector2(32, 16)
 
+[sub_resource type="Animation" id="Animation_cylka"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("item:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("item:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-40, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8er33"]
+resource_name = "process"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("item:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("item:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-40, 4), Vector2(-14, 4)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_play_second_half_animation"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cylka"]
+_data = {
+&"RESET": SubResource("Animation_cylka"),
+&"shredder": SubResource("Animation_8er33")
+}
+
 [node name="Shredder" type="Node2D" unique_id=473627541]
 script = ExtResource("1_cyxco")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2125300723]
+[node name="anim" type="AnimatedSprite2D" parent="." unique_id=2125300723]
 sprite_frames = SubResource("SpriteFrames_h46ej")
 animation = &"shredder"
-autoplay = "shredder"
+autoplay = "idle"
 
 [node name="input" type="Area2D" parent="." unique_id=1536987009]
 position = Vector2(-80, 0)
@@ -127,7 +217,25 @@ collision_mask = 2
 position = Vector2(16, 0)
 shape = SubResource("RectangleShape2D_mt4fb")
 
+[node name="item" type="Sprite2D" parent="." unique_id=965747306]
+visible = false
+position = Vector2(-40, 0)
+rotation = -1.5707964
+texture = ExtResource("15_g1uls")
+
+[node name="anim" type="AnimationPlayer" parent="item" unique_id=611000448]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_cylka")
+autoplay = &"RESET"
+
 [node name="glass" type="Sprite2D" parent="." unique_id=1142497299]
 texture = ExtResource("14_mt4fb")
+
+[node name="InputQueue" parent="." unique_id=2069312393 instance=ExtResource("17_cylka")]
+priority_type = 2
+
+[node name="ToastSpawn" type="Marker2D" parent="." unique_id=1431273666]
+position = Vector2(16, 8)
+gizmo_extents = 4.0
 
 [connection signal="body_entered" from="input" to="." method="_on_input_body_entered"]

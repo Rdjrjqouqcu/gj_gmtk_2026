@@ -152,7 +152,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rhis3"]
 size = Vector2(32, 16)
 
-[sub_resource type="Animation" id="Animation_1lxwo"]
+[sub_resource type="Animation" id="Animation_gnljj"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -232,8 +232,8 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_weuiu"]
 _data = {
-&"RESET": SubResource("Animation_1lxwo"),
-&"process": SubResource("Animation_dcqyj")
+&"RESET": SubResource("Animation_gnljj"),
+&"salvager": SubResource("Animation_dcqyj")
 }
 
 [node name="Salvager" type="Node2D" unique_id=103653287]

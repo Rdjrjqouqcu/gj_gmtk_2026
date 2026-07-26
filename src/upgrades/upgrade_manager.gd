@@ -161,24 +161,6 @@ func get_crusher_speed() -> float:
 	return _crusher_speed_upgrade[GET_CURRENT].call()
 #endregion
 
-#region crusher size
-var _crusher_size_current: int = 0
-signal crusher_size_changed(prev: float, curr: float)
-
-@onready var _crusher_size_state: Array = [_recycler_size, _crusher_size_current, crusher_size_changed]
-@onready var _crusher_size_upgrade: Array = [
-	"Crusher Size",
-	"x",
-	get_v.bind(_crusher_size_state),
-	get_next_v.bind(_crusher_size_state),
-	get_cost_v.bind(_crusher_size_state),
-	increase_v.bind(_crusher_size_state),
-]
-
-func get_crusher_size() -> float:
-	return _crusher_size_upgrade[GET_CURRENT].call()
-#endregion
-
 #region shredder speed
 var _shredder_speed_current: int = 0
 signal shredder_speed_changed(prev: float, curr: float)
@@ -197,24 +179,6 @@ func get_shredder_speed() -> float:
 	return _shredder_speed_upgrade[GET_CURRENT].call()
 #endregion
 
-#region shredder size
-var _shredder_size_current: int = 0
-signal shredder_size_changed(prev: float, curr: float)
-
-@onready var _shredder_size_state: Array = [_recycler_size, _shredder_size_current, shredder_size_changed]
-@onready var _shredder_size_upgrade: Array = [
-	"Shredder Size",
-	"x",
-	get_v.bind(_shredder_size_state),
-	get_next_v.bind(_shredder_size_state),
-	get_cost_v.bind(_shredder_size_state),
-	increase_v.bind(_shredder_size_state),
-]
-
-func get_shredder_size() -> float:
-	return _shredder_size_upgrade[GET_CURRENT].call()
-#endregion
-
 #region extractor speed
 var _extractor_speed_current: int = 0
 signal extractor_speed_changed(prev: float, curr: float)
@@ -231,6 +195,50 @@ signal extractor_speed_changed(prev: float, curr: float)
 
 func get_extractor_speed() -> float:
 	return _extractor_speed_upgrade[GET_CURRENT].call()
+#endregion
+
+var _queue_size: Array = [
+	[5, ResourceBundle.new(10, 0, 0, 0)],
+	[10, ResourceBundle.new(10, 0, 0, 0)],
+	[15, ResourceBundle.new(10, 0, 0, 0)],
+	[20, ResourceBundle.new(10, 0, 0, 0)],
+	[25, null],
+]
+
+#region priority size
+var _crusher_size_current: int = 0
+signal priority_size_changed(prev: float, curr: float)
+
+@onready var _crusher_size_state: Array = [_queue_size, _crusher_size_current, priority_size_changed]
+@onready var _priority_size_upgrade: Array = [
+	"Priority Size",
+	"x",
+	get_v.bind(_crusher_size_state),
+	get_next_v.bind(_crusher_size_state),
+	get_cost_v.bind(_crusher_size_state),
+	increase_v.bind(_crusher_size_state),
+]
+
+func get_priority_size() -> float:
+	return _priority_size_upgrade[GET_CURRENT].call()
+#endregion
+
+#region generic size
+var _shredder_size_current: int = 0
+signal generic_size_changed(prev: float, curr: float)
+
+@onready var _shredder_size_state: Array = [_queue_size, _shredder_size_current, generic_size_changed]
+@onready var _generic_size_upgrade: Array = [
+	"Generic Size",
+	"x",
+	get_v.bind(_shredder_size_state),
+	get_next_v.bind(_shredder_size_state),
+	get_cost_v.bind(_shredder_size_state),
+	increase_v.bind(_shredder_size_state),
+]
+
+func get_generic_size() -> float:
+	return _generic_size_upgrade[GET_CURRENT].call()
 #endregion
 
 #region extractor size
@@ -265,14 +273,14 @@ func get_upgrade(t: Upgrades) -> Array[Variant]:
 			return _salvager_size_upgrade
 		Upgrades.CRUSHER_SPEED:
 			return _crusher_speed_upgrade
-		Upgrades.CRUSHER_SIZE:
-			return _crusher_size_upgrade
 		Upgrades.SHREDDER_SPEED:
 			return _shredder_speed_upgrade
-		Upgrades.SHREDDER_SIZE:
-			return _shredder_size_upgrade
 		Upgrades.EXTRACTOR_SPEED:
 			return _extractor_speed_upgrade
+		Upgrades.CRUSHER_SIZE:
+			return _priority_size_upgrade
+		Upgrades.SHREDDER_SIZE:
+			return _generic_size_upgrade
 		Upgrades.EXTRACTOR_SIZE:
 			return _extractor_size_upgrade
 	push_error("upgrade not set up", Upgrades.keys()[t])
