@@ -8,12 +8,17 @@
 [ext_resource type="PackedScene" uid="uid://cwslks0hxdfgx" path="res://src/resources/resource_display.tscn" id="5_fyndt"]
 [ext_resource type="PackedScene" uid="uid://cvav5wlslk61r" path="res://src/recycler/salvager.tscn" id="5_kmhfv"]
 [ext_resource type="Texture2D" uid="uid://fe3mnojhtwrf" path="res://assets/metal-frame.png" id="5_kqbth"]
+[ext_resource type="FontFile" uid="uid://brrmqymjrmamm" path="res://assets/edit-undo.brk.ttf" id="5_mlv6i"]
 [ext_resource type="PackedScene" uid="uid://b71uxwneml6ig" path="res://src/upgrades/upgrade_buttons.tscn" id="5_rlaii"]
 [ext_resource type="PackedScene" uid="uid://dmxw7yplcce6r" path="res://src/recycler/shredder.tscn" id="6_kqbth"]
 [ext_resource type="PackedScene" uid="uid://y7yx0w5acybb" path="res://src/platform.tscn" id="6_srxbw"]
 [ext_resource type="PackedScene" uid="uid://650bvom5oj6e" path="res://src/recycler/extractor.tscn" id="7_srxbw"]
 [ext_resource type="PackedScene" uid="uid://cc107pe41im83" path="res://src/recycler/crusher.tscn" id="8_d3u4l"]
 [ext_resource type="Texture2D" uid="uid://bxp0g6xmc7l0q" path="res://assets/menu-background.png" id="14_mlv6i"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_sbfji"]
+font = ExtResource("5_mlv6i")
+font_size = 20
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_eewff"]
 
@@ -26,13 +31,22 @@ size = Vector2(2, 212)
 size = Vector2(32, 20)
 
 [sub_resource type="LabelSettings" id="LabelSettings_d3u4l"]
+font = ExtResource("5_mlv6i")
 font_size = 8
 
 [sub_resource type="LabelSettings" id="LabelSettings_rhis3"]
+font = ExtResource("5_mlv6i")
 font_size = 64
 
+[sub_resource type="LabelSettings" id="LabelSettings_pb1gy"]
+font = ExtResource("5_mlv6i")
+
 [sub_resource type="LabelSettings" id="LabelSettings_tb146"]
+font = ExtResource("5_mlv6i")
 font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_hns8g"]
+font = ExtResource("5_mlv6i")
 
 [node name="Main" type="Node" unique_id=388192039]
 
@@ -56,11 +70,12 @@ position = Vector2(192, 20)
 texture = ExtResource("4_uewes")
 
 [node name="SpawnTimer" type="Label" parent="bin/trap" unique_id=580670251]
-offset_left = -30.0
-offset_top = -12.0
-offset_right = 12.0
-offset_bottom = 11.0
+offset_left = -29.0
+offset_top = -8.0
+offset_right = 13.0
+offset_bottom = 15.0
 text = "0.0"
+label_settings = SubResource("LabelSettings_sbfji")
 horizontal_alignment = 2
 
 [node name="TrashSpawn" type="Marker2D" parent="bin/trap" unique_id=1022385217]
@@ -229,6 +244,7 @@ vertical_alignment = 1
 
 [node name="GameOver" type="PanelContainer" parent="CanvasLayer" unique_id=460355744]
 process_mode = 3
+visible = false
 top_level = true
 anchors_preset = 8
 anchor_left = 0.5
@@ -269,21 +285,28 @@ label_settings = SubResource("LabelSettings_rhis3")
 [node name="score" type="Label" parent="CanvasLayer/GameOver/MarginContainer/VBoxContainer" unique_id=499439024]
 layout_mode = 2
 text = "Processed 0 Scrap"
+label_settings = SubResource("LabelSettings_pb1gy")
 horizontal_alignment = 1
 
 [node name="Restart" type="Button" parent="CanvasLayer/GameOver/MarginContainer/VBoxContainer" unique_id=573860672]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("5_mlv6i")
+theme_override_font_sizes/font_size = 32
 text = "Restart"
 
 [node name="Credits" type="Button" parent="CanvasLayer/GameOver/MarginContainer/VBoxContainer" unique_id=1713447775]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("5_mlv6i")
+theme_override_font_sizes/font_size = 32
 text = "Credits"
 
 [node name="Quit" type="Button" parent="CanvasLayer/GameOver/MarginContainer/VBoxContainer" unique_id=662695952]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("5_mlv6i")
+theme_override_font_sizes/font_size = 32
 text = "Quit"
 
 [node name="credits" type="Control" parent="CanvasLayer" unique_id=1804435021]
@@ -333,15 +356,19 @@ label_settings = SubResource("LabelSettings_tb146")
 [node name="Label2" type="Label" parent="CanvasLayer/credits/MarginContainer/VBoxContainer" unique_id=1525900236]
 layout_mode = 2
 text = "Rdjrjqouqcu"
+label_settings = SubResource("LabelSettings_hns8g")
 horizontal_alignment = 1
 
 [node name="Label3" type="Label" parent="CanvasLayer/credits/MarginContainer/VBoxContainer" unique_id=1855949802]
 layout_mode = 2
 text = "szymon_krzak"
+label_settings = SubResource("LabelSettings_hns8g")
 horizontal_alignment = 1
 
 [node name="Close" type="Button" parent="CanvasLayer/credits/MarginContainer/VBoxContainer" unique_id=1260529273]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("5_mlv6i")
+theme_override_font_sizes/font_size = 24
 text = "Close"
 
 [connection signal="child_entered_tree" from="bin/ScrapNodes" to="bin" method="_on_scrap_nodes_child_entered_tree"]

@@ -3,9 +3,14 @@
 [ext_resource type="Texture2D" uid="uid://dfuuwxlbshqge" path="res://assets/salvage.tres" id="1_5xxkw"]
 [ext_resource type="Script" uid="uid://228t75gu1dcc" path="res://src/upgrades/upgrade_button.gd" id="1_xyia7"]
 [ext_resource type="LabelSettings" uid="uid://dwv6emm2q7mur" path="res://assets/upgrade_button_label.tres" id="2_cuedw"]
+[ext_resource type="FontFile" uid="uid://brrmqymjrmamm" path="res://assets/edit-undo.brk.ttf" id="2_qpoy6"]
 [ext_resource type="Texture2D" uid="uid://dh778d2tucsb7" path="res://assets/metal.tres" id="4_1cox5"]
 [ext_resource type="Texture2D" uid="uid://dnf5j6jbi73j1" path="res://assets/plastic.tres" id="5_1ct5o"]
 [ext_resource type="Texture2D" uid="uid://r5luvcvw0qje" path="res://assets/circuit.tres" id="6_7c3sj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_02dmg"]
+font = ExtResource("2_qpoy6")
+font_size = 13
 
 [node name="UpgradeButton" type="PanelContainer" unique_id=1310057937]
 custom_minimum_size = Vector2(98, 90)
@@ -20,7 +25,7 @@ alignment = 1
 [node name="name" type="Label" parent="VBoxContainer" unique_id=2077639540]
 layout_mode = 2
 text = "robot speed"
-label_settings = ExtResource("2_cuedw")
+label_settings = SubResource("LabelSettings_02dmg")
 horizontal_alignment = 1
 
 [node name="effect" type="Label" parent="VBoxContainer" unique_id=1037943939]

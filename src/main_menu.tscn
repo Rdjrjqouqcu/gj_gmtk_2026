@@ -3,9 +3,15 @@
 [ext_resource type="Script" uid="uid://c4gvqcheqv2fi" path="res://src/main_menu.gd" id="1_bq8pk"]
 [ext_resource type="Texture2D" uid="uid://bey5x4m660jvw" path="res://assets/logo315x250.png" id="1_guuao"]
 [ext_resource type="Texture2D" uid="uid://bxp0g6xmc7l0q" path="res://assets/menu-background.png" id="2_6w7d7"]
+[ext_resource type="FontFile" uid="uid://brrmqymjrmamm" path="res://assets/edit-undo.brk.ttf" id="4_d3tmf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tb146"]
-font_size = 48
+font = ExtResource("4_d3tmf")
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_hjwgm"]
+font = ExtResource("4_d3tmf")
+font_size = 24
 
 [node name="MainMenu" type="CenterContainer" unique_id=1806182471]
 anchors_preset = 15
@@ -29,16 +35,22 @@ texture = ExtResource("1_guuao")
 [node name="Play" type="Button" parent="menu" unique_id=248655704]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_d3tmf")
+theme_override_font_sizes/font_size = 64
 text = "Play"
 
 [node name="Credits" type="Button" parent="menu" unique_id=1581859113]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_d3tmf")
+theme_override_font_sizes/font_size = 64
 text = "Credits"
 
 [node name="Quit" type="Button" parent="menu" unique_id=742977199]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_d3tmf")
+theme_override_font_sizes/font_size = 64
 text = "Quit"
 
 [node name="credits" type="PanelContainer" parent="." unique_id=2094375422]
@@ -66,15 +78,19 @@ label_settings = SubResource("LabelSettings_tb146")
 [node name="Label2" type="Label" parent="credits/MarginContainer/VBoxContainer" unique_id=1525900236]
 layout_mode = 2
 text = "Rdjrjqouqcu"
+label_settings = SubResource("LabelSettings_hjwgm")
 horizontal_alignment = 1
 
 [node name="Label3" type="Label" parent="credits/MarginContainer/VBoxContainer" unique_id=1855949802]
 layout_mode = 2
 text = "szymon_krzak"
+label_settings = SubResource("LabelSettings_hjwgm")
 horizontal_alignment = 1
 
 [node name="Close" type="Button" parent="credits/MarginContainer/VBoxContainer" unique_id=1260529273]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_d3tmf")
+theme_override_font_sizes/font_size = 40
 text = "Close"
 
 [connection signal="pressed" from="menu/Play" to="." method="_on_play_pressed"]

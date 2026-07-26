@@ -3,8 +3,13 @@
 [ext_resource type="Script" uid="uid://bbtqils2o2bnq" path="res://src/resources/resource_display.gd" id="1_y640e"]
 [ext_resource type="Texture2D" uid="uid://dfuuwxlbshqge" path="res://assets/salvage.tres" id="2_ltq7i"]
 [ext_resource type="Texture2D" uid="uid://dh778d2tucsb7" path="res://assets/metal.tres" id="2_op6nu"]
+[ext_resource type="FontFile" uid="uid://brrmqymjrmamm" path="res://assets/edit-undo.brk.ttf" id="2_yaqky"]
 [ext_resource type="Texture2D" uid="uid://dnf5j6jbi73j1" path="res://assets/plastic.tres" id="4_b6l11"]
 [ext_resource type="Texture2D" uid="uid://r5luvcvw0qje" path="res://assets/circuit.tres" id="5_tlkyn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tb146"]
+font = ExtResource("2_yaqky")
+font_size = 24
 
 [node name="ResourceDisplay" type="Control" unique_id=833009980]
 layout_mode = 3
@@ -40,6 +45,7 @@ alignment = 1
 [node name="ValSalvage" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer" unique_id=1962963336]
 layout_mode = 2
 text = "00"
+label_settings = SubResource("LabelSettings_tb146")
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/VBoxContainer" unique_id=1940310851]
@@ -58,6 +64,7 @@ alignment = 1
 [node name="ValMetal" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer2" unique_id=1844716271]
 layout_mode = 2
 text = "00"
+label_settings = SubResource("LabelSettings_tb146")
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/VBoxContainer2" unique_id=1375644155]
@@ -78,6 +85,7 @@ alignment = 1
 [node name="ValPlastic" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer3" unique_id=557892870]
 layout_mode = 2
 text = "00"
+label_settings = SubResource("LabelSettings_tb146")
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/VBoxContainer3" unique_id=1384899174]
@@ -96,6 +104,7 @@ alignment = 1
 [node name="ValCircuit" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer4" unique_id=1592262963]
 layout_mode = 2
 text = "00"
+label_settings = SubResource("LabelSettings_tb146")
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/VBoxContainer4" unique_id=14840000]
