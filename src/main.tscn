@@ -236,6 +236,7 @@ text = "Resc"
 
 [node name="GameOver" type="PanelContainer" parent="." unique_id=460355744]
 process_mode = 3
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -289,6 +290,7 @@ text = "Quit"
 
 [node name="credits" type="Control" parent="." unique_id=1804435021]
 process_mode = 3
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 158.0

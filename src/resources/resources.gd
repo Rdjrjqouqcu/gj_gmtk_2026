@@ -59,6 +59,12 @@ var plastic_max: int = 100
 var circuit_count: int = 0
 var circuit_max: int = 100
 
+func restart() -> void:
+	salvage_count = 0
+	metal_count = 0
+	plastic_count = 0
+	circuit_count = 0
+
 signal amounts_updated
 signal amounts_spent(b: Bundle)
 

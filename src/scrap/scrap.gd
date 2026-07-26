@@ -1,4 +1,3 @@
-@icon ("res://addons/at-icons/node2d/box.svg")
 extends RigidBody2D
 class_name Scrap
 

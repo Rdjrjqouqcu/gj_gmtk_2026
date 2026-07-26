@@ -38,10 +38,9 @@ var _robot_speeds: Array = [
 	[2.5, ResourceBundle.new(100, 100, 100, 100)],
 	[2.0, null],
 ]
-var _robot_speed_current: int = 0
 signal mover_speed_changed(prev: float, curr: float)
 
-@onready var _robot_speed_state: Array = [_robot_speeds, _robot_speed_current, mover_speed_changed]
+@onready var _robot_speed_state: Array = [_robot_speeds, 0, mover_speed_changed]
 @onready var _robot_speed_upgrade: Array = [
 	"Mover Speed",
 	"s",
@@ -62,10 +61,9 @@ var _platform_speeds: Array = [
 	[3, ResourceBundle.new(75, 75, 75, 75)],
 	[4, null],
 ]
-var _platform_speed_current: int = 0
 signal mover_count_changed(prev: float, curr: float)
 
-@onready var _platform_speed_state: Array = [_platform_speeds, _platform_speed_current, mover_count_changed]
+@onready var _platform_speed_state: Array = [_platform_speeds, 0, mover_count_changed]
 @onready var _platform_speed_upgrade: Array = [
 	"Mover Count",
 	"s",
@@ -86,10 +84,9 @@ var _salvager_speeds: Array = [
 	[2.0, ResourceBundle.new(40, 0, 0, 0)],
 	[1.0, null],
 ]
-var _salvager_speed_current: int = 0
 signal salvager_speed_changed(prev: float, curr: float)
 
-@onready var _salvager_speed_state = [_salvager_speeds, _salvager_speed_current, salvager_speed_changed]
+@onready var _salvager_speed_state = [_salvager_speeds, 0, salvager_speed_changed]
 @onready var _salvager_speed_upgrade: Array = [
 	"Salvage Speed",
 	"s",
@@ -111,10 +108,9 @@ var _salvager_size: Array = [
 	[4.0, ResourceBundle.new(80, 0, 0, 0)],
 	[5.0, null],
 ]
-var _salvager_size_current: int = 0
 signal salvager_size_changed(prev: float, curr: float)
 
-@onready var _salvager_size_state = [_salvager_size, _salvager_size_current, salvager_size_changed]
+@onready var _salvager_size_state = [_salvager_size, 0, salvager_size_changed]
 @onready var _salvager_size_upgrade: Array = [
 	"Salvage Count",
 	"x",
@@ -139,10 +135,9 @@ var _recycler_speeds: Array = [
 ]
 
 #region crusher speed
-var _crusher_speed_current: int = 0
 signal crusher_speed_changed(prev: float, curr: float)
 
-@onready var _crusher_speed_state: Array = [_recycler_speeds, _crusher_speed_current, crusher_speed_changed]
+@onready var _crusher_speed_state: Array = [_recycler_speeds, 0, crusher_speed_changed]
 @onready var _crusher_speed_upgrade: Array = [
 	"Crusher Speed",
 	"s",
@@ -157,10 +152,9 @@ func get_crusher_speed() -> float:
 #endregion
 
 #region shredder speed
-var _shredder_speed_current: int = 0
 signal shredder_speed_changed(prev: float, curr: float)
 
-@onready var _shredder_speed_state: Array = [_recycler_speeds, _shredder_speed_current, shredder_speed_changed]
+@onready var _shredder_speed_state: Array = [_recycler_speeds, 0, shredder_speed_changed]
 @onready var _shredder_speed_upgrade: Array = [
 	"Shredder Speed",
 	"s",
@@ -175,10 +169,9 @@ func get_shredder_speed() -> float:
 #endregion
 
 #region extractor speed
-var _extractor_speed_current: int = 0
 signal extractor_speed_changed(prev: float, curr: float)
 
-@onready var _extractor_speed_state = [_recycler_speeds, _extractor_speed_current, extractor_speed_changed]
+@onready var _extractor_speed_state = [_recycler_speeds, 0, extractor_speed_changed]
 @onready var _extractor_speed_upgrade: Array = [
 	"Extractor Speed",
 	"s",
@@ -205,10 +198,9 @@ var _queue_size: Array = [
 ]
 
 #region priority size
-var _crusher_size_current: int = 0
 signal priority_size_changed(prev: float, curr: float)
 
-@onready var _crusher_size_state: Array = [_queue_size, _crusher_size_current, priority_size_changed]
+@onready var _crusher_size_state: Array = [_queue_size, 0, priority_size_changed]
 @onready var _priority_size_upgrade: Array = [
 	"Priority Size",
 	"x",
@@ -223,10 +215,9 @@ func get_priority_size() -> float:
 #endregion
 
 #region generic size
-var _shredder_size_current: int = 0
 signal generic_size_changed(prev: float, curr: float)
 
-@onready var _shredder_size_state: Array = [_queue_size, _shredder_size_current, generic_size_changed]
+@onready var _shredder_size_state: Array = [_queue_size, 0, generic_size_changed]
 @onready var _generic_size_upgrade: Array = [
 	"Generic Size",
 	"x",
@@ -247,10 +238,9 @@ var _bonus_amounts: Array = [
 	[3.0, ResourceBundle.new(200, 200, 200, 200)],
 	[4.0, null],
 ]
-var _extractor_size_current: int = 0
 signal extractor_size_changed(prev: float, curr: float)
 
-@onready var _bonus_amount_state = [_bonus_amounts, _extractor_size_current, extractor_size_changed]
+@onready var _bonus_amount_state = [_bonus_amounts, 0, extractor_size_changed]
 @onready var _bonus_amount_upgrade: Array = [
 	"Bonus Amount",
 	"x",
@@ -290,6 +280,18 @@ func get_upgrade(t: Upgrades) -> Array[Variant]:
 			return _bonus_amount_upgrade
 	push_error("upgrade not set up", Upgrades.keys()[t])
 	return []
+
+func restart() -> void:
+	_robot_speed_state[1] = 0
+	_platform_speed_state[1] = 0
+	_salvager_speed_state[1] = 0
+	_salvager_size_state[1] = 0
+	_crusher_speed_state[1] = 0
+	_shredder_speed_state[1] = 0
+	_extractor_speed_state[1] = 0
+	_crusher_size_state[1] = 0
+	_shredder_size_state[1] = 0
+	_bonus_amount_state[1] = 0
 
 
 #region meta

@@ -40,6 +40,8 @@ func _on_game_over() -> void:
 	credits.visible = false
 const MAIN = preload("uid://baopmn5l2lmu")
 func _on_restart_pressed() -> void:
+	UpgradeManager.restart()
+	Resources.restart()
 	get_tree().paused = false
 	get_tree().change_scene_to_packed(MAIN)
 func _on_credits_opened() -> void:
