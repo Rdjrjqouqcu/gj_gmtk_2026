@@ -13,7 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://b041s3m3knnjq" path="res://assets/animations/machines10.png" id="11_lvfu3"]
 [ext_resource type="Texture2D" uid="uid://cspl6ku8vudrr" path="res://assets/animations/machines11.png" id="12_hjjcl"]
 [ext_resource type="Texture2D" uid="uid://ctt6pv4x0dotd" path="res://assets/animations/machines12.png" id="13_l32eg"]
+[ext_resource type="Texture2D" uid="uid://1t27qx70k4r5" path="res://assets/machines-idle1.png" id="14_he8uy"]
 [ext_resource type="Texture2D" uid="uid://t078yafm7wec" path="res://assets/window.png" id="14_heskx"]
+[ext_resource type="Texture2D" uid="uid://r5luvcvw0qje" path="res://assets/circuit.tres" id="15_upa2e"]
+[ext_resource type="PackedScene" uid="uid://dgux2mqapj8qs" path="res://src/recycler/input_queue.tscn" id="17_yymp8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lrlg4"]
 atlas = ExtResource("2_5hj6a")
@@ -63,6 +66,10 @@ region = Rect2(0, 64, 96, 64)
 atlas = ExtResource("13_l32eg")
 region = Rect2(0, 64, 96, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwla5"]
+atlas = ExtResource("14_he8uy")
+region = Rect2(0, 64, 96, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_xn4yd"]
 animations = [{
 "frames": [{
@@ -102,22 +109,104 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xhunm")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"extractor",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dwla5")
+}],
+"loop": 1,
+"name": &"idle",
 "speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rhis3"]
 size = Vector2(32, 16)
 
+[sub_resource type="Animation" id="Animation_qnja1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("item:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("item:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-40, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_f5xdk"]
+resource_name = "process"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("item:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("item:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-40, 1), Vector2(1, 1)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_play_second_half_animation"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nmfhm"]
+_data = {
+&"RESET": SubResource("Animation_qnja1"),
+&"extractor": SubResource("Animation_f5xdk")
+}
+
 [node name="Extractor" type="Node2D" unique_id=1140322655]
 script = ExtResource("1_jksqx")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1410026249]
+[node name="anim_sprite" type="AnimatedSprite2D" parent="." unique_id=1410026249]
 sprite_frames = SubResource("SpriteFrames_xn4yd")
 animation = &"extractor"
-autoplay = "extractor"
-frame_progress = 0.4474818
+autoplay = "idle"
 
 [node name="input" type="Area2D" parent="." unique_id=1932090342]
 position = Vector2(-80, 0)
@@ -128,7 +217,25 @@ collision_mask = 2
 position = Vector2(16, 0)
 shape = SubResource("RectangleShape2D_rhis3")
 
+[node name="item" type="Sprite2D" parent="." unique_id=105177996]
+visible = false
+position = Vector2(-40, 0)
+rotation = -1.5707964
+texture = ExtResource("15_upa2e")
+
+[node name="anim" type="AnimationPlayer" parent="item" unique_id=306692155]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_nmfhm")
+autoplay = &"RESET"
+
 [node name="glass" type="Sprite2D" parent="." unique_id=193846539]
 texture = ExtResource("14_heskx")
+
+[node name="InputQueue" parent="." unique_id=2069312393 instance=ExtResource("17_yymp8")]
+priority_type = 3
+
+[node name="ToastSpawn" type="Marker2D" parent="." unique_id=1546181751]
+position = Vector2(0, 8)
+gizmo_extents = 4.0
 
 [connection signal="body_entered" from="input" to="." method="_on_input_body_entered"]

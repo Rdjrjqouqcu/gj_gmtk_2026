@@ -11,8 +11,9 @@ var _is_processing: bool = false
 var _cur_animation_duration: float
 var _cur_resource_type: Resources.Types
 func _play_second_half_animation() -> void:
+	var time: float = 2.0 / _cur_animation_duration
 	anim_player.play("RESET")
-	anim_sprite.play("shredder", 1.0)
+	anim_sprite.play("shredder", time)
 
 
 func _ready() -> void:
@@ -20,7 +21,9 @@ func _ready() -> void:
 
 
 func _finish_processing() -> void:
-	var count: int = 2 if _cur_resource_type == Resources.Types.PLASTIC else 1
+	var count: int = 1
+	if _cur_resource_type == Resources.Types.PLASTIC:
+		count += UpgradeManager.get_bonus_amount()
 	Resources.add(count, Resources.Types.PLASTIC)
 	ResourceToast.create(count, Resources.Types.PLASTIC, toast_spawn.global_position)
 	_is_processing = false

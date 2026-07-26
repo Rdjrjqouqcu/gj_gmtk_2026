@@ -241,22 +241,28 @@ func get_generic_size() -> float:
 	return _generic_size_upgrade[GET_CURRENT].call()
 #endregion
 
-#region extractor size
+#region bonus count
+var _bonus_amounts: Array = [
+	[1.0, ResourceBundle.new(25, 25, 25, 25)],
+	[2.0, ResourceBundle.new(75, 75, 75, 75)],
+	[3.0, ResourceBundle.new(200, 200, 200, 200)],
+	[4.0, null],
+]
 var _extractor_size_current: int = 0
 signal extractor_size_changed(prev: float, curr: float)
 
-@onready var _extractor_size_state = [_recycler_size, _extractor_size_current, extractor_size_changed]
-@onready var _extractor_size_upgrade: Array = [
-	"Extractor Size",
+@onready var _bonus_amount_state = [_bonus_amounts, _extractor_size_current, extractor_size_changed]
+@onready var _bonus_amount_upgrade: Array = [
+	"Bonus Amount",
 	"x",
-	get_v.bind(_extractor_size_state),
-	get_next_v.bind(_extractor_size_state),
-	get_cost_v.bind(_extractor_size_state),
-	increase_v.bind(_extractor_size_state),
+	get_v.bind(_bonus_amount_state),
+	get_next_v.bind(_bonus_amount_state),
+	get_cost_v.bind(_bonus_amount_state),
+	increase_v.bind(_bonus_amount_state),
 ]
 
-func get_extractor_size() -> float:
-	return _extractor_size_upgrade[GET_CURRENT].call()
+func get_bonus_amount() -> int:
+	return int(_bonus_amount_upgrade[GET_CURRENT].call())
 #endregion
 
 
@@ -282,7 +288,7 @@ func get_upgrade(t: Upgrades) -> Array[Variant]:
 		Upgrades.SHREDDER_SIZE:
 			return _generic_size_upgrade
 		Upgrades.EXTRACTOR_SIZE:
-			return _extractor_size_upgrade
+			return _bonus_amount_upgrade
 	push_error("upgrade not set up", Upgrades.keys()[t])
 	return []
 
