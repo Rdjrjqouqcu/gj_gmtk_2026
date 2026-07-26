@@ -234,63 +234,67 @@ offset_right = 70.0
 offset_bottom = 488.0
 text = "Resc"
 
-[node name="GameOver" type="PanelContainer" parent="." unique_id=460355744]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=539267443]
+
+[node name="GameOver" type="PanelContainer" parent="CanvasLayer" unique_id=460355744]
 process_mode = 3
 visible = false
+top_level = true
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -43.5
-offset_top = -11.5
-offset_right = 43.5
-offset_bottom = 11.5
+offset_left = -190.0
+offset_top = -162.0
+offset_right = 190.0
+offset_bottom = 162.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="GameOver" unique_id=981270752]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/GameOver" unique_id=981270752]
 layout_mode = 2
 texture = ExtResource("14_mlv6i")
 expand_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="GameOver" unique_id=1713161766]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GameOver" unique_id=1713161766]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GameOver/MarginContainer" unique_id=256032952]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GameOver/MarginContainer" unique_id=256032952]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="GameOver/MarginContainer/VBoxContainer" unique_id=1473223171]
+[node name="Label" type="Label" parent="CanvasLayer/GameOver/MarginContainer/VBoxContainer" unique_id=1473223171]
 layout_mode = 2
 text = "Game Over"
 label_settings = SubResource("LabelSettings_rhis3")
 
-[node name="Restart" type="Button" parent="GameOver/MarginContainer/VBoxContainer" unique_id=573860672]
+[node name="Restart" type="Button" parent="CanvasLayer/GameOver/MarginContainer/VBoxContainer" unique_id=573860672]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 text = "Restart"
 
-[node name="Credits" type="Button" parent="GameOver/MarginContainer/VBoxContainer" unique_id=1713447775]
+[node name="Credits" type="Button" parent="CanvasLayer/GameOver/MarginContainer/VBoxContainer" unique_id=1713447775]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 text = "Credits"
 
-[node name="Quit" type="Button" parent="GameOver/MarginContainer/VBoxContainer" unique_id=662695952]
+[node name="Quit" type="Button" parent="CanvasLayer/GameOver/MarginContainer/VBoxContainer" unique_id=662695952]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 text = "Quit"
 
-[node name="credits" type="Control" parent="." unique_id=1804435021]
+[node name="credits" type="Control" parent="CanvasLayer" unique_id=1804435021]
 process_mode = 3
 visible = false
+top_level = true
 layout_mode = 3
 anchors_preset = 0
 offset_left = 158.0
@@ -300,7 +304,7 @@ offset_bottom = 362.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="credits" unique_id=1379661227]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/credits" unique_id=1379661227]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -313,7 +317,7 @@ mouse_filter = 2
 texture = ExtResource("14_mlv6i")
 expand_mode = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="credits" unique_id=539150476]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/credits" unique_id=539150476]
 layout_mode = 0
 offset_right = 196.0
 offset_bottom = 212.0
@@ -322,33 +326,33 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="credits/MarginContainer" unique_id=882795865]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/credits/MarginContainer" unique_id=882795865]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="title" type="Label" parent="credits/MarginContainer/VBoxContainer" unique_id=891459921]
+[node name="title" type="Label" parent="CanvasLayer/credits/MarginContainer/VBoxContainer" unique_id=891459921]
 layout_mode = 2
 text = "Credits"
 label_settings = SubResource("LabelSettings_tb146")
 
-[node name="Label2" type="Label" parent="credits/MarginContainer/VBoxContainer" unique_id=1525900236]
+[node name="Label2" type="Label" parent="CanvasLayer/credits/MarginContainer/VBoxContainer" unique_id=1525900236]
 layout_mode = 2
 text = "Rdjrjqouqcu"
 horizontal_alignment = 1
 
-[node name="Label3" type="Label" parent="credits/MarginContainer/VBoxContainer" unique_id=1855949802]
+[node name="Label3" type="Label" parent="CanvasLayer/credits/MarginContainer/VBoxContainer" unique_id=1855949802]
 layout_mode = 2
 text = "szymon_krzak"
 horizontal_alignment = 1
 
-[node name="Close" type="Button" parent="credits/MarginContainer/VBoxContainer" unique_id=1260529273]
+[node name="Close" type="Button" parent="CanvasLayer/credits/MarginContainer/VBoxContainer" unique_id=1260529273]
 layout_mode = 2
 text = "Close"
 
 [connection signal="child_entered_tree" from="bin/ScrapNodes" to="bin" method="_on_scrap_nodes_child_entered_tree"]
 [connection signal="pressed" from="debugSpawn" to="bin" method="_on_debug_spawn"]
 [connection signal="pressed" from="debugSpawn/debugResc" to="bin" method="_on_debug_resc_pressed"]
-[connection signal="pressed" from="GameOver/MarginContainer/VBoxContainer/Restart" to="bin" method="_on_restart_pressed"]
-[connection signal="pressed" from="GameOver/MarginContainer/VBoxContainer/Credits" to="bin" method="_on_credits_opened"]
-[connection signal="pressed" from="GameOver/MarginContainer/VBoxContainer/Quit" to="bin" method="_on_quit_pressed"]
-[connection signal="pressed" from="credits/MarginContainer/VBoxContainer/Close" to="bin" method="_on_credits_closed"]
+[connection signal="pressed" from="CanvasLayer/GameOver/MarginContainer/VBoxContainer/Restart" to="bin" method="_on_restart_pressed"]
+[connection signal="pressed" from="CanvasLayer/GameOver/MarginContainer/VBoxContainer/Credits" to="bin" method="_on_credits_opened"]
+[connection signal="pressed" from="CanvasLayer/GameOver/MarginContainer/VBoxContainer/Quit" to="bin" method="_on_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/credits/MarginContainer/VBoxContainer/Close" to="bin" method="_on_credits_closed"]

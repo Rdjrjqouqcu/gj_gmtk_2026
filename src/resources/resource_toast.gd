@@ -2,6 +2,7 @@ extends Label
 class_name ResourceToast
 const RESOURCE_TOAST = preload("uid://bldrymxcpn7no")
 
+const GROUP_NAME = "toasts"
 
 const CIRCUIT = preload("uid://r5luvcvw0qje")
 const METAL = preload("uid://dh778d2tucsb7")
@@ -12,6 +13,7 @@ static func create(i: int, t: Resources.Types, gpos: Vector2) -> void:
 	if i == 0:
 		return
 	var r: ResourceToast = RESOURCE_TOAST.instantiate()
+	r.add_to_group(GROUP_NAME)
 	if i > 0:
 		r.text = "+%d" % i
 	else:
@@ -31,6 +33,9 @@ static func create(i: int, t: Resources.Types, gpos: Vector2) -> void:
 			return
 	r.global_position = gpos
 	(Engine.get_main_loop().root as Node).add_child(r)
+
+static func restart() -> void:
+	(Engine.get_main_loop() as SceneTree).call_group(GROUP_NAME, "queue_free")
 
 const DIRECTION: Vector2 = Vector2.UP
 const ANGLE_VARIATION: float = deg_to_rad(15)

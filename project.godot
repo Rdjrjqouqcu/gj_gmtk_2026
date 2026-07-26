@@ -35,6 +35,7 @@ enabled=PackedStringArray("res://addons/log/plugin.cfg", "res://addons/script-id
 [global_group]
 
 scraps=""
+toasts=""
 
 [layer_names]
 

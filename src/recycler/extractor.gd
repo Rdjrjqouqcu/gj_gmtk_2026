@@ -20,6 +20,7 @@ func _ready() -> void:
 
 
 func _finish_processing() -> void:
+	if not _is_processing: return
 	var count: int = 1
 	if _cur_resource_type == Resources.Types.CIRCUIT:
 		count += UpgradeManager.get_bonus_amount()

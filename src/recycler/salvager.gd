@@ -35,6 +35,7 @@ func _on_input_body_entered(body: Node2D) -> void:
 			body.collect()
 
 func _finish_processing(_name: String) -> void:
+	if not _is_processing: return
 	Resources.add(_processing_count, Resources.Types.SALVAGE)
 	ResourceToast.create(_processing_count, Resources.Types.SALVAGE, toast_spawn.global_position)
 	_is_processing = false

@@ -209,7 +209,7 @@ script = ExtResource("1_08b5q")
 
 [node name="anim_sprite" type="AnimatedSprite2D" parent="." unique_id=276395752]
 sprite_frames = SubResource("SpriteFrames_kloqm")
-animation = &"crusher"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="input" type="Area2D" parent="." unique_id=1495118197]

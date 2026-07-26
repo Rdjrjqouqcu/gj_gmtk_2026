@@ -31,25 +31,32 @@ func _on_scrap_nodes_child_entered_tree(node: Node) -> void:
 	node.tree_exited.connect(update_scrap_count)
 	update_scrap_count()
 
-
-@onready var game_over: Control = $"../GameOver"
-@onready var credits: Control = $"../credits"
+@onready var game_over: PanelContainer = $"../CanvasLayer/GameOver"
+@onready var credits: Control = $"../CanvasLayer/credits"
+var _game_over_input_lock: bool = true
 func _on_game_over() -> void:
 	get_tree().paused = true
 	game_over.visible = true
 	credits.visible = false
+	await get_tree().create_timer(2.5).timeout
+	_game_over_input_lock = false
 const MAIN = preload("uid://baopmn5l2lmu")
 func _on_restart_pressed() -> void:
+	if _game_over_input_lock: return
 	UpgradeManager.restart()
 	Resources.restart()
+	ResourceToast.restart()
 	get_tree().paused = false
 	get_tree().change_scene_to_packed(MAIN)
 func _on_credits_opened() -> void:
+	if _game_over_input_lock: return
 	game_over.visible = false
 	credits.visible = true
 func _on_quit_pressed() -> void:
+	if _game_over_input_lock: return
 	get_tree().quit()
 func _on_credits_closed() -> void:
+	if _game_over_input_lock: return
 	game_over.visible = true
 	credits.visible = false
 
