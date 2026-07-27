@@ -119,7 +119,7 @@ func _on_spawn_timer() -> void:
 	if _remaining_spawn_increase <= 0:
 		_current_spawn_count += SPAWN_INCREASE
 		if _current_spawn_count >= SPAWN_INCREASE_DOUBLE_CUTOFF:
-			_remaining_spawn_increase = floor(SPAWNS_BEFORE_INCREASE / 2.0)
+			_remaining_spawn_increase = floori(SPAWNS_BEFORE_INCREASE / 2.0)
 		else:
 			_remaining_spawn_increase = SPAWNS_BEFORE_INCREASE
 	spawn_timer = SPAWN_TIME
